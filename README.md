@@ -401,4 +401,8 @@ No open-source license has been specified for this repository. Add an appropriat
 
 **SETHU Historical Member Migration**
 
+<<<<<<< HEAD
 A controlled approach to migrating historical member data with validation, authorization, reconciliation, and auditability.
+=======
+A controlled approach to migrating historical member data with validation, authorization, reconciliation, and auditability.
+>>>>>>> b971da12e0e1c1b337756378ab46e3d5bffcc539
