@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" width="260" height="64" fill="none">
+  <defs>
+    <linearGradient id="sethuMaroonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E87509" />
+      <stop offset="40%" stop-color="#A52A3D" />
+      <stop offset="100%" stop-color="#7C0928" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCE1A9" />
+      <stop offset="100%" stop-color="#E6A93F" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Emblem Icon -->
+  <rect x="4" y="6" width="52" height="52" rx="14" fill="url(#sethuMaroonGrad)" />
+  <circle cx="30" cy="32" r="18" fill="#FFFBF5" opacity="0.18" />
+  <text x="30" y="41" font-family="'Segoe UI', Roboto, Inter, sans-serif" font-size="26" font-weight="900" fill="#FFFBF5" text-anchor="middle">✺</text>
+  
+  <!-- Brand Typography -->
+  <text x="68" y="34" font-family="'Segoe UI', Roboto, Inter, sans-serif" font-size="28" font-weight="900" letter-spacing="-0.03em" fill="#7C0928">SETHU</text>
+  <text x="69" y="49" font-family="'Segoe UI', Roboto, Inter, sans-serif" font-size="9" font-weight="800" letter-spacing="0.18em" fill="#E87509">DHARMIC BUSINESS NETWORK</text>
+</svg>

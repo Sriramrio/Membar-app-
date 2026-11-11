@@ -1,0 +1,568 @@
+{
+  "chapters": [
+    {
+      "slug": "chennai-central",
+      "name": "Chennai Central Chapter",
+      "city": "Chennai",
+      "region": "Tamil Nadu North",
+      "state": "Tamil Nadu",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "chennai-south",
+      "name": "Chennai South Chapter",
+      "city": "Chennai",
+      "region": "Tamil Nadu North",
+      "state": "Tamil Nadu",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "chennai-west",
+      "name": "Chennai West Chapter",
+      "city": "Chennai",
+      "region": "Tamil Nadu North",
+      "state": "Tamil Nadu",
+      "country": "India",
+      "count": 50,
+      "loginCount": 1
+    },
+    {
+      "slug": "hosur",
+      "name": "Hosur Chapter",
+      "city": "Hosur",
+      "region": "Tamil Nadu North",
+      "state": "Tamil Nadu",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "coimbatore",
+      "name": "Coimbatore Chapter",
+      "city": "Coimbatore",
+      "region": "Tamil Nadu West",
+      "state": "Tamil Nadu",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "trichy",
+      "name": "Trichy Chapter",
+      "city": "Tiruchirappalli",
+      "region": "Tamil Nadu Central",
+      "state": "Tamil Nadu",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "madurai",
+      "name": "Madurai Chapter",
+      "city": "Madurai",
+      "region": "Tamil Nadu South",
+      "state": "Tamil Nadu",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "mysuru",
+      "name": "Mysuru Chapter",
+      "city": "Mysuru",
+      "region": "Karnataka South",
+      "state": "Karnataka",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "bengaluru-central",
+      "name": "Bengaluru Central Chapter",
+      "city": "Bengaluru",
+      "region": "Karnataka Bengaluru",
+      "state": "Karnataka",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "bengaluru-south",
+      "name": "Bengaluru South Chapter",
+      "city": "Bengaluru",
+      "region": "Karnataka Bengaluru",
+      "state": "Karnataka",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "hyderabad-central",
+      "name": "Hyderabad Central Chapter",
+      "city": "Hyderabad",
+      "region": "Telangana Hyderabad",
+      "state": "Telangana",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "hyderabad-west",
+      "name": "Hyderabad West Chapter",
+      "city": "Hyderabad",
+      "region": "Telangana Hyderabad",
+      "state": "Telangana",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    },
+    {
+      "slug": "mumbai-central",
+      "name": "Mumbai Central Chapter",
+      "city": "Mumbai",
+      "region": "Maharashtra Mumbai",
+      "state": "Maharashtra",
+      "country": "India",
+      "count": 50,
+      "loginCount": 2
+    }
+  ],
+  "taxonomyProfiles": [
+    {
+      "sector": "Technology & Digital",
+      "segment": "Software & SaaS",
+      "specialisation": "Custom Software, SaaS & Mobile Applications",
+      "categoryId": "cat-it",
+      "capability": "Application engineering",
+      "product": "Business software platforms",
+      "service": "Custom product development"
+    },
+    {
+      "sector": "Technology & Digital",
+      "segment": "Cloud, Data & AI",
+      "specialisation": "Cloud, Data Analytics & AI Solutions",
+      "categoryId": "cat-it",
+      "capability": "Cloud and data engineering",
+      "product": "Analytics and AI solutions",
+      "service": "Cloud modernisation and analytics"
+    },
+    {
+      "sector": "Technology & Digital",
+      "segment": "Cybersecurity & IT Services",
+      "specialisation": "Cybersecurity, Managed IT & Infrastructure",
+      "categoryId": "cat-it",
+      "capability": "Cybersecurity and managed IT",
+      "product": "Managed infrastructure services",
+      "service": "Security assessment and IT support"
+    },
+    {
+      "sector": "Financial Services",
+      "segment": "Accounting, Tax & Audit",
+      "specialisation": "Chartered Accountancy, GST, Audit & Compliance",
+      "categoryId": "cat-services",
+      "capability": "Accounting and statutory compliance",
+      "product": "Tax and audit services",
+      "service": "GST, tax, audit and compliance advisory"
+    },
+    {
+      "sector": "Financial Services",
+      "segment": "Wealth & Investments",
+      "specialisation": "Wealth Management, Mutual Funds & Investment Advisory",
+      "categoryId": "cat-finance",
+      "capability": "Financial planning",
+      "product": "Investment advisory",
+      "service": "Wealth planning and investment support"
+    },
+    {
+      "sector": "Financial Services",
+      "segment": "Insurance & Risk",
+      "specialisation": "Life, Health & Business Insurance Advisory",
+      "categoryId": "cat-finance",
+      "capability": "Risk advisory",
+      "product": "Insurance protection solutions",
+      "service": "Insurance planning and servicing"
+    },
+    {
+      "sector": "Financial Services",
+      "segment": "Business Finance",
+      "specialisation": "Loans, Working Capital & SME Finance Advisory",
+      "categoryId": "cat-finance",
+      "capability": "Business finance advisory",
+      "product": "SME funding solutions",
+      "service": "Loan and working-capital facilitation"
+    },
+    {
+      "sector": "Professional Services",
+      "segment": "Legal & Corporate",
+      "specialisation": "Legal, Contracts & Corporate Advisory",
+      "categoryId": "cat-services",
+      "capability": "Legal advisory",
+      "product": "Contracts and corporate services",
+      "service": "Business legal and contract support"
+    },
+    {
+      "sector": "Professional Services",
+      "segment": "Management Consulting",
+      "specialisation": "Strategy, Family Business & Management Consulting",
+      "categoryId": "cat-services",
+      "capability": "Business strategy",
+      "product": "Management advisory",
+      "service": "Strategy, governance and growth consulting"
+    },
+    {
+      "sector": "Professional Services",
+      "segment": "HR & Recruitment",
+      "specialisation": "Recruitment, HR Advisory & Payroll Services",
+      "categoryId": "cat-services",
+      "capability": "People advisory",
+      "product": "HR and recruitment services",
+      "service": "Talent acquisition and HR operations"
+    },
+    {
+      "sector": "Professional Services",
+      "segment": "Marketing & Branding",
+      "specialisation": "Branding, Digital Marketing & Lead Generation",
+      "categoryId": "cat-services",
+      "capability": "Brand and growth marketing",
+      "product": "Marketing services",
+      "service": "Digital marketing and lead generation"
+    },
+    {
+      "sector": "Professional Services",
+      "segment": "Design & Creative",
+      "specialisation": "Graphic Design, Photography & Creative Studio",
+      "categoryId": "cat-services",
+      "capability": "Creative design",
+      "product": "Visual communication services",
+      "service": "Design, photography and content production"
+    },
+    {
+      "sector": "Education & Learning",
+      "segment": "School & Academic Learning",
+      "specialisation": "Tutoring, Coaching & Academic Learning Centres",
+      "categoryId": "cat-services",
+      "capability": "Academic education",
+      "product": "Learning programmes",
+      "service": "Tutoring and academic coaching"
+    },
+    {
+      "sector": "Education & Learning",
+      "segment": "Higher Education & Careers",
+      "specialisation": "Career Guidance, Overseas Education & Admissions",
+      "categoryId": "cat-services",
+      "capability": "Career and education guidance",
+      "product": "Admissions advisory",
+      "service": "Career counselling and higher-education support"
+    },
+    {
+      "sector": "Education & Learning",
+      "segment": "Professional Skills",
+      "specialisation": "Professional Training, Language & Digital Skills",
+      "categoryId": "cat-services",
+      "capability": "Skills development",
+      "product": "Professional learning programmes",
+      "service": "Professional, language and digital-skills training"
+    },
+    {
+      "sector": "Healthcare & Wellness",
+      "segment": "Medical Practice",
+      "specialisation": "Clinics, Specialist Consultation & Diagnostics",
+      "categoryId": "cat-services",
+      "capability": "Healthcare services",
+      "product": "Clinical and diagnostic services",
+      "service": "Consultation and diagnostics"
+    },
+    {
+      "sector": "Healthcare & Wellness",
+      "segment": "Dental & Allied Health",
+      "specialisation": "Dental, Physiotherapy & Allied Healthcare",
+      "categoryId": "cat-services",
+      "capability": "Allied healthcare",
+      "product": "Dental and therapy services",
+      "service": "Dental, physiotherapy and rehabilitation services"
+    },
+    {
+      "sector": "Healthcare & Wellness",
+      "segment": "Ayurveda & Wellness",
+      "specialisation": "Ayurveda, Yoga & Holistic Wellness",
+      "categoryId": "cat-services",
+      "capability": "Holistic wellness",
+      "product": "Wellness programmes",
+      "service": "Ayurveda, yoga and wellbeing services"
+    },
+    {
+      "sector": "Food & Hospitality",
+      "segment": "Traditional Foods",
+      "specialisation": "Traditional Foods, Snacks, Sweets & Ready Mixes",
+      "categoryId": "cat-services",
+      "capability": "Food production",
+      "product": "Packaged traditional foods",
+      "service": "Traditional food production and catering"
+    },
+    {
+      "sector": "Food & Hospitality",
+      "segment": "Catering & Events",
+      "specialisation": "Catering, Event Meals & Corporate Food Services",
+      "categoryId": "cat-services",
+      "capability": "Catering services",
+      "product": "Event and corporate meals",
+      "service": "Catering and food-service management"
+    },
+    {
+      "sector": "Food & Hospitality",
+      "segment": "Restaurants & Cloud Kitchens",
+      "specialisation": "Vegetarian Restaurants, Cafés & Cloud Kitchens",
+      "categoryId": "cat-services",
+      "capability": "Hospitality operations",
+      "product": "Restaurant and food delivery",
+      "service": "Restaurant, café and cloud-kitchen services"
+    },
+    {
+      "sector": "Retail & Lifestyle",
+      "segment": "Textiles & Apparel",
+      "specialisation": "Sarees, Handloom, Apparel & Boutique Retail",
+      "categoryId": "cat-services",
+      "capability": "Retail merchandising",
+      "product": "Textile and apparel products",
+      "service": "Retail and online commerce"
+    },
+    {
+      "sector": "Retail & Lifestyle",
+      "segment": "Jewellery & Gifts",
+      "specialisation": "Jewellery, Silverware, Gifts & Lifestyle Products",
+      "categoryId": "cat-services",
+      "capability": "Lifestyle retail",
+      "product": "Jewellery and gift products",
+      "service": "Retail and custom gifting"
+    },
+    {
+      "sector": "Retail & Lifestyle",
+      "segment": "Home & Consumer",
+      "specialisation": "Home Décor, Furnishings & Consumer Products",
+      "categoryId": "cat-services",
+      "capability": "Consumer retail",
+      "product": "Home and lifestyle products",
+      "service": "Retail distribution and e-commerce"
+    },
+    {
+      "sector": "Real Estate & Built Environment",
+      "segment": "Real Estate Services",
+      "specialisation": "Real Estate Advisory, Brokerage & Property Management",
+      "categoryId": "cat-services",
+      "capability": "Property advisory",
+      "product": "Real estate services",
+      "service": "Property transactions and management"
+    },
+    {
+      "sector": "Real Estate & Built Environment",
+      "segment": "Architecture & Interiors",
+      "specialisation": "Architecture, Interior Design & Renovation",
+      "categoryId": "cat-services",
+      "capability": "Design and build",
+      "product": "Architecture and interiors",
+      "service": "Architecture, interiors and renovation"
+    },
+    {
+      "sector": "Real Estate & Built Environment",
+      "segment": "Construction Services",
+      "specialisation": "Civil Contracting, Waterproofing & Building Services",
+      "categoryId": "cat-services",
+      "capability": "Construction services",
+      "product": "Civil and building solutions",
+      "service": "Civil works and building maintenance"
+    },
+    {
+      "sector": "Trade & Commerce",
+      "segment": "Distribution & Wholesale",
+      "specialisation": "FMCG, Industrial & Consumer Distribution",
+      "categoryId": "cat-services",
+      "capability": "Distribution network",
+      "product": "Wholesale products",
+      "service": "Distribution and channel development"
+    },
+    {
+      "sector": "Trade & Commerce",
+      "segment": "Import & Export",
+      "specialisation": "Import, Export & Cross-Border Trade Services",
+      "categoryId": "cat-services",
+      "capability": "Trade facilitation",
+      "product": "Import-export services",
+      "service": "Cross-border sourcing and trade"
+    },
+    {
+      "sector": "Travel & Mobility",
+      "segment": "Travel & Tourism",
+      "specialisation": "Domestic, International & Pilgrimage Travel Services",
+      "categoryId": "cat-services",
+      "capability": "Travel planning",
+      "product": "Travel packages",
+      "service": "Travel planning and tour operations"
+    },
+    {
+      "sector": "Travel & Mobility",
+      "segment": "Transport Services",
+      "specialisation": "Corporate Transport, Rentals & Mobility Services",
+      "categoryId": "cat-logistics",
+      "capability": "Passenger mobility",
+      "product": "Transport and rental services",
+      "service": "Corporate transport and mobility"
+    },
+    {
+      "sector": "Media, Arts & Culture",
+      "segment": "Music & Performing Arts",
+      "specialisation": "Carnatic Music, Performing Arts & Training",
+      "categoryId": "cat-services",
+      "capability": "Performing arts",
+      "product": "Music and arts programmes",
+      "service": "Performance, teaching and event programmes"
+    },
+    {
+      "sector": "Media, Arts & Culture",
+      "segment": "Publishing & Content",
+      "specialisation": "Publishing, Books, Translation & Content Services",
+      "categoryId": "cat-services",
+      "capability": "Publishing and content",
+      "product": "Books and content services",
+      "service": "Publishing, editing and translation"
+    },
+    {
+      "sector": "Media, Arts & Culture",
+      "segment": "Cultural & Ritual Services",
+      "specialisation": "Vedic, Ritual, Temple & Cultural Services",
+      "categoryId": "cat-services",
+      "capability": "Cultural service coordination",
+      "product": "Ceremonial and cultural services",
+      "service": "Ritual, cultural and event coordination"
+    },
+    {
+      "sector": "Events & Community Services",
+      "segment": "Events & Weddings",
+      "specialisation": "Event Planning, Wedding Services & Décor",
+      "categoryId": "cat-services",
+      "capability": "Event management",
+      "product": "Event production services",
+      "service": "Planning, coordination and décor"
+    },
+    {
+      "sector": "Events & Community Services",
+      "segment": "Matrimonial & Community",
+      "specialisation": "Matrimonial, Community Directory & Member Services",
+      "categoryId": "cat-services",
+      "capability": "Community platforms",
+      "product": "Community services",
+      "service": "Matrimonial and community-directory services"
+    },
+    {
+      "sector": "Home & Personal Services",
+      "segment": "Home Services",
+      "specialisation": "Home Maintenance, Repairs & Facility Services",
+      "categoryId": "cat-services",
+      "capability": "Home services",
+      "product": "Maintenance services",
+      "service": "Repairs, maintenance and facility support"
+    },
+    {
+      "sector": "Home & Personal Services",
+      "segment": "Personal Care",
+      "specialisation": "Beauty, Grooming & Personal Care Services",
+      "categoryId": "cat-services",
+      "capability": "Personal care",
+      "product": "Beauty and grooming services",
+      "service": "Salon and personal care"
+    },
+    {
+      "sector": "Agriculture & Sustainability",
+      "segment": "Organic & Farm Products",
+      "specialisation": "Organic Foods, Farm Products & Natural Produce",
+      "categoryId": "cat-services",
+      "capability": "Sustainable agriculture",
+      "product": "Farm and organic products",
+      "service": "Farm sourcing and natural products"
+    },
+    {
+      "sector": "Agriculture & Sustainability",
+      "segment": "Renewable Energy",
+      "specialisation": "Solar, Energy Efficiency & Sustainability Advisory",
+      "categoryId": "cat-energy",
+      "capability": "Renewable energy",
+      "product": "Solar and energy solutions",
+      "service": "Energy assessment and solar solutions"
+    },
+    {
+      "sector": "Manufacturing & Industrial",
+      "segment": "Precision & Equipment",
+      "specialisation": "Precision Components, Equipment & Industrial Products",
+      "categoryId": "cat-precision",
+      "capability": "Industrial engineering",
+      "product": "Engineered industrial products",
+      "service": "Precision manufacturing and industrial supply"
+    },
+    {
+      "sector": "Manufacturing & Industrial",
+      "segment": "Electrical & Automation",
+      "specialisation": "Electrical Panels, Automation & Industrial Controls",
+      "categoryId": "cat-electrical",
+      "capability": "Industrial automation",
+      "product": "Electrical and control systems",
+      "service": "Automation and electrical integration"
+    },
+    {
+      "sector": "Logistics & Supply Chain",
+      "segment": "Logistics & Fulfilment",
+      "specialisation": "Warehousing, Courier, Freight & Fulfilment",
+      "categoryId": "cat-logistics",
+      "capability": "Logistics operations",
+      "product": "Freight and fulfilment services",
+      "service": "Warehousing, courier and logistics"
+    },
+    {
+      "sector": "Startups & Innovation",
+      "segment": "Startup Products",
+      "specialisation": "Startup, Product Innovation & Venture Services",
+      "categoryId": "cat-it",
+      "capability": "Startup innovation",
+      "product": "New digital and physical products",
+      "service": "Product strategy and startup execution"
+    },
+    {
+      "sector": "Consulting & Knowledge",
+      "segment": "Research & Advisory",
+      "specialisation": "Research, Analytics, Knowledge & Advisory Services",
+      "categoryId": "cat-services",
+      "capability": "Knowledge advisory",
+      "product": "Research and analytical services",
+      "service": "Research, analysis and specialised advisory"
+    },
+    {
+      "sector": "Consulting & Knowledge",
+      "segment": "Astrology & Traditional Advisory",
+      "specialisation": "Jyotisha, Panchanga & Traditional Advisory Services",
+      "categoryId": "cat-services",
+      "capability": "Traditional advisory",
+      "product": "Traditional consultation services",
+      "service": "Jyotisha and traditional advisory"
+    },
+    {
+      "sector": "Security & Compliance",
+      "segment": "Safety & Compliance",
+      "specialisation": "Fire Safety, Workplace Safety & Compliance Services",
+      "categoryId": "cat-safety",
+      "capability": "Safety compliance",
+      "product": "Safety products and services",
+      "service": "Safety assessment and compliance support"
+    },
+    {
+      "sector": "Packaging & Printing",
+      "segment": "Printing & Packaging",
+      "specialisation": "Printing, Publishing Production & Packaging",
+      "categoryId": "cat-packaging",
+      "capability": "Print and packaging",
+      "product": "Printed and packaged products",
+      "service": "Commercial printing and packaging"
+    }
+  ]
+}

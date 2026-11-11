@@ -1,0 +1,166 @@
+{
+  "chapters": [
+    {
+      "id": "CH-CHE",
+      "city": "Chennai",
+      "region": "Tamil Nadu"
+    },
+    {
+      "id": "CH-CBE",
+      "city": "Coimbatore",
+      "region": "Tamil Nadu"
+    },
+    {
+      "id": "CH-BLR",
+      "city": "Bengaluru",
+      "region": "Karnataka"
+    }
+  ],
+  "users": [
+    {
+      "id": "USR-001",
+      "displayName": "Anand Test"
+    },
+    {
+      "id": "USR-002",
+      "displayName": "Meera Test"
+    },
+    {
+      "id": "USR-003",
+      "displayName": "Kiran Test"
+    },
+    {
+      "id": "USR-004",
+      "displayName": "Latha Test"
+    }
+  ],
+  "members": [
+    {
+      "id": "MEM-001",
+      "userId": "USR-001",
+      "chapterId": "CH-CHE"
+    },
+    {
+      "id": "MEM-002",
+      "userId": "USR-002",
+      "chapterId": "CH-CBE"
+    },
+    {
+      "id": "MEM-003",
+      "userId": "USR-003",
+      "chapterId": "CH-CHE"
+    }
+  ],
+  "businesses": [
+    {
+      "id": "BIZ-001",
+      "memberId": "MEM-001",
+      "sector": "Professional Services",
+      "specialisation": "Accounting"
+    },
+    {
+      "id": "BIZ-002",
+      "memberId": "MEM-002",
+      "sector": "Food",
+      "specialisation": "Catering"
+    },
+    {
+      "id": "BIZ-003",
+      "memberId": "MEM-003",
+      "sector": "Technology",
+      "specialisation": "Software Development"
+    }
+  ],
+  "roles": [
+    {
+      "id": "ROLE-001",
+      "userId": "USR-001",
+      "chapterId": "CH-CHE",
+      "role": "MEMBER_COORDINATOR",
+      "from": "2026-01-01",
+      "to": "2027-01-01"
+    },
+    {
+      "id": "ROLE-002",
+      "userId": "USR-004",
+      "chapterId": "CH-CHE",
+      "role": "MANAGEMENT_COMMITTEE",
+      "from": "2025-01-01",
+      "to": "2026-01-01"
+    }
+  ],
+  "connections": [
+    {
+      "id": "CON-001",
+      "fromMemberId": "MEM-001",
+      "toMemberId": "MEM-002",
+      "status": "PENDING"
+    }
+  ],
+  "meetings": [
+    {
+      "id": "MTG-001",
+      "fromMemberId": "MEM-001",
+      "toMemberId": "MEM-002",
+      "status": "COMPLETED"
+    }
+  ],
+  "opportunities": [
+    {
+      "id": "OPP-001",
+      "ownerMemberId": "MEM-001",
+      "title": "Accounting services collaboration",
+      "status": "OPEN"
+    }
+  ],
+  "responses": [
+    {
+      "id": "RSP-001",
+      "opportunityId": "OPP-001",
+      "memberId": "MEM-002",
+      "status": "SUBMITTED"
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "OUT-001",
+      "opportunityId": "OPP-001",
+      "fromMemberId": "MEM-001",
+      "toMemberId": "MEM-002",
+      "status": "AWAITING_CONFIRMATION"
+    }
+  ],
+  "notes": [
+    {
+      "id": "NOTE-001",
+      "ownerMemberId": "MEM-001",
+      "contextType": "MEETING",
+      "contextId": "MTG-001",
+      "visibility": "PRIVATE"
+    }
+  ],
+  "messages": [
+    {
+      "id": "MSG-001",
+      "senderMemberId": "MEM-001",
+      "recipientMemberId": "MEM-002",
+      "text": "Could we schedule a follow-up?"
+    }
+  ],
+  "applications": [
+    {
+      "id": "APP-001",
+      "applicantUserId": "USR-004",
+      "chapterId": "CH-CHE",
+      "status": "DOCUMENT_VERIFICATION"
+    }
+  ],
+  "governanceCases": [
+    {
+      "id": "GOV-001",
+      "subjectApplicationId": "APP-001",
+      "status": "OPEN",
+      "decisionAuthority": "INDEPENDENT_GOVERNANCE"
+    }
+  ]
+}

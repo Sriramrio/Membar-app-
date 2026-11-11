@@ -1,0 +1,19 @@
+{
+  "release": "SETHU Enterprise Platform V6 Canonical",
+  "version": "6.1.0",
+  "release_status": "FINAL_SOURCE_VERIFIED_RUNTIME_BLOCKED_ENVIRONMENT",
+  "dependency_certification": "BLOCKED_ENVIRONMENT",
+  "browser_certification": "NOT_CLAIMED_ENVIRONMENT_BLOCKED",
+  "manifest_file_count": 675,
+  "authenticated_workspace_routes": 84,
+  "public_auth_routes": 14,
+  "member_routes": 45,
+  "management_routes": 13,
+  "governance_routes": 8,
+  "platform_admin_routes": 17,
+  "retired_enterprise_production_dependencies": 0,
+  "enterprise_root_state": 0,
+  "legacy_control_plane_page_imports": 0,
+  "configuration_mirror_count": 0,
+  "historical_compatibility_boundary": "src/migrations"
+}

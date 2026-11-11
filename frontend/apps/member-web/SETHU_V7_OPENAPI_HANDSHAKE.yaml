@@ -1,0 +1,241 @@
+openapi: 3.1.0
+info:
+  title: SETHU V7 Frontend/Backend Handshake (REST Contract)
+  version: 7.1.0
+paths:
+  /api/directory/members:
+    get:
+      summary: Search network members and businesses
+      responses:
+        "200":
+          description: Member directory search page
+  /api/connections:
+    get:
+      summary: Get current member connections
+      responses:
+        "200":
+          description: List of connections
+    post:
+      summary: Request a connection
+      responses:
+        "200":
+          description: Created connection
+  /api/connections/actions:
+    post:
+      summary: Transition connection state
+      responses:
+        "200":
+          description: Updated connection
+  /api/opportunities:
+    get:
+      summary: Get network opportunities
+      responses:
+        "200":
+          description: List of opportunities
+    post:
+      summary: Create an opportunity
+      responses:
+        "200":
+          description: Created opportunity
+  /api/opportunities/actions:
+    post:
+      summary: Act on an opportunity or response
+      responses:
+        "200":
+          description: Updated opportunity
+  /api/references:
+    get:
+      summary: Get references
+      responses:
+        "200":
+          description: List of references
+    post:
+      summary: Create a reference
+      responses:
+        "200":
+          description: Created reference
+  /api/references/actions:
+    post:
+      summary: Update reference status
+      responses:
+        "200":
+          description: Updated reference
+  /api/one-to-one:
+    get:
+      summary: Get one-to-one meetings
+      responses:
+        "200":
+          description: List of meetings
+    post:
+      summary: Schedule a meeting
+      responses:
+        "200":
+          description: Created meeting
+  /api/one-to-one/actions:
+    post:
+      summary: Act on a meeting
+      responses:
+        "200":
+          description: Updated meeting
+  /api/notes:
+    post:
+      summary: Record an interaction note
+      responses:
+        "200":
+          description: Created private interaction note
+  /api/notifications:
+    get:
+      summary: Get notifications
+      responses:
+        "200":
+          description: List of notifications
+  /api/messages/conversations:
+    get:
+      summary: Get conversations
+      responses:
+        "200":
+          description: List of conversations
+    post:
+      summary: Create conversation
+      responses:
+        "200":
+          description: Created conversation
+  /api/attendance/my:
+    get:
+      summary: Get member attendance history
+      responses:
+        "200":
+          description: Attendance records
+  /api/transactions:
+    get:
+      summary: Get transactions
+      responses:
+        "200":
+          description: List of transactions
+    post:
+      summary: Record a transaction slip
+      responses:
+        "200":
+          description: Created transaction
+  /api/membership/me:
+    get:
+      summary: Get membership context
+      responses:
+        "200":
+          description: Member tier and validity
+  /v6/member/query:
+    post:
+      summary: Backward-compatible REST query mapping
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/member/commands:
+    post:
+      summary: Backward-compatible REST command mapping
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/management/query:
+    post:
+      summary: Management query endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/management/commands:
+    post:
+      summary: Management commands endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/governance/query:
+    post:
+      summary: Governance query endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/governance/commands:
+    post:
+      summary: Governance commands endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/platform-admin/query:
+    post:
+      summary: Platform admin query endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/platform-admin/commands:
+    post:
+      summary: Platform admin commands endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+x-sethu-member-query-ids:
+  - member.directory.businesses
+  - member.directory.people
+  - member.opportunities.marketplace
+  - member.notifications.list
+  - member.converse.inbox
+  - member.converse.messages
+  - member.attendance.list
+  - member.references.list
+  - member.transactions.list
+  - member.meetings.list
+x-sethu-member-command-ids:
+  - member.profile.update
+  - family.update
+  - business.update
+  - business.affiliation.request
+  - business.affiliation.end
+  - business.affiliation.set-primary
+  - business.certification.upsert
+  - connection.request
+  - connection.respond
+  - connection.cancel
+  - connection.remove
+  - connection.block
+  - converse.conversation.create
+  - converse.chapter-group.create
+  - converse.conversation.join
+  - converse.conversation.leave
+  - converse.conversation.flag
+  - converse.conversation.read
+  - converse.message.send
+  - meeting.create
+  - meeting.update
+  - meeting.poll
+  - event.rsvp
+  - event.rsvp.cancel
+  - attendance.correction.request
+  - reference.create
+  - reference.status.update
+  - opportunity.status.update
+  - opportunity.response.submit
+  - opportunity.response.status
+  - opportunity.question.ask
+  - opportunity.question.answer
+  - opportunity.award
+  - transaction.create
+  - transaction.status.update
+  - notifications.mark-all-read
+  - notification.mark-read
+  - notification.acknowledge
+  - announcement.acknowledge
+  - thank-you.create
+  - thank-you.acknowledge
+  - support.create
+  - promotion.event.record
+  - member.interaction-note.create
+components:
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: { type: string }
+    IfMatch:
+      name: If-Match
+      in: header
+      required: false
+      schema: { type: string }

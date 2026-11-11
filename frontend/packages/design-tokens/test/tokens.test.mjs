@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { themeNames, resolveSemanticToken } from '../tokens.js';
+const data=JSON.parse(readFileSync(new URL('../themes.json', import.meta.url),'utf8'));
+const css=readFileSync(new URL('../themes.css', import.meta.url),'utf8');
+test('themes are exactly the actual three workspaces',()=>assert.deepEqual([...themeNames].sort(),['member','organisation','platform-admin']));
+test('each supported semantic token maps to its verified source',()=>{ for(const [workspace,tokens] of Object.entries(data.themes)){const original=readFileSync(new URL('../../../'+data.source_files[workspace],import.meta.url),'utf8');for(const [name,value] of Object.entries(tokens)){ assert.ok(value===null|| /^#[0-9a-f]{3,8}$/i.test(value)||/^var\(--[\w-]+\)$/.test(value)); if(value!==null){assert.ok(css.includes('--sethu-'+name+': '+value+';'));assert.ok(original.includes(value),'missing original value '+value+' in '+workspace);assert.equal(resolveSemanticToken(workspace,name),value)} } }});
+test('missing explicit theme values are not fabricated',()=>assert.equal(resolveSemanticToken('platform-admin','focus'),null));
+test('unknown token or workspace is rejected',()=>{assert.throws(()=>resolveSemanticToken('foo','primary'));assert.throws(()=>resolveSemanticToken('member','unknown'))});

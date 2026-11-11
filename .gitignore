@@ -1,0 +1,47 @@
+
+# .NET build files
+**/bin/
+**/obj/
+**/.vs/
+**/*.user
+**/*.suo
+
+# Node.js
+**/node_modules/
+**/dist/
+**/build/
+**/.vite/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Local configuration and secrets
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/secrets.json
+
+# Logs
+*.log
+
+# Database backups
+**/backups/
+**/backup/
+*.bak
+*.dump
+*.backup
+*.sql.gz
+*backup*.sql
+*dump*.sql
+
+# Certificates and private keys
+*.pfx
+*.p12
+*.pem
+*.key
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,10 @@
+import fs from 'node:fs';import path from 'node:path';let p=0,f=0;const ok=(c,m)=>{console.log(`${c?'PASS':'FAIL'}: ${m}`);c?p++:f++};const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]);const tests=walk('src').filter(x=>/\.test\.(?:ts|tsx)$/.test(x));const joined=tests.map(x=>fs.readFileSync(x,'utf8')).join('\n');
+ok(tests.length>=11,`Conventional behavioral/unit test modules expanded (${tests.length})`);
+ok(tests.includes('src/services/api/errorMapper.test.ts'),'API error/recovery contract tests exist');
+ok(tests.includes('src/services/storage/versionedDraft.test.ts'),'Versioned draft recovery tests exist');
+ok(joined.includes("type:'CONFLICT'")||joined.includes("type: 'CONFLICT'"),'Conflict/concurrency behavior is covered');
+ok(joined.includes('RATE_LIMIT'),'Rate-limit/retryability behavior is covered');
+ok(joined.includes('CANCELLED'),'Request cancellation behavior is covered');
+ok(joined.includes('incompatible')&&joined.includes('invalid'),'Stale/corrupt draft recovery behavior is covered');
+const e2e=fs.readFileSync('e2e/run-browser-e2e.mjs','utf8');ok(e2e.includes('canonicalRoutes')&&e2e.includes('/unauthorized')&&e2e.includes('pageerror'),'Browser E2E harness is route-crawl/error-policy aware');
+console.log(`\nSETHU V6 behavioral regression readiness: ${f?'FAIL':'PASS'} — ${p}/${p+f}`);process.exit(f?1:0);

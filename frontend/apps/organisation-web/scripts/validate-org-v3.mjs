@@ -1,0 +1,8 @@
+import fs from 'node:fs'; import path from 'node:path';
+const root=process.cwd(); const src=path.join(root,'src');
+const files=[]; const walk=d=>{if(!fs.existsSync(d))return;for(const n of fs.readdirSync(d)){const p=path.join(d,n);const s=fs.statSync(p);if(s.isDirectory())walk(p);else if(/\.(ts|tsx|css)$/.test(n))files.push(p)}}; walk(src);
+const bad=[];
+for(const f of files){const t=fs.readFileSync(f,'utf8');const rel=path.relative(root,f);if(/<<<<<<<|=======|>>>>>>>/.test(t))bad.push(`${rel}: merge marker`);if(/catch\s*\{\s*\}/.test(t))bad.push(`${rel}: empty catch`);if(/(?:^|\n)\s*\/\/\s*(?:TODO|FIXME)|\/\*\s*(?:TODO|FIXME)/.test(t))bad.push(`${rel}: TODO/FIXME marker`);if(!rel.endsWith('dependency-stubs.d.ts')&&/\bany\b/.test(t))bad.push(`${rel}: explicit any in production source`);if(rel.startsWith('src/pages/')&&rel.endsWith('.tsx'))for(const m of t.matchAll(/<button\b([^>]*)>/g)){const attrs=m[1];if(!/onClick=|type=["']submit["']|disabled/.test(attrs))bad.push(`${rel}: button without action handler`);}}
+const routes=path.join(src,'routes','routeRegistry.tsx'); if(!fs.existsSync(routes))bad.push('missing routeRegistry.ts');
+const required=['/org/today','/org/action-centre','/org/converse','/org/calendar','/org/approvals','/org/audit','/org/handoffs']; if(fs.existsSync(routes)){const t=fs.readFileSync(routes,'utf8');for(const r of required)if(!t.includes(r))bad.push(`missing route ${r}`)}
+if(bad.length){console.error(bad.join('\n'));process.exit(1)}console.log(`PASS org-v3 static quality: ${files.length} source/style files; no stale markers, empty catches, production any, or unwired page buttons`);

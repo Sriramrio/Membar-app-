@@ -1,0 +1,1 @@
+import{r as o}from"./index-PjpCc3ra.js";function s(e,t=300){const[r,n]=o.useState(e);return o.useEffect(()=>{const u=window.setTimeout(()=>n(e),Math.max(0,t));return()=>window.clearTimeout(u)},[e,t]),r}export{s as u};

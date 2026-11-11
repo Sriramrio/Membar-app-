@@ -1,0 +1,14 @@
+{
+  "release": "SETHU V6.1 Navigation Interaction Production Closure Final",
+  "version": "6.1.0",
+  "release_status": "FINAL_SOURCE_VERIFIED_RUNTIME_BROWSER_DEPLOYMENT_BLOCKED_ENVIRONMENT",
+  "source_closure": "PASS_N00_N11",
+  "dependency_typecheck_test_build": "BLOCKED_EAI_AGAIN",
+  "browser_role_action_e2e": "NOT_CLAIMED_ENVIRONMENT_BLOCKED",
+  "browser_navigation_e2e": "NOT_CLAIMED_ENVIRONMENT_BLOCKED",
+  "live_certification": "NOT_CLAIMED_ENVIRONMENT_DEPLOYMENT_BLOCKED",
+  "external_production_services": "REQUIRED_NOT_INCLUDED",
+  "active_v3_v4_v5_member_runtime_dependencies": 0,
+  "retired_enterprise_production_dependencies": 0,
+  "manifest_file_count": 671
+}

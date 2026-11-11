@@ -1,0 +1,1 @@
+import {ControlsPage} from './ControlsPage';export default function ExceptionsPage(){return <ControlsPage mode="EXCEPTIONS"/>}

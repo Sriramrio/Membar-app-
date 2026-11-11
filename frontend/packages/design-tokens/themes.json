@@ -1,0 +1,46 @@
+{
+  "description": "Verified source-derived SETHU semantic theme mappings. Unavailable values remain null; no substitutes or fabricated colors.",
+  "source_files": {
+    "organisation": "apps/organisation-web/src/styles/global.css",
+    "member": "apps/member-web/src/styles/index.css",
+    "platform-admin": "apps/platform-admin-web/src/shared/styles.css"
+  },
+  "themes": {
+    "organisation": {
+      "background": "#f7f9fc",
+      "surface": "#fff",
+      "text": "#172033",
+      "muted": "#59687f",
+      "border": "#dbe4ef",
+      "primary": "#1b5fa7",
+      "success": "#166534",
+      "warning": "#7b4f00",
+      "danger": "#932727",
+      "focus": "#f2b84b"
+    },
+    "member": {
+      "background": "#f5f7fb",
+      "surface": "#ffffff",
+      "text": "#172033",
+      "muted": "#1b528c",
+      "border": "#d7deea",
+      "primary": "#087dc1",
+      "success": "#087f5b",
+      "warning": "#b45309",
+      "danger": "#b42318",
+      "focus": "#087dc1"
+    },
+    "platform-admin": {
+      "background": "#f8fafc",
+      "surface": "#ffffff",
+      "text": "#0f172a",
+      "muted": "#64748b",
+      "border": "#e2e8f0",
+      "primary": "#1e3a8a",
+      "success": null,
+      "warning": null,
+      "danger": null,
+      "focus": null
+    }
+  }
+}

@@ -1,0 +1,11 @@
+import fs from 'node:fs';let p=0,f=0;const ok=(c,m)=>{console.log(`${c?'PASS':'FAIL'}: ${m}`);c?p++:f++};const read=x=>fs.readFileSync(x,'utf8');
+const env=read('src/config/env.ts');const api=read('src/services/api/apiClient.ts');const domain=read('src/services/api/domainPersistence.ts');const providers=read('src/services/api/productionProviders.ts');
+ok(env.includes("import.meta.env.PROD && (useMocks || previewAuthEnabled)"),'Production runtime fails closed if preview mocks/auth are enabled');
+ok(env.includes('clientRuntimePersistence = useMocks'),'Client runtime persistence remains coupled to preview/mock mode');
+ok(domain.includes('commandId: string'),'Server-authoritative domain commands require a stable command id');
+ok(domain.includes('idempotencyKey: command.commandId'),'Domain command id is propagated as the idempotency key');
+ok(api.includes('idempotencyKey?: string'),'API request options support caller-owned stable idempotency keys');
+ok(providers.includes('payment-session:${request.memberId}:${request.paymentId}:${request.purpose}'),'Payment-session creation uses a deterministic idempotency key');
+ok(providers.includes('idempotencyKey:request.dedupeKey'),'Notification delivery propagates its dedupe key as idempotency key');
+ok((providers.match(/retry:'safe'/g)||[]).length>=5,'Read/evaluation provider POSTs explicitly opt into safe retry semantics');
+console.log(`\nSETHU V6 production safety policy: ${f?'FAIL':'PASS'} — ${p}/${p+f}`);process.exit(f?1:0);

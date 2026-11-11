@@ -1,0 +1,63 @@
+{
+  "name": "sethu-organisational-operations",
+  "private": true,
+  "version": "3.8.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b --pretty false",
+    "validate:org": "node scripts/validate-org-v3.mjs",
+    "validate:contracts": "node scripts/validate-contract-sync.mjs",
+    "validate:release": "npm run validate:syntax && npm run validate:org && npm run validate:contracts && npm run validate:integrity && npm run validate:detail-integrity && npm run validate:command-journeys && npm run validate:enterprise-hardening && npm run validate:reachability && npm run validate:performance-a11y && npm run validate:production-runtime && npm run validate:recovery && npm run validate:runtime-resilience && npm run validate:final-closure && npm run validate:hierarchy-extension && npm run validate:strict-stub && npm run validate:access-governance && npm run validate:policy-boundary && npm run validate:role-responsibility && npm run validate:role-navigation && npm run validate:business-journeys && npm run validate:semantic-links-actions && npm run validate:v38-source-hygiene && npm run validate:v38-release-readiness && npm run validate:v38-functional-freeze && npm run validate:v38-independent-freeze",
+    "validate:syntax": "node scripts/validate-syntax.mjs",
+    "validate:integrity": "node scripts/validate-integrity.mjs",
+    "validate:semantic-stub": "tsc -p tsconfig.validation.json --pretty false",
+    "validate:strict-stub": "tsc -p tsconfig.strict-validation.json --pretty false",
+    "validate:enterprise-hardening": "node scripts/validate-enterprise-hardening.mjs",
+    "validate:reachability": "node scripts/validate-reachability.mjs",
+    "validate:performance-a11y": "node scripts/validate-performance-accessibility.mjs",
+    "validate:production-runtime": "node scripts/validate-production-runtime.mjs",
+    "validate:recovery": "node scripts/validate-recovery.mjs",
+    "validate:detail-integrity": "node scripts/validate-detail-integrity.mjs",
+    "validate:command-journeys": "node scripts/validate-command-journeys.mjs",
+    "validate:runtime-resilience": "node scripts/validate-runtime-resilience.mjs",
+    "validate:final-closure": "node scripts/validate-final-closure.mjs",
+    "validate:hierarchy-extension": "node scripts/validate-hierarchy-extension.mjs",
+    "validate:access-governance": "node scripts/validate-access-governance.mjs",
+    "validate:policy-boundary": "node scripts/validate-policy-boundary.mjs",
+    "validate:role-responsibility": "node scripts/validate-role-responsibility.mjs",
+    "validate:role-navigation": "node scripts/validate-role-navigation.mjs",
+    "validate:business-journeys": "node scripts/validate-business-journeys.mjs",
+    "validate:semantic-links-actions": "node scripts/validate-semantic-links-actions.mjs",
+    "validate:v38-source-hygiene": "node scripts/validate-v38-source-hygiene.mjs",
+    "validate:v38-release-readiness": "node scripts/validate-v38-release-readiness.mjs",
+    "validate:v38-functional-freeze": "node scripts/validate-v38-functional-freeze.mjs",
+    "validate:v38-independent-freeze": "node scripts/validate-v38-independent-freeze.mjs",
+    "dev:simulator": "vite --mode simulator"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.9.0",
+    "@sethu/navigation": "file:../../packages/navigation",
+    "@tailwindcss/vite": "^4.3.3",
+    "axios": "^1.21.0",
+    "lucide-react": "^0.544.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.9.0",
+    "tailwindcss": "^4.3.3",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7"
+  }
+}

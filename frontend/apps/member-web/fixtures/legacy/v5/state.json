@@ -1,0 +1,1 @@
+{"controlPlane":{"schemaVersion":5,"releaseVersion":"5.0.0","modules":[{"id":"MOD-MEMBER"}],"permissions":[{"id":"PERM-MEMBER"}]},"network":{"members":[{"id":"M-V5"}],"affiliations":[{"id":"AFF-V5","memberId":"M-V5","businessId":"B-V5"}]}}

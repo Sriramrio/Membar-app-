@@ -1,0 +1,12 @@
+import{readFileSync,readdirSync,statSync}from'node:fs';import{join}from'node:path';
+let p=0,f=0;const ck=(n,o)=>{o?(p++,console.log('PASS',n)):(f++,console.error('FAIL',n))};const root=process.cwd();
+const cat=readFileSync(join(root,'src/contracts/catalogue.ts'),'utf8');const app=readFileSync(join(root,'src/app/PlatformAdminApp.tsx'),'utf8');
+for(const x of ['platform.integration.read','platform.import.read','platform.export.read','platform.jobs.read','platform.data-quality.read','platform.correction.read','platform.moderation.read'])ck(`permission ${x}`,cat.includes(x));
+for(const x of ['IntegrationsPage','ImportsPage','ExportsPage','JobsPage','DataQualityPage','CorrectionsPage','ModerationPage'])ck(`wired ${x}`,app.includes(x));
+const all=[];function walk(d){for(const n of readdirSync(d)){const q=join(d,n);statSync(q).isDirectory()?walk(q):(/\.(ts|tsx)$/.test(n)&&all.push(q))}}walk(join(root,'src'));
+const src=all.map(x=>readFileSync(x,'utf8')).join('\n');
+ck('no forbidden consumer imports',!/@\/features\/(member|organisation-operations|governance)\//.test(src));
+ck('no empty catch',!/catch\s*\([^)]*\)?\s*\{\s*\}/.test(src));
+ck('no role-name authorization',!/role\s*===\s*['"]/i.test(src));
+ck('no javascript:void',!src.includes('javascript:void'));
+console.log(`Wave3 ${p} PASS / ${f} FAIL`);if(f)process.exit(1);

@@ -1,0 +1,1 @@
+import{q as s}from"./index-PjpCc3ra.js";const r={getSavedItems:(e,t)=>{const o=e?`?type=${encodeURIComponent(e)}`:"";return s.get(`/saved-items${o}`,{signal:t,retry:"safe"})},toggleSavedItem:(e,t)=>s.post("/saved-items/toggle",{itemType:e.toLowerCase(),itemId:t})};export{r as s};

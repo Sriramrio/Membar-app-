@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const exists=p=>fs.existsSync(p);
+const source=fs.readdirSync('src/features/member/pages').filter(f=>f.endsWith('.tsx')).map(f=>read(`src/features/member/pages/${f}`)).join('\n')+read('src/hooks/useConnectionCommands.ts');
+const checks=[];const check=(label,ok)=>checks.push({label,ok});
+check('Package/runtime version is V7.1-compatible',/^7\.(?:0|1)\./.test(JSON.parse(read('package.json')).version)&&(/'7\.(?:0|1)\.0'/.test(read('src/config/env.ts'))));
+for(const d of ['SETHU_V7_FRONTEND_BACKEND_HANDSHAKE.md','SETHU_V7_BACKEND_IMPLEMENTATION_REQUIREMENTS.md','SETHU_V7_BACKEND_DEVELOPER_EXECUTION_PLAN.md','SETHU_V7_FRONTEND_BACKEND_HANDOFF_INDEX.md','SETHU_V7_COMMAND_QUERY_CATALOG.md','SETHU_V7_INTEGRATION_TEST_MATRIX.md','SETHU_V7_OPENAPI_HANDSHAKE.yaml','SETHU_V7_FRONTEND_PRODUCTION_READINESS_REPORT.md','SETHU_V7_FINAL_VALIDATION_REPORT.md','SETHU_V7_CHECKPOINT_STATUS.md'])check(`Document present: ${d}`,exists(d));
+const queries=['member.directory.businesses','member.directory.people','member.opportunities.marketplace','member.notifications.list','member.converse.inbox','member.converse.messages','member.attendance.list','member.references.list','member.transactions.list','member.meetings.list'];
+for(const q of queries)check(`Frontend contract consumes ${q}`,source.includes(q));
+const commands=['connection.request','connection.respond','connection.cancel','connection.remove','connection.block','converse.message.send','meeting.create','reference.create','reference.status.update','opportunity.response.submit','opportunity.award','transaction.status.update','attendance.correction.request','member.profile.update'];
+for(const c of commands)check(`Governed command present ${c}`,source.includes(c));
+const openapi=read('SETHU_V7_OPENAPI_HANDSHAKE.yaml');
+check('OpenAPI declares query and command endpoints',openapi.includes('/v6/member/query:')&&openapi.includes('/v6/member/commands:'));
+check('OpenAPI carries idempotency and optimistic-concurrency headers',openapi.includes('Idempotency-Key')&&openapi.includes('If-Match'));
+check('OpenAPI documents all ten adopted Member query IDs',queries.every(q=>openapi.includes(q)));
+const handshake=read('SETHU_V7_FRONTEND_BACKEND_HANDSHAKE.md');
+check('Handshake covers outbox, indexing, SoD and specialisation race', ['transactional outbox','Database index baseline','RACI/SoD','Specialisation reservation race'].every(x=>handshake.includes(x)));
+let fail=0;for(const c of checks){console.log(`${c.ok?'PASS':'FAIL'}: ${c.label}`);if(!c.ok)fail++;}console.log(`\nSETHU V7 final readiness evidence: ${checks.length-fail}/${checks.length} PASS`);if(fail)process.exit(1);

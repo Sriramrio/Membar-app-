@@ -1,0 +1,1 @@
+import {ControlsPage} from './ControlsPage';export default function IssuesPage(){return <ControlsPage mode="ISSUES"/>}

@@ -1,0 +1,9 @@
+import { useEffect,useId,useRef,useState,type ReactNode } from 'react';
+import { Lightbulb,X } from 'lucide-react';
+import { cn } from '@/utils/cn';
+
+export function ContextTip({title='Helpful tip',children,className}:{title?:string;children:ReactNode;className?:string}){
+ const [open,setOpen]=useState(false);const id=useId();const rootRef=useRef<HTMLSpanElement>(null);
+ useEffect(()=>{if(!open)return;const onKey=(event:KeyboardEvent)=>{if(event.key==='Escape')setOpen(false)};const onPointer=(event:PointerEvent)=>{if(rootRef.current&&!rootRef.current.contains(event.target as Node))setOpen(false)};document.addEventListener('keydown',onKey);document.addEventListener('pointerdown',onPointer);return()=>{document.removeEventListener('keydown',onKey);document.removeEventListener('pointerdown',onPointer)}},[open]);
+ return <span ref={rootRef} className={cn('relative inline-flex align-middle',className)}><button type="button" className="grid size-11 place-items-center rounded-full text-amber-700 hover:bg-amber-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400" aria-label={`Open tip: ${title}`} aria-expanded={open} aria-controls={id} onClick={()=>setOpen(v=>!v)}><Lightbulb className="size-5"/></button>{open&&<span id={id} role="note" className="fixed inset-x-3 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] z-[110] max-h-[45dvh] overflow-auto rounded-2xl border border-amber-200 bg-white p-4 text-left shadow-2xl sm:absolute sm:inset-auto sm:right-0 sm:top-12 sm:w-80"><span className="flex items-start justify-between gap-3"><span className="min-w-0"><strong className="block text-sm text-slate-950">{title}</strong><span className="mt-1 block text-sm leading-6 text-slate-600">{children}</span></span><button type="button" className="grid size-9 shrink-0 place-items-center rounded-lg hover:bg-slate-100" aria-label="Close tip" onClick={()=>setOpen(false)}><X className="size-4"/></button></span></span>}</span>
+}

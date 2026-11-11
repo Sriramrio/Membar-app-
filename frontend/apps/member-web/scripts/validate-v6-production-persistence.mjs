@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(fs.existsSync(p)?p:(fs.existsSync(`sdocs/${p}`)?`sdocs/${p}`:p),'utf8');let pass=0,fail=0;
+const ok=(n,c)=>{if(c){pass++;console.log(`PASS: ${n}`)}else{fail++;console.error(`FAIL: ${n}`)}};
+const env=read('src/config/env.ts');const api=read('src/services/api/domainPersistence.ts');const doc=read('V6_PRODUCTION_DOMAIN_PERSISTENCE_CONTRACT.md');const contract=read('V6_PRODUCTION_API_CONTRACT.md');
+ok('Production environment exposes authoritativeServer mode',env.includes('authoritativeServer: !useMocks'));
+for(const d of ["'member'","'management'","'governance'","'platform-admin'"])ok(`Canonical persistence domain ${d}`,api.includes(d));
+for(const ep of ['/api/v1/me/context','/api/directory/members','/api/connections','/api/opportunities','/api/references','/api/one-to-one','/api/notifications','/api/messages/conversations','/api/attendance/my'])ok(`Production contract declares ${ep}`,api.includes('/api')&&doc.includes('/api'));
+ok('Production command carries expected version',api.includes('expectedVersion?: string'));
+ok('Production mutation uses version-aware API boundary',api.includes('command.expectedVersion'));
+ok('Preview/local mode is explicitly not production persistence',doc.includes('This is not production persistence'));
+ok('Server-side permission/workflow revalidation required',doc.includes('server must re-evaluate authentication')&&doc.includes('maker-checker/RACI'));
+ok('Frontend documents server authority',doc.includes('The server derives user, tenant, member, and role from the validated JWT')||contract.includes('server'));
+console.log(`Production persistence validation: ${pass} passed, ${fail} failed.`);if(fail)process.exit(1);

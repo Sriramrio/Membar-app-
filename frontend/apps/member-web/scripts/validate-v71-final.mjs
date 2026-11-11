@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const resolveFile=p=>fs.existsSync(p)?p:(fs.existsSync(`sdocs/${p}`)?`sdocs/${p}`:p);const read=p=>fs.readFileSync(resolveFile(p),'utf8');const exists=p=>fs.existsSync(resolveFile(p));const pkg=JSON.parse(read('package.json'));const checks=[];const c=(n,o)=>checks.push([n,!!o]);
+c('Version 7.1.0',pkg.version==='7.1.0');
+for(const f of ['SETHU_V7_1_FRONTEND_BACKEND_HANDSHAKE.md','SETHU_V7_1_BACKEND_IMPLEMENTATION_STANDARD.md','SETHU_V7_1_INTEGRATION_TEST_MATRIX.md','SETHU_V7_1_OPENAPI_HANDSHAKE.yaml','SETHU_V7_1_FRONTEND_STANDARD_COMPLIANCE_REPORT.md','SETHU_V7_1_FINAL_VALIDATION_REPORT.md','SETHU_V7_1_BACKEND_HANDOFF_INDEX.md','SETHU_V7_1_CHECKPOINT_STATUS.md'])c(`Document ${f}`,exists(f));
+const hs=read('SETHU_V7_1_FRONTEND_BACKEND_HANDSHAKE.md'), oa=read('SETHU_V7_1_OPENAPI_HANDSHAKE.yaml'), std=read('SETHU_V7_1_BACKEND_IMPLEMENTATION_STANDARD.md');
+for(const q of ['member.directory.businesses','member.directory.people','member.opportunities.marketplace','member.notifications.list','member.converse.inbox','member.converse.messages','member.attendance.list','member.references.list','member.transactions.list','member.meetings.list'])c(`Query ${q}`,hs.includes(q)&&oa.includes(q));
+c('Handshake includes latency/SLO objectives',hs.includes('500–800 ms')&&hs.includes('Server-Timing'));
+c('Backend standard includes B00-B14',std.includes('B00')&&std.includes('B14'));
+c('Integration matrix includes V7.1 performance acceptance',read('SETHU_V7_1_INTEGRATION_TEST_MATRIX.md').includes('V7.1 performance and async UX acceptance'));
+c('OpenAPI version is 7.1 contract',oa.includes('version: 7.1.0-contract'));
+let fail=0;for(const [n,o] of checks){console.log(`${o?'PASS':'FAIL'}: ${n}`);if(!o)fail++;}console.log(`SETHU V7.1 final contract/readiness: ${checks.length-fail}/${checks.length}`);if(fail)process.exit(1);

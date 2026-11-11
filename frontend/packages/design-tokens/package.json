@@ -1,0 +1,14 @@
+{
+  "name": "@sethu/design-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./themes.css": "./themes.css",
+    "./themes.json": "./themes.json",
+    "./tokens.js": "./tokens.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

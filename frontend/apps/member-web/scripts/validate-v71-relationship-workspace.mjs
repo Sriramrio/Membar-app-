@@ -1,0 +1,11 @@
+import fs from 'node:fs';const r=p=>fs.readFileSync(p,'utf8');const checks=[];const add=(n,v)=>checks.push([n,Boolean(v)]);
+const types=r('src/features/network/types.ts'),slice=r('src/features/network/networkSlice.ts'),member=r('src/features/member/pages/MemberDetailPage.tsx'),business=r('src/features/member/pages/BusinessDetailPage.tsx'),opp=r('src/features/member/pages/OpportunityDetailPage.tsx'),meeting=r('src/features/member/pages/MeetingDetailAttendancePollPage.tsx'),txn=r('src/features/member/pages/TransactionsPage.tsx');
+add('Interaction note has explicit context and privacy model',types.includes('MemberInteractionNote')&&types.includes("visibility:'Private'|'Participants'"));
+add('Interaction notes are separate canonical state',slice.includes('interactionNotes:MemberInteractionNote[]'));
+add('Member profile supports contextual Add note',member.includes('Add note')&&member.includes('member.interaction-note.create'));
+add('Member profile shows meetings, opportunities, references, outcomes and notes',member.includes('meetingsWithTarget')&&member.includes('opportunitiesWithTarget')&&member.includes('referencesWithTarget')&&member.includes('outcomesWithTarget')&&member.includes('visibleNotes'));
+add('Business profile provides relationship note action',business.includes('Add relationship note')&&business.includes("contextType:'Business'"));
+add('Opportunity workspace provides opportunity-context note',opp.includes('Add opportunity note')&&opp.includes("contextType:'Opportunity'"));
+add('Meeting completion separates outcome/follow-up/private/shared notes',meeting.includes('My private note')&&meeting.includes('Shared participant note')&&meeting.includes('followUp')&&meeting.includes('outcome'));
+add('Transaction notes remain separate from proof evidence',txn.includes('Add transaction note')&&txn.includes("contextType:'Transaction'")&&txn.includes('proofNote'));
+const fail=checks.filter(x=>!x[1]);for(const [n,ok] of checks)console.log(`${ok?'PASS':'FAIL'}: ${n}`);console.log(`SETHU V7.1 relationship workspace: ${checks.length-fail.length}/${checks.length} PASS`);if(fail.length)process.exit(1);

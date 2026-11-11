@@ -1,0 +1,1 @@
+function s(t){if(!t||!t.startsWith("/")||t.startsWith("//")||/[\u0000-\u001F\u007F]/.test(t))return!1;try{const r=decodeURIComponent(t);if(r.startsWith("//")||r.includes("\\"))return!1}catch{return!1}return!t.includes("\\")}export{s as i};

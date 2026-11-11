@@ -1,0 +1,8 @@
+import type {ReactNode} from 'react';import type {ApiErrorEnvelope} from '@/types/api';
+export function AsyncState({loading,refreshing,stale,error,children,onRetry}:{loading?:boolean;refreshing?:boolean;stale?:boolean;error?:Error|ApiErrorEnvelope;children:ReactNode;onRetry?:()=>void}){
+  if(loading)return <div className="card p-6 bg-white rounded-xl border border-slate-200 shadow-2xs text-center text-slate-500 font-medium" role="status" aria-live="polite">Loading…</div>;
+  const structured=error&&'type' in error?error:undefined;
+  const retryable=structured?structured.retryable:true;
+  return <>{error&&<div className="callout warn-callout p-4 rounded-xl border border-rose-300 bg-rose-50 text-rose-950 mb-4 text-sm" role="alert"><b className="font-bold text-rose-900">{structured?.title??'Unable to refresh this view.'}</b><div className="mt-1">{structured?.detail??(error instanceof Error?error.message:'Unable to refresh this view.')}</div>{structured?.correlationId&&<div className="row-meta text-xs text-rose-700 mt-1">Reference {structured.correlationId}</div>}{structured?.allowedRecovery?.length?<div className="row-meta text-xs text-rose-700 mt-1">Recovery: {structured.allowedRecovery.join(' · ')}</div>:null}{retryable&&onRetry&&<button className="btn mt-2 px-3 py-1.5 rounded-lg border border-rose-300 bg-white text-rose-900 font-bold text-xs hover:bg-rose-100" onClick={onRetry}>Retry safely</button>}</div>}{(refreshing||stale)&&<div className="row-meta text-xs text-slate-500 py-1" role="status">{refreshing?'Refreshing latest data…':'Showing previously loaded data.'}</div>}{children}</>;
+}
+

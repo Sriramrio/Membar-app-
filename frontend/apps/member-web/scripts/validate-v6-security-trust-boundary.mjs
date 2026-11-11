@@ -1,0 +1,32 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');let pass=0,fail=0;
+const ok=(name,cond,detail='')=>{if(cond){pass++;console.log(`PASS: ${name}`)}else{fail++;console.error(`FAIL: ${name}${detail?` — ${detail}`:''}`)}};
+const env=read('src/config/env.ts');
+const store=read('src/app/store.ts');
+const persistence=read('src/app/persistenceScheduler.ts');
+const axios=read('src/services/api/axiosInstance.ts');
+const auth=read('src/features/auth/authService.ts');
+const vite=read('vite.config.ts');
+const html=read('index.html');
+const business=read('src/features/member/pages/BusinessDetailPage.tsx');
+const urlSec=read('src/utils/urlSecurity.ts');
+ok('Production API base URL rejects non-HTTP(S) protocols',env.includes("!['http:', 'https:'].includes(url.protocol)"));
+ok('Production API base URL requires HTTPS except localhost',env.includes("import.meta.env.PROD && url.protocol !== 'https:'"));
+ok('Preview auth is explicit/dev gated',env.includes('previewAuthEnabled'));
+ok('Client runtime persistence is coupled to mock/preview runtime',env.includes('const clientRuntimePersistence = useMocks'));
+ok('Full runtime state read is disabled outside client preview persistence',store.includes('env.clientRuntimePersistence?readRuntimeState'));
+ok('Full runtime state write is disabled outside client preview persistence',persistence.includes('if(env.clientRuntimePersistence)')&&persistence.includes('writeRuntimeState'));
+ok('Production safe-preference persistence excludes Control Plane/runtime authority',persistence.includes('if(!env.clientRuntimePersistence)return {network};')&&persistence.includes('controlPlane:state.controlPlane'));
+ok('Legacy preview auth session migration is gated to preview persistence',auth.includes('if(env.clientRuntimePersistence&&env.previewAuthEnabled)migrateLegacyPreviewAuthSession()'));
+ok('API client uses credentialed secure-cookie boundary',axios.includes('withCredentials: true'));
+ok('API client names XSRF cookie/header contract',axios.includes("xsrfCookieName: 'XSRF-TOKEN'")&&axios.includes("xsrfHeaderName: 'X-XSRF-TOKEN'"));
+ok('Production build source maps disabled',vite.includes('sourcemap: false'));
+ok('HTML referrer policy hardened',html.includes('strict-origin-when-cross-origin'));
+ok('External URL helper allows only HTTP(S)',urlSec.includes("url.protocol !== 'https:' && url.protocol !== 'http:'"));
+ok('Business website/catalogue use safe external URL helper',business.includes('safeExternalHttpUrl(b.website)')&&business.includes('safeExternalHttpUrl(b.catalogueUrl)'));
+ok('External links protect opener',business.includes('rel="noopener noreferrer"'));
+const srcFiles=[];function walk(d){for(const e of fs.readdirSync(d,{withFileTypes:true})){const p=`${d}/${e.name}`;if(e.isDirectory())walk(p);else if(/\.(ts|tsx)$/.test(e.name))srcFiles.push(p)}}walk('src');
+const dangerous=[];for(const f of srcFiles){const t=read(f);if(/dangerouslySetInnerHTML|\beval\s*\(|new Function\s*\(|document\.write\s*\(/.test(t))dangerous.push(f)}
+ok('No high-risk dynamic HTML/eval primitives in source',dangerous.length===0,dangerous.join(', '));
+if(fail){console.error(`\nSecurity/trust-boundary validation: FAIL — ${pass} passed, ${fail} failed.`);process.exit(1)}
+console.log(`\nSecurity/trust-boundary validation: PASS — ${pass}/${pass} checks.`);

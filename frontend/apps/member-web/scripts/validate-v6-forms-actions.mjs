@@ -1,0 +1,19 @@
+import fs from 'node:fs';import path from 'node:path';
+const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]);
+const files=walk('src').filter(f=>/\.(tsx|ts)$/.test(f));let pass=0,fail=0;const ok=(c,m)=>{if(c){console.log(`PASS: ${m}`);pass++}else{console.error(`FAIL: ${m}`);fail++}};
+const texts=new Map(files.map(f=>[f,fs.readFileSync(f,'utf8')]));
+const all=[...texts.values()].join('\n');
+ok(!all.includes("href:'/platform/")&&!all.includes('href:"/platform/'),'No retired /platform/* action routes remain');
+ok(!all.includes('/app/responses/${'),'No nonexistent dynamic /app/responses/:id route remains');
+ok(!/window\.(?:confirm|prompt)\s*\(/.test(all),'No native window.confirm/window.prompt action remains');
+ok(!all.includes("@/features/enterprise"),'No retired enterprise production import remains');
+const placeholderHits=[];for(const [f,s] of texts){if(f.includes('/migrations/'))continue;if(f.endsWith('mockServer.ts'))continue;if(/\bTODO\b|coming soon|placeholder implementation/i.test(s))placeholderHits.push(f)}ok(placeholderHits.length===0,`No TODO/coming-soon/placeholder implementation markers (${placeholderHits.join(', ')||'0'})`);
+const apiHits=[];for(const [f,s] of texts){if(s.includes('apiClient.'))apiHits.push(f)}const invalidApiHits=apiHits.filter(f=>!f.endsWith('src/features/auth/authService.ts')&&!f.startsWith('src/services/api/')&&!f.startsWith('src/services/query/'));ok(invalidApiHits.length===0&&apiHits.includes('src/features/auth/authService.ts')&&apiHits.includes('src/services/api/domainPersistence.ts'),'apiClient usage is centralized in explicit production API boundary modules');
+const mock=texts.get('src/services/api/mockServer.ts')??'';ok(mock.includes("onPost('/auth/login')"),'Preview POST /auth/login endpoint is implemented');ok(mock.includes('PREVIEW_ENDPOINT_NOT_IMPLEMENTED'),'Unmatched preview API calls fail explicitly instead of fake success');
+const suspicious=[];let editableFiles=0,actionFiles=0,buttons=0,links=0;
+for(const [f,s] of texts){if(!f.endsWith('.tsx'))continue;const inputs=(s.match(/<(?:Input|input|textarea|select)\b/g)||[]).length;const forms=(s.match(/<form\b/g)||[]).length;const bs=(s.match(/<Button\b|<button\b/g)||[]).length;const lbs=(s.match(/<LinkButton\b/g)||[]).length;const ls=(s.match(/<Link\b/g)||[]).length+lbs;if(inputs||forms)editableFiles++;if(bs||ls)actionFiles++;buttons+=bs+lbs;links+=ls;
+ for(const [kind,re] of [['Button',/<Button\b([^>]*)>/gs],['button',/<button\b([^>]*)>/gs]]){for(const m of s.matchAll(re)){if(f.endsWith('components/ui/Button.tsx'))continue;const attrs=m[1].replace(/\s+/g,' ');if(/onClick=|type=["']submit["']|disabled|form=/.test(attrs))continue;const pre=s.slice(Math.max(0,m.index-180),m.index);if(/<Link\b[^>]*>\s*$/s.test(pre))continue;suspicious.push(`${f}:${kind}:${attrs.slice(0,80)}`)}}
+}
+ok(suspicious.length===0,`No active Button/button control lacks handler/submit/link/disabled semantics (${suspicious.join(' | ')||'0'})`);
+ok(editableFiles>=59,`Editable source inventory covers ${editableFiles} files`);ok(actionFiles>=106,`Action source inventory covers ${actionFiles} files`);ok(buttons>0,`Action scan inspected ${buttons} button controls without relying on a stale absolute button-count contract`);ok(fs.existsSync('V6_FORM_FUNCTIONAL_INVENTORY.md'),'Form functional inventory exists');ok(fs.existsSync('V6_ACTION_FUNCTIONAL_INVENTORY.md'),'Action functional inventory exists');ok(fs.existsSync('V6_API_FUNCTIONAL_COVERAGE_MATRIX.md'),'API functional coverage matrix exists');
+if(fail){console.error(`\nSETHU V6.1 forms/actions closure: FAIL (${pass} passed, ${fail} failed).`);process.exit(1)}console.log(`\nSETHU V6.1 forms/actions closure: PASS (${pass}/${pass} checks; ${editableFiles} editable files, ${actionFiles} action files, ${buttons} buttons, ${links} router links).`);

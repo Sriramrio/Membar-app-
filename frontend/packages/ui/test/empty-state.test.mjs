@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';
+const here=path.resolve(import.meta.dirname,'..');
+test('canonical shared empty state preserves exact original JSX and defaults',()=>{const src=fs.readFileSync(path.join(here,'src/EmptyState.tsx'),'utf8');assert.match(src,/title='Nothing needs attention'/);assert.match(src,/body='There are no records matching this view.'/);assert.match(src,/className="empty flex flex-col/);assert.match(src,/>\{title\}<\/strong>/);assert.match(src,/>\{body\}<\/span>/)});
+test('organisation reexports canonical component with its stable import path',()=>{const adapter=fs.readFileSync(path.resolve(here,'../../apps/organisation-web/src/components/EmptyState.tsx'),'utf8');assert.match(adapter,/export \{ EmptyState \} from '\.\.\/\.\.\/\.\.\/\.\.\/packages\/ui\/src\/EmptyState'/);assert.ok(fs.existsSync(path.resolve(here,'src/EmptyState.tsx')))});

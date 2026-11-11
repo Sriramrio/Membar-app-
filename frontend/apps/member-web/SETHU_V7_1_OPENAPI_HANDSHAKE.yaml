@@ -1,0 +1,121 @@
+openapi: 3.1.0
+info:
+  title: SETHU V7 Frontend/Backend Handshake
+  version: 7.1.0-contract
+paths:
+  /v6/member/query:
+    post:
+      summary: Canonical workspace contract endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/member/commands:
+    post:
+      summary: Canonical workspace contract endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/management/query:
+    post:
+      summary: Canonical workspace contract endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/management/commands:
+    post:
+      summary: Canonical workspace contract endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/governance/query:
+    post:
+      summary: Canonical workspace contract endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/governance/commands:
+    post:
+      summary: Canonical workspace contract endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/platform-admin/query:
+    post:
+      summary: Canonical workspace contract endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+  /v6/platform-admin/commands:
+    post:
+      summary: Canonical workspace contract endpoint
+      responses:
+        "200":
+          description: Accepted canonical response
+x-sethu-member-query-ids:
+  - member.directory.businesses
+  - member.directory.people
+  - member.opportunities.marketplace
+  - member.notifications.list
+  - member.converse.inbox
+  - member.converse.messages
+  - member.attendance.list
+  - member.references.list
+  - member.transactions.list
+  - member.meetings.list
+x-sethu-member-command-ids:
+  - member.profile.update
+  - family.update
+  - business.update
+  - business.affiliation.request
+  - business.affiliation.end
+  - business.affiliation.set-primary
+  - business.certification.upsert
+  - connection.request
+  - connection.respond
+  - connection.cancel
+  - connection.remove
+  - connection.block
+  - converse.conversation.create
+  - converse.chapter-group.create
+  - converse.conversation.join
+  - converse.conversation.leave
+  - converse.conversation.flag
+  - converse.conversation.read
+  - converse.message.send
+  - meeting.create
+  - meeting.update
+  - meeting.poll
+  - event.rsvp
+  - event.rsvp.cancel
+  - attendance.correction.request
+  - reference.create
+  - reference.status.update
+  - opportunity.status.update
+  - opportunity.response.submit
+  - opportunity.response.status
+  - opportunity.question.ask
+  - opportunity.question.answer
+  - opportunity.award
+  - transaction.create
+  - transaction.status.update
+  - notifications.mark-all-read
+  - notification.mark-read
+  - notification.acknowledge
+  - announcement.acknowledge
+  - thank-you.create
+  - thank-you.acknowledge
+  - support.create
+  - promotion.event.record
+  - member.interaction-note.create
+components:
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: { type: string }
+    IfMatch:
+      name: If-Match
+      in: header
+      required: false
+      schema: { type: string }

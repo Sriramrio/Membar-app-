@@ -1,0 +1,12 @@
+{
+  "release": "SETHU V6 Member Enterprise Canonical",
+  "version": "6.1.0",
+  "release_status": "FINAL_SOURCE_VERIFIED_RUNTIME_BLOCKED_ENVIRONMENT",
+  "dependency_certification": "BLOCKED_ENVIRONMENT",
+  "browser_certification": "NOT_CLAIMED_ENVIRONMENT_BLOCKED",
+  "manifest_file_count": 463,
+  "canonical_member_routes": 45,
+  "legacy_member_production_dependencies": 0,
+  "historical_contract_groups_mapped": 123,
+  "member_specific_historical_behaviours_mapped": 54
+}

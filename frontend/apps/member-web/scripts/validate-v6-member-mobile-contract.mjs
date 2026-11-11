@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+const r=p=>fs.readFileSync(p,'utf8');let p=0,f=0;const c=(ok,m)=>{console.log(`${ok?'PASS':'FAIL'}: ${m}`);ok?p++:f++};
+const css=r('src/styles/index.css'),layout=r('src/layouts/MainLayout.tsx'),nav=r('src/components/layout/MobileBottomNav.tsx'),thread=r('src/features/member/pages/ConverseThreadPage.tsx'),privacy=r('src/features/member/pages/PrivacySettingsPage.tsx'),notify=r('src/features/member/pages/NotificationSettingsPage.tsx');
+c(css.includes('--member-bottom-nav-height:68px'),'Member bottom navigation height is tokenised');
+c(css.includes('env(safe-area-inset-bottom'),'Safe-area bottom inset is reserved');
+c(css.includes('.member-bottom-nav{padding-bottom:env(safe-area-inset-bottom'),'Bottom navigation itself respects device safe area');
+c(css.includes('.member-converse-composer{bottom:calc(var(--member-bottom-nav-height)'),'Converse composer clears mobile bottom navigation');
+c(css.includes('.member-scope-shell{top:calc(64px + .5rem)'),'Scope control clears compact sticky header');
+c(css.includes('@media(min-width:768px) and (max-width:1023px){.member-scope-shell{top:calc(104px + .5rem)}}'),'Scope control clears tablet sticky header');
+c(layout.includes('min-h-[100dvh]'),'Authenticated shell supports dynamic mobile viewport height');
+c(nav.includes('member-bottom-nav'),'Mobile navigation uses shared safe-area contract');
+c(thread.includes('member-converse-composer'),'Converse composer uses thumb-zone collision contract');
+c(!privacy.includes('min-w-[620px]')&&!privacy.includes('<table'),'Privacy settings use mobile cards rather than a wide table');
+c(!notify.includes('min-w-[680px]')&&!notify.includes('<table'),'Notification settings use mobile cards rather than a wide matrix table');
+console.log(`\nSETHU Member mobile contract: ${f?'FAIL':'PASS'} — ${p}/${p+f}`);process.exit(f?1:0);

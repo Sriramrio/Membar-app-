@@ -1,0 +1,20 @@
+import { readFile,stat,readdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=fileURLToPath(new URL('..',import.meta.url));const errors=[];
+const exists=async p=>{try{await stat(join(root,p));return true}catch{return false}};const read=async p=>readFile(join(root,p),'utf8');
+const pkg=JSON.parse(await read('package.json'));const lock=JSON.parse(await read('package-lock.json'));
+if(pkg.version!=='6.1.0')errors.push(`package.json version must be 6.1.0, found ${pkg.version}`);
+if(lock.version!=='6.1.0')errors.push(`package-lock root version must be 6.1.0, found ${lock.version}`);
+if(lock.packages?.['']?.version!=='6.1.0')errors.push(`package-lock packages[""] version must be 6.1.0, found ${lock.packages?.['']?.version}`);
+const required=['README.md','ARCHITECTURE.md','RUNBOOK.md','SOURCE_ALIGNMENT.md','TRACEABILITY.md','COMPLETION_MATRIX.md','VALIDATION_REPORT.md','V6_LEGACY_INVENTORY.md','V6_BASELINE_MIGRATION_GUIDE.md','V6_LEGACY_RETIREMENT_REPORT.md','V6_CANONICAL_DOMAIN_MODEL.md','V6_CANONICAL_ROUTE_CATALOGUE.md','V6_CANONICAL_CONFIGURATION_CATALOGUE.md','V6_CANONICAL_PERMISSION_CATALOGUE.md','V6_CANONICAL_WORKFLOW_CATALOGUE.md','V6_CANONICAL_DOMAIN_EVENT_CATALOGUE.md','V6_CANONICAL_METRIC_CATALOGUE.md','V6_BASELINE_BACKWARD_COMPATIBILITY_REPORT.md','V6_BASELINE_VALIDATION_REPORT.md','V6_BASELINE_COMPLETION_MATRIX.md','V6_BASELINE_RELEASE_NOTES.md','V6_BASELINE_RELEASE_CHECKLIST.md','V6_BASELINE_VALIDATION_EVIDENCE.txt','V6_BASELINE_CHECKPOINT_STATUS.md','V6_BASELINE_CHANGE_MANIFEST.txt','V6_BASELINE_SOURCE_MANIFEST_SHA256.txt','VERSION','RELEASE_LOCK.json'];
+for(const f of required)if(!(await exists(f)))errors.push(`Missing V6 Baseline release artefact: ${f}`);
+if((await read('VERSION')).trim()!=='6.1.0')errors.push('VERSION file is not 6.1.0');
+const rl=JSON.parse(await read('RELEASE_LOCK.json'));if(rl.version!=='6.1.0')errors.push('RELEASE_LOCK version is not 6.1.0');
+if(!['CANDIDATE','FINAL'].some(x=>String(rl.release_status??'').includes(x)))errors.push('RELEASE_LOCK status must be CANDIDATE or FINAL');
+const readme=await read('README.md');for(const t of ['Technical Release:** `6.1.0`','SETHU_Enterprise_Platform_V6_BASELINE_FINAL.zip','npm run validate:v6:release'])if(!readme.includes(t))errors.push(`README missing baseline marker: ${t}`);
+const manifestName='V6_BASELINE_SOURCE_MANIFEST_SHA256.txt';
+if(await exists(manifestName)){const manifest=await read(manifestName);let count=0;for(const line of manifest.trim().split(/\r?\n/)){if(!line.trim())continue;count++;const m=line.match(/^([a-f0-9]{64})  (.+)$/);if(!m){errors.push(`Invalid manifest line: ${line}`);continue}const file=m[2];if(!(await exists(file))){errors.push(`Manifest file missing: ${file}`);continue}const hash=createHash('sha256').update(await readFile(join(root,file))).digest('hex');if(hash!==m[1])errors.push(`Manifest mismatch: ${file}`)}const expectedBaselineCount=rl.baseline_manifest_file_count??rl.manifest_file_count;if(expectedBaselineCount&&Number(expectedBaselineCount)!==count)errors.push(`Baseline release-lock manifest count ${expectedBaselineCount} differs from manifest ${count}`)}
+const roots=await readdir(root);if(roots.some(f=>/^V[345]_/.test(f)))errors.push('Historical V3/V4/V5 release artefact remains at root');
+console.log('SETHU V6 Baseline release validation');console.log(`Package version: ${pkg.version}`);console.log(`Required release artefacts: ${required.length}`);if(errors.length){errors.forEach(e=>console.error(`ERROR: ${e}`));process.exit(1)}console.log('PASS: V6 Baseline version lock, evidence set and source-manifest verification are clean.');

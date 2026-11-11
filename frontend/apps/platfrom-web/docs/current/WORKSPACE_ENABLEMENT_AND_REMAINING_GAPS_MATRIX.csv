@@ -1,0 +1,25 @@
+Capability,Platform Admin Ownership,Member Workspace Usage,Organisation Workspace Usage,Independent Governance Usage,Current State,Remaining Production Work
+Identity/Session,Technical account/session policy,Member login/session,Office bearer/admin session,Strong governance actor session,Simulator/source complete,Production IdP MFA session store revocation
+Organisation Structure,Hierarchy definitions,Member chapter context,Primary org hierarchy,Scope/reference only,Source/simulator complete,Persistent temporal hierarchy service
+Roles/Permissions,Stable authority definitions,Member feature/action access,Org route/action/field access,Protected governance capability access,Source/simulator complete,Server-side enforcement service
+Assignments/Delegations,Temporal authority,Coordinator responsibility,Office bearer tenure/acting,Reviewer/approver technical authority,Source/simulator complete,Persistent temporal assignment/delegation service
+Effective Access,Explainable access resolution,Allow/deny member action,Allow/deny org action,Allow/deny protected technical action,Simulator complete,Production evaluator + caching/invalidation
+RACI,Technical process responsibility,Approval/responsibility where used,Core process/stage resolver,Governance technical responsibility only,Simulator/source complete,Production resolver + ambiguity handling
+SoD,Technical conflict rules,Maker/checker where applicable,Pre-commit conflict prevention,Independent review separation,Simulator/source complete,Production evaluator + controlled exception workflow
+Configuration,Versioned hierarchical config,Chapter/network behavior,State/chapter behavior,Technical governance settings,Source/simulator complete,Production resolver/release activation
+Taxonomy,Controlled vocabulary,Member business classification,Organisation reporting classifications,Reference only where appropriate,Source/simulator complete,Persistent versioned taxonomy + migration
+Master/Reference Data,Shared definitions,Registration/profile values,Case/event/program values,Permitted lookup values,Source/simulator complete,Reference provenance + persistent APIs
+Forms,Versioned form definitions,Registration/profile submissions,Organisation process submissions,Governance intake/review forms,Source/simulator complete,Consumer-owned submission storage/runtime
+Workflow,Versioned technical definitions,Onboarding/business journeys,Organisation cases/processes,Governance technical case flow only,Source/simulator complete,Workflow instance runtime in consumers
+SLA/Calendar,Timing definitions,Approval/follow-up timing,Case/program escalation,Permitted governance timers,Source/simulator complete,Scheduler/worker + business-day calculator
+Notifications/Templates,Event/template policy,Member messages,Organisation process messages,Governance-safe notifications,Source/simulator complete,Delivery service + channel integrations
+Features/Capabilities,Availability definitions,Member rollout,Organisation rollout,Governance feature availability,Source/simulator complete,Runtime feature evaluator + cache invalidation
+Integrations,Technical registry/health,Consumer integrations where permitted,Organisation integrations,Governance connectors only when approved,Source/simulator complete,Secrets store + production connector workers
+Imports/Exports/Jobs,Governed technical operations,Member data jobs when permitted,Organisation admin jobs,Governance only by explicit policy,Source/simulator complete,Background job engine + storage + audit
+Data Quality/Corrections,Technical remediation control,Member data remediation references,Organisation data remediation references,Governance data only under independent policy,Source/simulator complete,Production correction transaction + verification
+Audit/History,Technical immutable evidence,Member command correlation,Organisation process correlation,Governance technical evidence only,Simulator complete,Immutable persistent audit ledger
+Security/Break Glass,Technical security policy,Member/admin security controls,Organisation admin security,Independent technical elevation policy,Simulator/source complete,Production MFA/reauth/elevation service
+Privacy/Retention,Technical retention definitions,Member retention classes,Organisation retention classes,Governance-specific classes subject to policy,Source/simulator complete,Retention worker/legal hold/anonymisation execution
+Handoffs,Technical cross-workspace reference,Member→Platform technical escalation,Organisation→Platform escalation,Governance→Platform technical escalation only,Source/simulator complete,Production handoff API + source reconciliation
+Consumer Capability Registry,Contract/dependency metadata,Member dependency declaration,Organisation dependency declaration,Governance dependency declaration,Source/simulator complete,Replace blueprint evidence with production integration evidence
+Reports,Platform technical read models,No business KPI ownership,No business KPI ownership,No governance decision KPI ownership,Source/simulator complete,Production read models and governed export

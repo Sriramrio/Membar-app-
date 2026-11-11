@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
+let pass=0;
+const check=(name,ok)=>{if(!ok){console.error('FAIL',name);process.exitCode=1}else{console.log('PASS',name);pass++}};
+check("Notification page", read('src/features/notifications/NotificationsPage.tsx').includes('recipient resolver'));
+check("Template page", read('src/features/templates/TemplatesPage.tsx').includes('Arbitrary executable scripts are not supported'));
+check("Notification contract", read('src/contracts/platform.ts').includes('interface NotificationDefinition'));
+check("Template contract", read('src/contracts/platform.ts').includes('interface TemplateDefinition'));
+check("Routes implemented", read('src/routes/routeManifest.ts').includes('PERMISSIONS.notificationRead')&&read('src/routes/routeManifest.ts').includes('PERMISSIONS.templateRead'));
+if(!process.exitCode)console.log('PA-S32: '+pass+' checks PASS');

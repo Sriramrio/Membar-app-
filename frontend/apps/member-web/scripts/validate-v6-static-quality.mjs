@@ -1,0 +1,21 @@
+import fs from 'node:fs';import path from 'node:path';
+const root=process.cwd();let pass=0,fail=0;const ok=(n,c,d='')=>{if(c){pass++;console.log(`PASS: ${n}`)}else{fail++;console.error(`FAIL: ${n}${d?` — ${d}`:''}`)}};
+const files=[];function walk(d){for(const e of fs.readdirSync(path.join(root,d),{withFileTypes:true})){const rel=path.join(d,e.name).replaceAll('\\','/');if(e.isDirectory())walk(rel);else if(/\.(ts|tsx)$/.test(e.name))files.push(rel)}}walk('src');
+const prod=files.filter(f=>!f.includes('.test.')&&!f.startsWith('src/migrations/'));const tests=files.filter(f=>f.includes('.test.'));
+const read=f=>fs.readFileSync(path.join(root,f),'utf8');
+const suppressed=prod.filter(f=>/@ts-ignore|@ts-nocheck|eslint-disable/.test(read(f)));
+const debug=prod.filter(f=>/console\.(?:log|debug|info)\s*\(|\bdebugger\s*;/.test(read(f)));
+const placeholders=prod.filter(f=>/\bTODO\b|\bFIXME\b|coming soon|lorem ipsum/i.test(read(f)));
+const dangerous=prod.filter(f=>/dangerouslySetInnerHTML|\beval\s*\(|new Function\s*\(|document\.write\s*\(/.test(read(f)));
+const focused=tests.filter(f=>/\b(?:it|test|describe)\.(?:only|skip)\s*\(/.test(read(f)));
+ok('No TypeScript/ESLint suppression directives in production source',suppressed.length===0,suppressed.join(', '));
+ok('No console/debugger debug statements in production source',debug.length===0,debug.join(', '));
+ok('No TODO/FIXME/coming-soon placeholder markers in production source',placeholders.length===0,placeholders.join(', '));
+ok('No dangerous dynamic HTML/eval primitives',dangerous.length===0,dangerous.join(', '));
+ok('No focused/skipped Vitest suites',focused.length===0,focused.join(', '));
+ok('At least nine conventional Vitest test modules are present',tests.length>=9,String(tests.length));
+for(const expected of ['src/features/auth/authPolicy.test.ts','src/utils/urlSecurity.test.ts','src/features/platform-runtime/stateMachines.test.ts'])ok(`R06 test exists: ${expected}`,tests.includes(expected));
+const pkg=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));ok('npm test remains Vitest run',pkg.scripts?.test==='vitest run');
+ok('Typecheck remains project TypeScript build',String(pkg.scripts?.typecheck??'').startsWith('tsc -b'));
+if(fail){console.error(`\nStatic quality validation: FAIL — ${pass} passed, ${fail} failed.`);process.exit(1)}
+console.log(`\nStatic quality validation: PASS — ${pass}/${pass}; ${prod.length} production TS/TSX files; ${tests.length} Vitest modules.`);

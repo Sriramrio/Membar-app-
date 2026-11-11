@@ -1,0 +1,8 @@
+import { useCallback } from 'react';
+import { useAppSelector } from '@/app/hooks';
+import { evaluateControlPermission,platformPathPermission } from '@/features/control-plane/policyEngine';
+import { requiredPermissionForWorkspacePath } from '@/features/control-plane/workspaceRoutePermissions';
+import { selectRoleAssignments } from '@/features/platform-runtime/authorisationRuntime';
+import { selectIdentityRecords } from '@/features/platform-runtime/identitySecurityRuntime';
+import { workspaceForPath } from '@/utils/permissions';
+export function useAllowedWorkspaceLinks(){const auth=useAppSelector(s=>s.auth);const cp=useAppSelector(s=>s.controlPlane);const assignments=useAppSelector(selectRoleAssignments);const identities=useAppSelector(selectIdentityRecords);return useCallback((path:string)=>{if(!auth.account)return false;const workspace=workspaceForPath(path);if(workspace==='Member')return auth.account.workspaces.includes('Member');if(!['Management','Governance','Platform Admin'].includes(workspace))return true;const identity=identities.find(i=>i.accountId===auth.account?.id);const module=cp.modules.filter(m=>m.enabled&&m.workspace===workspace&&m.routeRoots.some(root=>path===root||path.startsWith(`${root}/`))).sort((a,b)=>Math.max(...b.routeRoots.map(r=>r.length))-Math.max(...a.routeRoots.map(r=>r.length)))[0];if(!module)return false;const permission=workspace==='Platform Admin'?platformPathPermission(path):requiredPermissionForWorkspacePath(path,cp.modules);if(!permission)return false;return evaluateControlPermission({account:auth.account,identity,enterpriseAssignments:assignments,state:cp,permissionCode:permission,unitName:auth.activeUnit??auth.account.unit}).allowed},[auth.account,auth.activeUnit,assignments,cp,identities])}

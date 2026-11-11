@@ -1,0 +1,1 @@
+import{g as s,r as c,aH as u,aI as f}from"./index-PjpCc3ra.js";function D(t,e,a){const r=s();c.useEffect(()=>(r(t?u({dirty:!0,label:e,canSaveDraft:a?.canSaveDraft,draftKey:a?.draftKey}):f()),()=>{r(f())}),[t,e,a?.canSaveDraft,a?.draftKey,r])}export{D as u};

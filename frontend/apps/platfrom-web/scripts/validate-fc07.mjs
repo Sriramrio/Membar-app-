@@ -1,0 +1,12 @@
+import fs from'node:fs';import path from'node:path';
+const root='src';const route=fs.readFileSync('src/routes/routeManifest.ts','utf8');const routes=[...route.matchAll(/path:'([^']+)'/g)].map(m=>m[1]);const bases=new Set(routes);const files=[];function walk(d){for(const n of fs.readdirSync(d)){const p=path.join(d,n),s=fs.statSync(p);if(s.isDirectory())walk(p);else if(p.endsWith('.tsx'))files.push(p)}}walk(root);let p=0,f=0;const ck=(n,o)=>o?(p++,console.log('PASS',n)):(f++,console.error('FAIL',n));
+const actionIssues=[],linkIssues=[];
+for(const file of files){const s=fs.readFileSync(file,'utf8');for(const m of s.matchAll(/<button\b([^>]*)>/g)){const a=m[1];if(!/onClick=/.test(a)&&!/type=["']submit["']/.test(a))actionIssues.push(`${file}:${m.index}`)}for(const m of s.matchAll(/<(?:Link|NavLink)\b([^>]*)>/g)){const a=m[1];const q=a.match(/to=["']([^"']+)["']/);if(q&&q[1].startsWith('/platform-admin')){const base=q[1].split('?')[0];if(!bases.has(base)&&base!='/platform-admin')linkIssues.push(`${file}:${q[1]}`)}}}
+ck('all canonical routes unique',routes.length===new Set(routes).size&&routes.length===45);
+ck('active buttons wired or submit',actionIssues.length===0);if(actionIssues.length)console.error(actionIssues.join('\n'));
+ck('static platform links canonical',linkIssues.length===0);if(linkIssues.length)console.error(linkIssues.join('\n'));
+const app=fs.readFileSync('src/app/PlatformAdminApp.tsx','utf8');for(const id of [...route.matchAll(/\{id:'([^']+)'/g)].map(m=>m[1]))if(!app.includes(`${id}:lazyNamed`)&&!app.includes(`'${id}':lazyNamed`))linkIssues.push(`unmapped:${id}`);ck('all route ids component-mapped',!linkIssues.some(x=>x.startsWith('unmapped:')));
+const nav=fs.readFileSync('src/navigation/menu.ts','utf8');ck('navigation derived from canonical routes',nav.includes("import {routes}")&&nav.includes('routes.filter'));
+const ac=fs.readFileSync('src/features/action-centre/ActionCentrePage.tsx','utf8');ck('Action Centre uses canonical Link',ac.includes('<Link')&&ac.includes('to={String(r.deepLink)}'));
+const trace=fs.existsSync('docs/current/PLATFORM_ADMIN_ACTION_TRACEABILITY.csv');const perm=fs.existsSync('docs/current/PLATFORM_ADMIN_PERMISSION_TRACEABILITY.csv');ck('action traceability generated',trace);ck('permission traceability generated',perm);
+console.log(`PA-FC07 action/navigation/cross-link validation: ${p} PASS / ${f} FAIL`);if(f)process.exit(1);

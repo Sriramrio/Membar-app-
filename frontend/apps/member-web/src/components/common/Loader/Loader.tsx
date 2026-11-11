@@ -1,0 +1,1 @@
+export function Loader({label='Loading'}:{label?:string}){return <div className="grid min-h-56 place-items-center" role="status"><div className="grid justify-items-center gap-3"><div className="size-9 animate-spin rounded-full border-4 border-slate-200 border-t-sky-600"/><span className="text-sm text-slate-500">{label}</span></div></div>}

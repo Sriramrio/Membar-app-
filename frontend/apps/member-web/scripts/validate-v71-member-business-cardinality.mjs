@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');const checks=[];const add=(n,v)=>checks.push([n,Boolean(v)]);
+const policy=read('src/config/memberBusinessPolicy.ts');const slice=read('src/features/network/networkSlice.ts');const page=read('src/features/member/pages/MyBusinessesPage.tsx');const data=read('src/features/network/data.ts');
+add('Central SETHU single-current-business policy exists',policy.includes('maxCurrentAffiliationsPerMember:1'));
+add('Pending affiliations count toward current-business limit',policy.includes("verificationStatus==='Pending'"));
+add('Reducer enforces cardinality invariant',slice.includes('enforceSingleCurrentAffiliation(state.affiliations,a.payload)'));
+add('Primary affiliation is member-scoped',slice.includes("x=>x.memberId===a.payload.memberId&&x.id!==a.payload.id"));
+add('Member UI uses central policy',page.includes('canRequestAnotherBusinessAffiliation'));
+add('Member UI no longer invites another current business',!page.includes('Request another business affiliation'));
+add('Historical advisor sample is ended, not silently removed',data.includes("id:'AFF-member-advisor'")&&data.includes("endedReason:'Historical sample relationship ended during SETHU single-current-business policy reconciliation.'")&&data.includes('active:false'));
+const fail=checks.filter(x=>!x[1]);for(const [n,ok] of checks)console.log(`${ok?'PASS':'FAIL'}: ${n}`);console.log(`SETHU V7.1 member-business cardinality: ${checks.length-fail.length}/${checks.length} PASS`);if(fail.length)process.exit(1);

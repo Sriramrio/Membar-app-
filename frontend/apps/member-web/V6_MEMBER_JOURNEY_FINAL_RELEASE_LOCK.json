@@ -1,0 +1,16 @@
+{
+  "release": "SETHU_MEMBER_JOURNEY_FINAL_VALIDATED",
+  "memberRouteContract": "45/45",
+  "primaryScopes": [
+    "FOR YOU",
+    "YOUR CHAPTER",
+    "YOUR NETWORK"
+  ],
+  "communicationLabel": "Converse",
+  "converseV1": "text-only-no-file-upload",
+  "currentSourceRegression": "PASS_30_OF_30",
+  "sourceManifestFileCount": 703,
+  "dependencyBackedBuildCertification": "NOT_CLAIMED_ENVIRONMENT_NPM_INSTALL_TIMEOUT",
+  "browserE2ECertification": "NOT_CLAIMED_WITHOUT_DEPENDENCY_INSTALL",
+  "historicalReleaseManifests": "PRESERVED_UNCHANGED"
+}

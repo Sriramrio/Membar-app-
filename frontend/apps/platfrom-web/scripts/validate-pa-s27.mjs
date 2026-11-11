@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
+let pass=0;
+const check=(name,ok)=>{if(!ok){console.error('FAIL',name);process.exitCode=1}else{console.log('PASS',name);pass++}};
+check("Forms page exists", read('src/features/forms/FormsPage.tsx').includes('Published versions are immutable'));
+check("Form contracts versioned", read('src/contracts/platform.ts').includes('interface FormVersion'));
+check("Form route implemented", read('src/routes/routeManifest.ts').includes("id:'forms'")&&read('src/routes/routeManifest.ts').includes('PERMISSIONS.formsRead'));
+check("Form validation query catalogued", read('src/contracts/catalogue.ts').includes('platform.form.validate'));
+check("No direct submission ownership", !read('src/features/forms/FormsPage.tsx').includes('FormSubmission'));
+if(!process.exitCode)console.log('PA-S27: '+pass+' checks PASS');

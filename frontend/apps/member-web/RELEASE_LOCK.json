@@ -1,0 +1,14 @@
+{
+  "release": "SETHU Enterprise Platform V6 Platform Admin Hardened",
+  "version": "6.1.0",
+  "baseline": "SETHU Enterprise Platform V6 Baseline FINAL 6.1.0",
+  "baseline_sha256": "64ad7264b5c7890dc48cd6635068bffb94f89b67260ce2fcba5ec43ca9b69d2f",
+  "status": "HARDENED RELEASE FINAL \u2014 historical scope retained after N09 source retirement",
+  "release_status": "FINAL \u2014 historical Platform Admin release scope with 379 surviving manifest entries after verified retirement of unreachable ChapterPerformanceSection",
+  "validation_command": "npm run validate:v6:platform-admin:release",
+  "manifest_file_count": 379,
+  "candidate_clean_extraction": "PASS",
+  "forbidden_artifact_scan": "PASS",
+  "member_canonical_migration_phase": "C07_LEGACY_RETIREMENT",
+  "baseline_manifest_file_count": 335
+}

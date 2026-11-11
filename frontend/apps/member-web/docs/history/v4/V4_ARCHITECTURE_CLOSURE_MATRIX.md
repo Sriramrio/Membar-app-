@@ -1,0 +1,80 @@
+# SETHU V4 — Architecture Closure Matrix
+
+**Release:** V4 Architecture & Integration Hardening  
+**Package version:** `4.0.0`  
+**Release label:** `SETHU_Enterprise_Platform_V4_FINAL`  
+**Date:** 24 September 2026  
+**Acceptance principle:** a capability is not considered closed merely because a screen exists. Closure requires a coherent entity model, user journey, legal state transition, permission/governance rule, cross-module effect, notification/audit behavior, exception handling and validation evidence.
+
+## Closure status definitions
+
+- **Implemented + source validated** — present in the V4 source and covered by the dependency-independent route/syntax/contract validators.
+- **Implemented at prototype runtime boundary** — behavior is wired in the React/Redux prototype but authoritative server infrastructure is intentionally replaceable.
+- **Deployment integration required** — requires an external/server capability that cannot be truthfully certified from this frontend source package alone.
+- **Browser certification required** — implementation exists, but rendered cross-browser/device/accessibility certification requires a runnable dependency-backed environment.
+
+| Capability | Entity / source of truth | Primary journey / screens | State / policy enforcement | Cross-module effect | Notification / audit | Error / exception handling | V4 status |
+|---|---|---|---|---|---|---|---|
+| Public/authentication | Account, OTP challenge | Landing → Login/OTP/Recovery → Workspace | Account status, expiring OTP, attempt limit, safe return path | Resolves effective workspaces | Security/session audit model | Invalid/expired OTP, inactive/suspended account, non-enumerating recovery | Implemented at prototype runtime boundary; production IdP required |
+| Workspace context | AccountAssignment / EffectiveRoleAssignment | Workspace Hub / switcher | Effective dates + workspace entitlement | Navigation, permissions and active scope change together | Role changes notify/audit | Stale/expired context fails closed | Implemented + source validated |
+| Member identity boundary | Member | All `/app/*` member routes | Exact authenticated-member resolution; active status; no seed fallback | Protects every member journey | Denials flow to operation feedback/audit | Missing identity/member fails closed | Implemented + source validated |
+| Member profile/privacy | Member + field visibility | Profile / Privacy Settings / member detail | Field-level visibility: private/admin/connections/chapter/network/public | Member detail disclosure and directory cards | Contact change verification | Unsaved change, contact verification, restricted disclosure | Implemented + source validated |
+| Member ↔ Business affiliation | MemberBusinessAffiliation | My Businesses / affiliation workflow | Pending/Verified/Rejected; primary; authority; effective dates; end reason | Business owners/representatives and member context update | Workflow decision + configured notification + audit | Duplicate/history-safe update; ended affiliations retained | Implemented + source validated |
+| Business profile | Business | My Businesses / Business Detail | Visibility, ownership/representation, verification | Directory, opportunity, relationships, certifications | Audit through governed mutations | Hidden business, missing representative, permission-safe actions | Implemented + source validated |
+| Controlled business taxonomy | TaxonomyTerm + TaxonomyReference | Platform Lookups → My Business → Directory | Active governed taxonomy + synonyms | Search/matching uses controlled + descriptive terms | Configuration audit | Descriptive terms retained where no governed term exists | Implemented + source validated |
+| Structured certification | CertificationRecord | My Business → Moderation → Business Detail/Directory | Pending → Verified/Rejected; evidence + dates | Only verified standards become discoverable certification filters | Moderation notification + audit | Pending/rejected data excluded from verified search | Implemented + source validated |
+| Directory/search | Member, Business, taxonomy, relationship | Smart Directory → Member/Business Detail | Privacy, business visibility, chapter/network scope | Can initiate connection, message, meeting, reference, opportunity response | User actions audited where governed | Empty/missing/filter state; privacy-safe cross-chapter cards | Implemented + source validated; scalable search service is deployment work |
+| Business relationship graph | BusinessRelationship | Business Detail / opportunity award | Supplier/Buyer/Customer/Partner/etc. contextual relationship | Award can create Supplier relationship | Award notification/audit | Duplicate/visibility-aware display | Implemented + source validated |
+| Connections | Connection | Directory/Member Detail → Connections | Legal lifecycle + block/remove/cancel | Enables relationship-aware actions/messaging | Configured request notification | Duplicate/prevented/blocked states | Implemented + source validated |
+| Messaging | Conversation / Message | Direct/group inbox + thread | Membership, archive/mute/pin/unread/read/reply | Opportunity/business/reference context can be linked | Read/user action state | Empty/archived/block context; attachment metadata | Implemented + source validated |
+| Meetings | Meeting | Member/Business → Meeting → outcome/follow-up | Legal meeting transitions; participant confirmation | Completion can drive follow-up/thank-you journey | Participant notification + denied/success audit | Illegal transition denied with correlation feedback | Implemented + source validated |
+| References | BusinessReference | Member/Business → Reference | Consent/confidentiality + lifecycle | Links business parties and follow-up | Participant status notification + audit | Illegal transition denied; action-needed states | Implemented + source validated |
+| Opportunities | Opportunity | Create → Publish/Review → Detail → Q&A | Type/status/visibility; configurable requirement form version | Directory/business context, Q&A, responses | Lifecycle audit | Draft/review/publish/close/withdraw rules | Implemented + source validated |
+| Opportunity Q&A | OpportunityQuestion | Opportunity Detail | Owner answers; linked opportunity | Clarification available before response/award | Domain audit path | Missing/closed opportunity handled by route/domain guards | Implemented + source validated |
+| Responses/shortlisting | OpportunityResponse | Opportunity Detail / Responses | Draft/submitted/shortlisted/discussion/accepted/declined/withdrawn | Discussion can create/open conversation | Lifecycle audit | Illegal transition denied | Implemented + source validated |
+| Opportunity award → outcome | Response + Transaction + BusinessRelationship | Select supplier | Award requires valid response state | Winner/losers updated; transaction + supplier relationship created | Configured award notification + audit | Duplicate/illegal award guarded | Implemented + source validated |
+| Transactions/business outcomes | Transaction | Transactions | Contacted → Discussion → Proposal → Negotiation → Won/Lost/Closed | Counterparty relationship context | Participant status notifications + audit | Illegal transition denied; dispute/correction model | Implemented + source validated |
+| Events | Event + Registration metadata | Event Detail / Event Management | Window, capacity, waitlist, terms, configurable form | RSVP creates attendance context; waitlist promotion | Promotion notification/audit | Capacity/waitlist/cancel handling | Implemented + source validated |
+| Configurable event forms | FormDefinition | Form Builder → Event Detail | Active definition + version captured at registration | Historical answers keep form version | Configuration + registration audit context | Required field/terms validation | Implemented + source validated |
+| Visitor registration | Visitor + FormDefinition | Public Visitor Register → Verification → Success | Consent, duplicate candidate capture, OTP verification | Verified visitor reused for due diligence/member creation | Verification/onboarding audit | Duplicate, invalid OTP, save/resume session draft | Implemented at prototype runtime boundary |
+| Due diligence/onboarding | Visitor + WorkflowTask | Management Visitors/Onboarding | Review checklist, request info, recommendation, independent approval | Activation creates member/business/payment/notification | Workflow/audit | Maker/checker and duplicate resolution | Implemented + source validated |
+| Attendance | AttendanceRecord | Member Attendance / Management Attendance | Finalized records protected from direct overwrite | Correction request follows governed flow | Audit | Before/after correction and approval | Implemented + source validated |
+| Payments | Payment | Member Payments / Management Payments | Status/reconciliation context | Import can create/reverse payment rows | Audit/import evidence | Reversal and unmatched/duplicate import handling | Implemented + source validated |
+| Import centre | ImportBatch + ImportLedger | Upload/API → Map → Validate → Submit → Approve → Post → Reconcile → Reverse | Maker/checker + batch state | Post materially creates Attendance/Payment/Member/Visitor records; reverse materially reverts | Import audit + applied IDs ledger | Warning/duplicate/unmatched/rejected states | Implemented + source validated |
+| Organisation hierarchy | OrganisationUnit | Platform Organisation Hierarchy | Effective hierarchy model | Used for assignment/scope context | Configuration audit | Historical/effective context retained in model | Implemented + source validated; authoritative org service optional |
+| RBAC | AccountAssignment + EffectiveRoleAssignment | Role Catalogue / RBAC simulator / ProtectedRoute | Workspace + role + scope + effective dates | Actual route/action availability uses effective assignments | Assignment notifications/audit | Expired/stale/unauthorized fails closed | Implemented + source validated |
+| RACI | RACIRule | RACI Matrix | Responsibility required by workflow step | Workflow Inbox action eligibility | Workflow audit | Unauthorized responsibility/action denied | Implemented + source validated |
+| Workflow designer/runtime | WorkflowDefinition + WorkflowTask | Workflow Designer → Workflow Inbox | Definition steps + legal task state + RACI + maker/checker + conflict | Affiliation/DQ/onboarding/import flows use governed tasks | SLA/action history/audit | Illegal task action denied | Implemented + source validated |
+| Data quality | DataQualityIssue + WorkflowTask | Data Quality Centre → Workflow | Proposed resolution requires decision | Approval resolves issue; rejection returns it | Audit | No self-approval through maker/checker rule | Implemented + source validated |
+| Role tenure/handover | EffectiveRoleAssignment | Role Catalogue / Role Tenure Oversight | Effective dates, exclusive-office overlap, legal handover sequence | Approved assignment changes live permissions/workspaces | Notification + governance/audit | Illegal overlap/transition denied; successor required for completion | Implemented + source validated |
+| Governance decisions | GovernanceDecision | Decision Register | Quorum, votes, recusal, conflict, immutable final rationale | Can activate Policy, Policy Exception, Role Assignment, Platform Setting | Immutable-style frontend audit trail | Conflict/quorum/ineligible decisions denied | Implemented + source validated; server immutability required |
+| Board packs | BoardPack | Governance Board Packs | Acknowledgement/status | Governance decision context | Audit | Missing acknowledgement visible | Implemented + source validated |
+| Policy register/exceptions | Policy / PolicyException | Policy Register / Exceptions | Version/status/effective scope | Approved governance effect activates policy/exception | Audit | Expiry/scope modeled | Implemented + source validated |
+| Notification control plane | NotificationTemplate | Notification Administration | Active event template | Connection, award, waitlist, role, affiliation, reference, transaction, meeting, certification use configured templates | Notification records + audit | Fallback message where template unavailable | Implemented + source validated |
+| Promotion control plane | PromotionPolicy | Promotion Policy → Member Home/Promotions | Active runtime policy, frequency/eligibility constraints | Promotion engine reads policy | Lifecycle audit | Invalid lifecycle denied | Implemented + source validated |
+| Moderation | ModerationCase | Moderation Queue | Claim + explicit resolution | Certification decision updates actual certification | Configured notification + audit | Evidence rejection/remediation/no-action modeled | Implemented + source validated |
+| Platform settings | PlatformSetting | Platform Settings | Versioned setting model | Governance can apply setting decision | Audit | Setting effect only after valid governance decision | Implemented + source validated |
+| API error envelope | ApiError | API client boundary | Validation/auth/authz/not-found/gone/conflict/rate/dependency/offline/server | Operation feedback can expose correlation | Correlation ID + retryability metadata | Standardized mapping | Implemented + source validated |
+| Idempotency/correlation | Request interceptor | Mutating API boundary | Idempotency key + correlation headers | Backend-ready request contract | Correlation surfaced | Server enforcement required in deployment | Implemented contract; deployment integration required |
+| Audit | AuditEvent | Audit Explorer | Append-oriented frontend model + result/reason/correlation | Security, workflow, imports, governance and domain transitions feed audit | Central explorer | Denied and failed operations visible | Implemented prototype; immutable server audit required |
+| Protected browser storage | Session state + SafePersisted preferences | Application runtime | Protected runtime state uses sessionStorage; durable local storage limited to safe preferences/config | Auth/member/payment/visitor runtime state not durably persisted | Security boundary documented | Storage corruption has initial-state fallback | Implemented + source validated |
+| UX action system | ActionDialog + common UI | Approval/reject/reversal/correction/etc. | Focus trap, escape, focus return, explicit reason fields | Replaces native browser prompts/confirmations | Result feedback | Required reason/confirmation supported | Implemented + source validated; rendered a11y cert required |
+| Navigation context | Breadcrumbs + back state | Main Layout / deep journeys | Workspace-aware breadcrumbs | Preserves orientation across domain links | — | Back/deep-link context | Implemented + source validated; browser journey cert required |
+| Route failure handling | RouteErrorBoundary / MemberPageBoundary | All routed UI | Error boundary + identity guard | Prevents silent blank-screen failures | Operation feedback | Route/member resolution failure | Implemented + source validated |
+
+## Deployment-only closure items
+
+The V4 source deliberately does **not** pretend that frontend source can supply production infrastructure. The following are deployment integrations, not unresolved UI/domain-model gaps:
+
+1. Authoritative backend database and transactional persistence.
+2. Production identity provider/SSO, MFA and real OTP delivery.
+3. Server-side RBAC/RACI authorization and policy decision enforcement.
+4. Immutable/tamper-evident server audit storage.
+5. Real email/SMS/push/payment/external-system connectors.
+6. Search/index infrastructure for large member/business populations.
+7. Object storage/virus scanning for uploaded evidence and attachments.
+8. API rate limiting, token rotation, secure cookies/CSRF controls where applicable, WAF and secrets management.
+9. Production observability: logs, metrics, traces, alerting and SLOs.
+10. Dependency-backed test/build plus rendered cross-browser, responsive and accessibility certification.
+
+These boundaries are detailed in `V4_SECURITY_BOUNDARY.md` and `V4_VALIDATION_REPORT.md`.

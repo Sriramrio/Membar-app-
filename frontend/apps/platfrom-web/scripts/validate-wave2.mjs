@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
+let pass=0;
+const check=(name,ok)=>{if(!ok){console.error('FAIL',name);process.exitCode=1}else{console.log('PASS',name);pass++}};
+check("Forms implemented", read('src/routes/routeManifest.ts').includes("id:'forms'")&&!read('src/routes/routeManifest.ts').includes("id:'forms',path:'/platform-admin/forms',label:'Forms',group:'Business Definitions',permission:PERMISSIONS.formsRead,status:'DESIGNED_NOT_IMPLEMENTED'"));
+check("Workflow implemented", read('src/routes/routeManifest.ts').includes('PERMISSIONS.workflowRead'));
+check("SLA implemented", read('src/routes/routeManifest.ts').includes('PERMISSIONS.slaRead'));
+check("Calendar implemented", read('src/routes/routeManifest.ts').includes('PERMISSIONS.calendarRead'));
+check("Features implemented", read('src/routes/routeManifest.ts').includes('PERMISSIONS.featuresRead'));
+check("Notifications implemented", read('src/routes/routeManifest.ts').includes('PERMISSIONS.notificationRead'));
+check("Templates implemented", read('src/routes/routeManifest.ts').includes('PERMISSIONS.templateRead'));
+check("No consumer feature import", !read('src/app/PlatformAdminApp.tsx').includes('@/member')&&!read('src/app/PlatformAdminApp.tsx').includes('@/org/')&&!read('src/app/PlatformAdminApp.tsx').includes('@/governance'));
+if(!process.exitCode)console.log('WAVE2: '+pass+' checks PASS');

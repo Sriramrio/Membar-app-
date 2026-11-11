@@ -1,0 +1,1 @@
+export function Footer(){return <footer className="w-full border-t border-slate-200 bg-white px-4 py-5 text-sm text-slate-500"><div className="mx-auto flex max-w-[96rem] flex-wrap items-center justify-between gap-2"><span>SETHU · Business Network Platform</span><span>Member discovery · opportunities · collaboration · governance</span></div></footer>}

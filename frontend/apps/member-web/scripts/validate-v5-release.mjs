@@ -1,0 +1,14 @@
+import { readFile,stat } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=fileURLToPath(new URL('..',import.meta.url));const errors=[];
+const exists=async p=>{try{await stat(join(root,p));return true}catch{return false}};const read=async p=>readFile(join(root,p),'utf8');
+const pkg=JSON.parse(await read('package.json'));const lock=JSON.parse(await read('package-lock.json'));
+if(pkg.version!=='5.0.0')errors.push(`package.json version must be 5.0.0, found ${pkg.version}`);if(lock.version!=='5.0.0')errors.push(`package-lock root version must be 5.0.0, found ${lock.version}`);if(lock.packages?.['']?.version!=='5.0.0')errors.push(`package-lock packages[""] version must be 5.0.0, found ${lock.packages?.['']?.version}`);
+const required=['README.md','ARCHITECTURE.md','RUNBOOK.md','SOURCE_ALIGNMENT.md','TRACEABILITY.md','V5_PLATFORM_ADMINISTRATION_CLOSURE_MATRIX.md','V5_CONTROL_PLANE_LINKAGE.md','V5_HARDCODE_AUDIT.md','V5_CONFIGURATION_CATALOGUE.md','V5_PERMISSION_CATALOGUE.md','V5_DOMAIN_EVENT_CATALOGUE.md','V5_V4_BACKWARD_COMPATIBILITY_REPORT.md','V5_COMPLETION_MATRIX.md','V5_PLATFORM_ADMIN_VALIDATION_REPORT.md','V5_RELEASE_NOTES.md','V5_RELEASE_CHECKLIST.md','V5_CHANGE_MANIFEST.txt','V5_ROUTE_INVENTORY.md','V5_WORKFLOW_INVENTORY.md','V5_FORM_INVENTORY.md','V5_VALIDATION_EVIDENCE.txt','V5_SOURCE_MANIFEST_SHA256.txt','VERSION','RELEASE_LOCK.json'];
+for(const f of required)if(!(await exists(f)))errors.push(`Missing V5 release artefact: ${f}`);
+if((await read('VERSION')).trim()!=='5.0.0')errors.push('VERSION file is not 5.0.0');const rl=JSON.parse(await read('RELEASE_LOCK.json'));if(rl.version!=='5.0.0')errors.push('RELEASE_LOCK version is not 5.0.0');
+const readme=await read('README.md');for(const t of ['Package version:** `5.0.0`','SETHU_Enterprise_Platform_V5_PLATFORM_ADMIN_FINAL','npm run validate:v5:source'])if(!readme.includes(t))errors.push(`README missing release marker: ${t}`);
+if(await exists('V5_SOURCE_MANIFEST_SHA256.txt')){const manifest=await read('V5_SOURCE_MANIFEST_SHA256.txt');for(const line of manifest.trim().split(/\r?\n/)){if(!line.trim())continue;const m=line.match(/^([a-f0-9]{64})  (.+)$/);if(!m){errors.push(`Invalid manifest line: ${line}`);continue}const file=m[2];if(!(await exists(file))){errors.push(`Manifest file missing: ${file}`);continue}const hash=createHash('sha256').update(await readFile(join(root,file))).digest('hex');if(hash!==m[1])errors.push(`Manifest mismatch: ${file}`)}}
+console.log('SETHU V5 release-lock validation');console.log(`Package version: ${pkg.version}`);console.log(`Required release artefacts: ${required.length}`);if(errors.length){errors.forEach(e=>console.error(`ERROR: ${e}`));process.exit(1)}console.log('PASS: V5 version lock, evidence set and source-manifest verification are clean.');

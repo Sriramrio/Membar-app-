@@ -1,0 +1,20 @@
+Capability,Platform Admin ownership,Member Workspace enablement,Organisation Workspace enablement,Independent Governance enablement,Production gap
+Identity and Sessions,Technical identity/session policy,Member login/session security,Officer/admin session security,Protected reviewer session assurance,Production IdP/session service
+Organisation Structure,Canonical technical hierarchy,Chapter/network context,Primary operational hierarchy,Scope context only,Temporal hierarchy backend
+Roles Permissions Assignments,Stable access definitions,Member route/action authority,Office bearer/admin authority,Governance capability authority,Authoritative backend evaluator and assignments
+Delegation Acting,Temporary authority definitions,Temporary member coordinator authority,Acting office bearer coverage,Temporary governance technical responsibility,Server-side effective dating and expiry
+RBAC,Role-permission mappings,Feature/action access,Operational action access,Protected capability access,Real server enforcement
+RACI,Resolver definitions,Approval/follow-up responsibility,Process/stage responsibility,Permitted technical responsibility,Resolver service tied to real process context
+SoD,Separation rules,Maker/checker controls,Approval separation,Independent review/approval separation,Server-side pre-commit evaluator
+Effective Access,Explainable technical authorization,Explain Member action decision,Explain Organisation action decision,Explain protected technical access decision,Production policy decision service
+Configuration,Scoped governed values,Chapter/network settings,State/region/chapter settings,Governance technical settings only,Resolver/release backend
+Taxonomy,Canonical controlled taxonomy,Business classification,Operational controlled vocabularies,Reference vocabularies when approved,Migration/version APIs
+Master and Reference Data,Canonical reference definitions,Registration/profile options,Operational forms/options,Permitted controlled references,Production reference service
+Forms,Versioned form definitions,Registration/profile/opportunity forms,Case/meeting/programme forms where applicable,Intake/review form definitions,Submission ownership remains consumer-side
+Workflows,Versioned technical workflow definitions,Onboarding/member journeys,Operational cases/events/processes,Technical governance state definitions only,Runtime workflow engine
+SLA and Calendars,Timing definitions,Member approval/follow-up timing,Operational escalation timing,Governance timing where policy permits,Timer/escalation worker
+Notifications Templates,Event/template definitions,Member notifications,Operational notifications,Governance-safe notifications,Delivery provider/event integration
+Features Capabilities,Availability definitions,Feature rollout,Workspace capability rollout,Governance feature rollout,Runtime feature service
+Audit Correlation,Technical immutable evidence,Trace member governed actions,Trace organisation governed actions,Trace protected technical actions,Immutable audit store
+Handoffs,Technical cross-workspace references,Escalate technical issue without transferring member record,Technical support/reconciliation without transferring organisation record,Reference-only protected handoff,Real cross-workspace APIs
+Consumer Capability Registry,Metadata boundary contract,Member dependencies documented,Organisation dependencies documented,Governance dependencies documented,Source verification and version compatibility

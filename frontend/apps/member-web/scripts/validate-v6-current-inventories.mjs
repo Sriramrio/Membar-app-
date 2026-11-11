@@ -1,0 +1,10 @@
+import fs from 'node:fs';import path from 'node:path';let p=0,f=0;const c=(x,m)=>{console.log(`${x?'PASS':'FAIL'}: ${m}`);x?p++:f++};const read=x=>fs.readFileSync(x,'utf8');
+for(const file of ['V6_ACTION_FUNCTIONAL_INVENTORY.md','V6_FORM_FUNCTIONAL_INVENTORY.md','V6_CURRENT_NAVIGATION_ACTION_INVENTORY.md'])c(fs.existsSync(file),`Current inventory exists: ${file}`);
+const docs=read('V6_ACTION_FUNCTIONAL_INVENTORY.md')+read('V6_FORM_FUNCTIONAL_INVENTORY.md');
+c(!docs.includes('src/features/network/pages/managementPages.tsx'),'Current inventories do not reference retired Management monolith');
+c(!docs.includes('src/components/ui/Modal.tsx'),'Current inventories do not reference retired Modal component');
+const rows=[...docs.matchAll(/`(src\/[^`]+\.(?:ts|tsx))`/g)].map(m=>m[1]);c(rows.every(fs.existsSync),'Every current inventory source path exists');
+const dash=read('src/features/member/pages/MemberDashboardPage.tsx');c(!dash.includes('ChapterPerformanceSection'),'Member Dashboard contains no stale ChapterPerformance implementation/comment');
+c(!fs.existsSync('src/features/member/dashboard/ChapterPerformanceSection.tsx'),'Unreachable ChapterPerformanceSection source retired');
+let commented=0;for(const file of fs.readdirSync('src/features/member/pages')){if(!file.endsWith('.tsx'))continue;const source=read(path.join('src/features/member/pages',file));commented+=(source.match(/\{\/\*(?:(?!\*\/).)*<\/?[A-Za-z][^>]*>(?:(?!\*\/).)*\*\/\}/gs)||[]).length}c(commented===0,'Member pages contain no commented-out JSX implementation blocks');
+console.log(`\nSETHU V6 N09 current inventory/stale-source closure: ${f?'FAIL':'PASS'} — ${p}/${p+f}`);process.exit(f?1:0);

@@ -1,0 +1,16 @@
+import fs from'node:fs';import path from'node:path';
+const read=p=>fs.readFileSync(p,'utf8');let pass=0,fail=0;const ck=(n,v)=>{v?(pass++,console.log('PASS',n)):(fail++,console.error('FAIL',n))};
+const ui=read('src/components/Ui.tsx'),grid=read('src/components/EnterpriseDataTable.tsx'),tab=read('src/components/TabulatorGridAdapter.tsx'),icon=read('src/components/LucideIcon.tsx'),shell=read('src/shell/PlatformAdminShell.tsx'),css=read('src/shared/styles.css'),tw=read('src/shared/tailwind.generated.css'),audit=read('src/features/audit/AuditPage.tsx');
+ck('Lucide offline-safe icon layer',icon.includes("export type LucideIconName")&&icon.includes('strokeWidth="2"'));
+ck('navigation icons wired',shell.includes('routeIcons')&&shell.includes('<LucideIcon'));
+ck('Tailwind generated layer present',tw.includes('tailwindcss v4.1.10')&&tw.includes('.tw-flex'));
+ck('Tailwind layer imported',read('src/main.tsx').includes('tailwind.generated.css'));
+ck('enterprise datatable sorting',grid.includes('localeCompare')&&grid.includes('sort-head'));
+ck('enterprise datatable pagination',grid.includes('Previous page')&&grid.includes('Next page'));
+ck('enterprise datatable responsive labels',grid.includes('data-label={c.label}')&&css.includes("content:attr(data-label)"));
+ck('enterprise datatable accessible',grid.includes('<caption className="sr-only">')&&grid.includes('scope="col"'));
+ck('Tabulator progressive adapter',tab.includes('window.Tabulator')&&tab.includes('EnterpriseDataTable'));
+ck('Tabulator adapter used on audit grid',audit.includes('TabulatorGridAdapter'));
+ck('mobile drawer icons no glyph buttons',!shell.includes('☰')&&!shell.includes('✕'));
+ck('no external CDN dependency',![...fs.readdirSync('src',{recursive:true})].some(x=>{try{return /https:\/\/(cdn|unpkg|jsdelivr)/.test(read(path.join('src',String(x))))}catch{return false}}));
+console.log(`UI modernization validation: ${pass} PASS / ${fail} FAIL`);if(fail)process.exit(1);

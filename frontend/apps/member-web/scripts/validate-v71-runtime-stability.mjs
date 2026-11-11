@@ -1,0 +1,14 @@
+import fs from 'node:fs';import path from 'node:path';
+const read=p=>fs.readFileSync(p,'utf8');const checks=[];const add=(n,v)=>checks.push([n,Boolean(v)]);
+const button=read('src/components/ui/Button.tsx'),dialog=read('src/components/ui/ActionDialog.tsx'),nav=read('src/navigation/useAppNavigation.ts'),api=read('src/services/api/apiClient.ts'),axios=read('src/services/api/axiosInstance.ts'),rt=read('src/hooks/useRealtimeRefresh.ts');
+add('Shared Button defaults to type=button',button.includes("type='button'"));
+add('Async dialog waits for confirmation result',dialog.includes('const outcome=await onConfirm'));
+add('Async dialog remains open when callback returns false',dialog.includes('if(outcome!==false)onClose()'));
+add('Dialog exposes aria-busy and prevents close while busy',dialog.includes('aria-busy={busy}')&&dialog.includes("if(e.key==='Escape'&&!busy)"));
+add('Dialog is mobile bottom-sheet and safe-area aware',dialog.includes('place-items-end')&&dialog.includes('env(safe-area-inset-bottom)'));
+add('Unsafe navigation is observable rather than silent',nav.includes('navigation.rejected')&&nav.includes('telemetry.warning'));
+add('API requests support AbortSignal',api.includes('signal?: AbortSignal')&&api.includes('signal:options.signal'));
+add('API timeout remains bounded at 12 seconds',axios.includes('timeout: 12_000'));
+add('Realtime refresh burst is debounced',rt.includes('setTimeout(refresh,150)'));
+let placeholders=[];function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,e.name);if(e.isDirectory())walk(p);else if(/\.(tsx|ts)$/.test(e.name)){const s=read(p);if(/href=["']#["']/.test(s)||/onClick=\{\(\)=>\{\}\}/.test(s))placeholders.push(p)}}}walk('src');add('No href=# or empty click-handler placeholders',placeholders.length===0);
+const fail=checks.filter(x=>!x[1]);for(const [n,ok] of checks)console.log(`${ok?'PASS':'FAIL'}: ${n}`);if(placeholders.length)console.log(placeholders.join('\n'));console.log(`SETHU V7.1 runtime stability: ${checks.length-fail.length}/${checks.length} PASS`);if(fail.length)process.exit(1);

@@ -1,0 +1,637 @@
+file,line,control,label_or_expression,interaction_semantics,certification
+src/components/commands/CommandExecutionFeedback.tsx,25,Button,Retry safely,onClick,PASS
+src/components/commands/CommandExecutionFeedback.tsx,25,Button,Dismiss,onClick,PASS
+src/components/concurrency/ConflictResolutionPanel.tsx,6,Button,Reload latest,onClick,PASS
+src/components/concurrency/ConflictResolutionPanel.tsx,6,Button,Retry safely,onClick,PASS
+src/components/concurrency/ConflictResolutionPanel.tsx,6,Button,Cancel,onClick,PASS
+src/components/data/QueryState.tsx,7,Button,Retry,onClick,PASS
+src/components/help/ContextTip.tsx,8,button,setOpen(v=>!v) >,onClick,PASS
+src/components/help/ContextTip.tsx,8,button,setOpen(false) >,onClick,PASS
+src/components/layout/Breadcrumbs.tsx,12,button,"back(fallback) className=""inline-flex min-h-11 items-center gap-1 rounded-lg px-2 hover:bg-slate-100 hover:text-slate-900""> origin?.returnLa",onClick,PASS
+src/components/layout/Breadcrumbs.tsx,12,Link,workspace,link,PASS
+src/components/layout/Breadcrumbs.tsx,12,Link,p.label,link,PASS
+src/components/layout/FocusedRecordPanel.tsx,8,button,,onClick,PASS
+src/components/layout/Header.tsx,52,button,"choose(r.href) className=""flex min-h-14 w-full items-center gap-3 rounded-xl px-3 py-2 text-left hover:bg-slate-50""> r.label r.meta",onClick,PASS
+src/components/layout/Header.tsx,69,button,,onClick,PASS
+src/components/layout/Header.tsx,72,button,"go(workspaceHome(auth.activeWorkspace), label:'Workspace home' ) className=""shrink-0"" aria-label=""SETHU home"">",onClick,PASS
+src/components/layout/Header.tsx,81,button,"setMobileSearch(true) className=""grid size-11 shrink-0 place-items-center rounded-xl border border-slate-200 md:hidden"" aria-label=""Search"">",onClick,PASS
+src/components/layout/Header.tsx,86,button,"go('/app/messages', label:'Converse' ) className=""grid size-11 shrink-0 place-items-center rounded-xl border border-slate-200 hover:bg-slate",onClick,PASS
+src/components/layout/Header.tsx,90,button,"setNoticeOpen(v=>!v) className=""relative grid size-11 shrink-0 place-items-center rounded-xl border border-slate-200 hover:bg-slate-50"" aria",onClick,PASS
+src/components/layout/Header.tsx,102,button,"dispatch(markAllNotificationsRead(memberId));toast.success('All notifications marked as read', 'Notifications'); > Mark all read",onClick,PASS
+src/components/layout/Header.tsx,106,button,"setNoticeOpen(false);go('/app/notifications', label:'Notifications' ); > View all",onClick,PASS
+src/components/layout/Header.tsx,109,button,"setNoticeOpen(false) className=""grid size-7 place-items-center rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 sm:hidden"" ",onClick,PASS
+src/components/layout/Header.tsx,116,button,"dispatch(markNotificationRead( notificationId: n.id, memberId ));setNoticeOpen(false);go(safeNavigationTarget(n.href), label:'Notification' ",onClick,PASS
+src/components/layout/Header.tsx,133,button,"dispatch(signOut());go('/login', remember:false ); className=""hidden size-11 shrink-0 place-items-center rounded-xl border border-slate-200 ",onClick,PASS
+src/components/layout/Header.tsx,149,button,"setMobileSearch(false);setQuery(''); className=""grid size-11 shrink-0 place-items-center rounded-xl border border-slate-200"" aria-label=""Clo",onClick,PASS
+src/components/layout/MobileBottomNav.tsx,8,button,setOpen(true) className= `grid min-h-[68px] place-items-center gap-1 px-1 py-2 text-sm font-bold $ secondary.some(x=>loc.pathname===x.path||,onClick,PASS
+src/components/layout/MobileBottomNav.tsx,8,button,"setOpen(false) className=""grid size-11 shrink-0 place-items-center rounded-xl border border-slate-200"">",onClick,PASS
+src/components/layout/MobileBottomNav.tsx,8,button,"setOpen(false);go(item.path, label:item.label ) className= `min-h-12 rounded-xl border p-3 text-left text-base font-bold $ loc.pathname===it",onClick,PASS
+src/components/layout/OperationFeedback.tsx,19,Button,setDismissed(event.id) >Dismiss,onClick,PASS
+src/components/layout/RoleContextBar.tsx,28,button,auth.activeWorkspace==='Member'?undefined:request( kind:'member' ) className= `whitespace-nowrap rounded-full px-3 py-1.5 text-xs sm:text-sm,onClick,PASS
+src/components/layout/RoleContextBar.tsx,29,button,"request( kind:'assignment',id:others[0].id ) className= `whitespace-nowrap rounded-full px-3 py-1.5 text-xs sm:text-sm $ activeOther?.id===o",onClick,PASS
+src/components/layout/Sidebar.tsx,23,button,,onClick,PASS
+src/components/layout/Sidebar.tsx,25,button,"dispatch(signOut());onClose();go('/login', remember:false ) > Sign out",onClick,PASS
+src/components/ui/ActionDialog.tsx,16,button,,onClick,PASS
+src/components/ui/ActionDialog.tsx,16,Button,Cancel,onClick,PASS
+src/components/ui/ActionDialog.tsx,16,Button,void confirm() > busy&& busy?`$ confirmLabel …`:confirmLabel,onClick,PASS
+src/components/ui/Button.tsx,7,button,,shared-component-props,PASS
+src/components/ui/LinkButton.tsx,7,Link,,link,PASS
+src/components/ui/RouteErrorBoundary.tsx,17,Button,"this.setState( error:null,correlationId:null ) >Retry screen",onClick,PASS
+src/components/ui/RouteErrorBoundary.tsx,17,Button,window.location.assign('/workspace') >Return to workspace,onClick,PASS
+src/components/ui/Tabs.tsx,35,button,onChange(item.key) className= cn( 'flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-bold whitespace-nowrap transition-colors focus:,onClick,PASS
+src/components/ui/Tabs.tsx,69,button,onChange(item.key) className= cn( 'flex min-h-11 items-center gap-2 rounded-xl px-4 py-2 text-sm font-bold transition-all focus:outline-hidd,onClick,PASS
+src/components/ui/Tabs.tsx,107,button,onChange(item.key) className= cn( 'flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-bold transition-all min-h-10 foc,onClick,PASS
+src/components/ui/Toast.tsx,75,button,,onClick,PASS
+src/features/auth/components/LoginForm.tsx,74,button,setMode('password') > Password,onClick,PASS
+src/features/auth/components/LoginForm.tsx,83,button,setMode('otp') > One-time code,onClick,PASS
+src/features/auth/components/LoginForm.tsx,114,button,setShow((value) => !value) aria-label= show ? 'Hide password' : 'Show password' > show ? :,onClick,PASS
+src/features/auth/components/LoginForm.tsx,126,Button,mode === 'otp' ? : status === 'loading' ? 'Signing in…' : otpBusy ? 'Requesting code…' : mode === 'otp' ? 'Send one-time code' : 'Sign in',submit,PASS
+src/features/auth/components/LoginForm.tsx,145,button,setIdentifier(account.email); setPassword(previewPassword()); setMode('password'); > account.name account.id · account.role account.email,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,20,Button,open(r) >Create route revision,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,20,Button,Create governed draft,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,20,Button,setEdit(null) >Cancel,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,22,Button,setEdit( ...i ) > i.name,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,22,Button,Create governed integration draft,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,22,Button,setEdit(null) >Cancel,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,29,Button,open(p) > p.name,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,29,Button,Create governed profile draft,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,29,Button,setEdit(null);setError('') >Cancel,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,32,Button,"setEdit( kind:'Feature Flag',value: ...x ) >Revise",onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,32,Button,"setEdit( kind:'Retention Policy',value: ...x ) >Revise",onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,32,Button,"setEdit( kind:'Numbering Rule',value: ...x ) >Revise",onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,32,Button,"setEdit( kind:'Matching Policy',value: ...x ) >Revise",onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,32,Button,Create governed draft,onClick,PASS
+src/features/control-plane/components/AdminPolicyEditors.tsx,32,Button,setEdit(null) >Cancel,onClick,PASS
+src/features/control-plane/components/ConfigurationReleasePanel.tsx,17,Button,"dispatch(validateConfigurationChange( id:c.id,actor )) >Validate",onClick,PASS
+src/features/control-plane/components/ConfigurationReleasePanel.tsx,17,Button,dispatch(analyseConfigurationImpact( id:c.id )) >Impact,onClick,PASS
+src/features/control-plane/components/ConfigurationReleasePanel.tsx,17,Button,"0 onClick= ()=>dispatch(submitConfigurationChange( id:c.id,actor )) >Submit",disabled-only,PASS
+src/features/control-plane/components/ConfigurationReleasePanel.tsx,17,Button,"setDialog( id:c.id,mode:'approve' ) >Approve",onClick,PASS
+src/features/control-plane/components/ConfigurationReleasePanel.tsx,17,Button,"setDialog( id:c.id,mode:'reject' ) >Reject",onClick,PASS
+src/features/control-plane/components/ConfigurationReleasePanel.tsx,17,Button,"setDialog( id:c.id,mode:'activate' ) >Activate",onClick,PASS
+src/features/control-plane/components/ConfigurationReleasePanel.tsx,17,Button,"setDialog( id:c.id,mode:'rollback' ) >Rollback",onClick,PASS
+src/features/governance/pages/BoardPacksPage.tsx,2,Button,"dispatch(acknowledgeBoardPack( id:p.id,memberName:actor )) > p.acknowledgedBy.includes(actor)?'Acknowledged':'Acknowledge pack'",onClick,PASS
+src/features/governance/pages/DecisionRegisterPage.tsx,21,Button,"setPending( kind:'resolve',id:d.id,title:d.title,conflictId:x.id ) >Resolve review",onClick,PASS
+src/features/governance/pages/DecisionRegisterPage.tsx,21,Button,"dispatch(castGovernanceVote( id:d.id,memberName:actor,vote:'For' )) >For",onClick,PASS
+src/features/governance/pages/DecisionRegisterPage.tsx,21,Button,"dispatch(castGovernanceVote( id:d.id,memberName:actor,vote:'Against' )) >Against",onClick,PASS
+src/features/governance/pages/DecisionRegisterPage.tsx,21,Button,"dispatch(castGovernanceVote( id:d.id,memberName:actor,vote:'Abstain' )) >Abstain",onClick,PASS
+src/features/governance/pages/DecisionRegisterPage.tsx,21,Button,"setPending( kind:'recusal',id:d.id,title:d.title ) >Recuse",onClick,PASS
+src/features/governance/pages/DecisionRegisterPage.tsx,21,Button,"setPending( kind:'conflict',id:d.id,title:d.title ) >Declare conflict",onClick,PASS
+src/features/governance/pages/DecisionRegisterPage.tsx,21,Button,"setPending( kind:'decision',id:d.id,decision:'Approved',title:d.title ) >Approve decision",onClick,PASS
+src/features/governance/pages/DecisionRegisterPage.tsx,21,Button,"setPending( kind:'decision',id:d.id,decision:'Rejected',title:d.title ) >Reject decision",onClick,PASS
+src/features/governance/pages/DecisionRegisterPage.tsx,21,Button,"setPending( kind:'decision',id:d.id,decision:'Deferred',title:d.title ) >Defer",onClick,PASS
+src/features/governance/pages/PolicyExceptionsPage.tsx,6,Button,setShow(v=>!v) >Request exception,onClick,PASS
+src/features/governance/pages/PolicyExceptionsPage.tsx,6,Button,Submit request,submit,PASS
+src/features/governance/pages/RoleTenureOversightPage.tsx,7,Button,"dispatch(updateHandover( id:r.id,status:'In Progress',actor )) >Start handover",onClick,PASS
+src/features/governance/pages/RoleTenureOversightPage.tsx,7,Button,"dispatch(updateHandover( id:r.id,status:'Complete',actor )) >Confirm complete",onClick,PASS
+src/features/management/pages/AnnouncementManagementPage.tsx,18,Button,setShow(true) > New announcement,onClick,PASS
+src/features/management/pages/AnnouncementManagementPage.tsx,18,Button,Publish announcement,submit,PASS
+src/features/management/pages/AnnouncementManagementPage.tsx,18,Button,setShow(false) >Cancel,onClick,PASS
+src/features/management/pages/AttendanceAdministrationPage.tsx,89,Button,Download CSV,onClick,PASS
+src/features/management/pages/AttendanceAdministrationPage.tsx,92,Button,r.finalised) > Mark All Present,onClick,PASS
+src/features/management/pages/AttendanceAdministrationPage.tsx,107,Button,Mark Selected Present ( selectedMemberIds.length ),onClick,PASS
+src/features/management/pages/AttendanceAdministrationPage.tsx,111,Button,Download CSV,onClick,PASS
+src/features/management/pages/AttendanceAdministrationPage.tsx,114,Button,dispatch(finaliseAttendance( eventId )) disabled= !rows.length||rows.every(r=>r.finalised) > Finalise attendance,onClick,PASS
+src/features/management/pages/AttendanceAdministrationPage.tsx,132,Button,"r.finalised) className=""text-sm font-bold text-sky-700""> Mark All Present",onClick,PASS
+src/features/management/pages/AttendanceAdministrationPage.tsx,164,Button,"dispatch(setAttendanceStatus( eventId:r.eventId,memberId:r.memberId,status:'present' )) > Present",onClick,PASS
+src/features/management/pages/AttendanceAdministrationPage.tsx,182,Button,"dispatch(approveAttendanceCorrection( eventId:r.eventId,memberId:r.memberId,status:'present' )) >Approve present",onClick,PASS
+src/features/management/pages/AttendanceAdministrationPage.tsx,183,Button,"dispatch(approveAttendanceCorrection( eventId:r.eventId,memberId:r.memberId,status:'absent' )) >Approve absent",onClick,PASS
+src/features/management/pages/EventManagementPage.tsx,26,Button,setShow(true) > Create event,onClick,PASS
+src/features/management/pages/EventManagementPage.tsx,28,Button,Publish event,submit,PASS
+src/features/management/pages/EventManagementPage.tsx,28,Button,setShow(false) >Cancel,onClick,PASS
+src/features/management/pages/EventManagementPage.tsx,29,Button,setExpanded(expanded===e.id?null:e.id) > expanded===e.id?'Hide registrations':'Review registrations',onClick,PASS
+src/features/management/pages/GalleryManagementPage.tsx,8,Button,Create draft,onClick,PASS
+src/features/management/pages/GalleryManagementPage.tsx,8,Button,"dispatch(setGalleryPublication( id:item.id,published:!item.published )) > item.published?'Unpublish':'Publish'",onClick,PASS
+src/features/management/pages/MeetingAdministrationPage.tsx,17,Button,"dispatch(updateMeeting( id:m.id,status:'confirmed' )) >Confirm",onClick,PASS
+src/features/management/pages/MeetingAdministrationPage.tsx,17,Button,"dispatch(updateMeeting( id:m.id,status:'cancelled' )) >Cancel",onClick,PASS
+src/features/management/pages/MemberManagementPage.tsx,52,Button,Download CSV,onClick,PASS
+src/features/management/pages/MemberManagementPage.tsx,65,Button,Download CSV,onClick,PASS
+src/features/management/pages/MemberManagementPage.tsx,77,Button,"const next = current==='active'?'suspended':'active'; dispatch(updateMember( id:m.id,changes: status:next )); if(next==='suspended') toast.e",onClick,PASS
+src/features/management/pages/NewMemberOnboardingPage.tsx,99,button,choose(v.id) className= `rounded-xl border p-3 text-left $ visitorId===v.id?'border-sky-400 bg-sky-50':'border-slate-200 hover:border-sky-30,onClick,PASS
+src/features/management/pages/NewMemberOnboardingPage.tsx,99,Button,visitor.status==='Activated'?'Already activated':'Activate approved visitor',submit,PASS
+src/features/management/pages/NewMemberOnboardingPage.tsx,99,Button,Save Draft,onClick,PASS
+src/features/management/pages/OrganisationalDashboardPage.tsx,19,button,"go(path, label:'Management Dashboard' ) className=""rounded-xl border border-slate-200 bg-white p-4 text-left hover:border-sky-300""> label bo",onClick,PASS
+src/features/management/pages/PaymentAdministrationPage.tsx,52,Button,Download CSV,onClick,PASS
+src/features/management/pages/PaymentAdministrationPage.tsx,61,Button,Download CSV,onClick,PASS
+src/features/management/pages/PaymentAdministrationPage.tsx,63,Button,"dispatch(payMembership( paymentId:p.id,memberId:p.memberId )); toast.success('Payment marked as paid!', 'Reconciled'); >Mark paid",onClick,PASS
+src/features/management/pages/PaymentAdministrationPage.tsx,63,Button,"dispatch(updatePaymentStatus( paymentId:p.id,status:'due' )); toast.info('Payment returned to due status.', 'Updated'); >Return to due",onClick,PASS
+src/features/management/pages/PromotionManagementPage.tsx,19,Button,setShow(true) > Create promotion,onClick,PASS
+src/features/management/pages/PromotionManagementPage.tsx,19,Button,setPreview(true) >Preview,onClick,PASS
+src/features/management/pages/PromotionManagementPage.tsx,19,Button,Save promotion,submit,PASS
+src/features/management/pages/PromotionManagementPage.tsx,19,Button,setShow(false) >Cancel,onClick,PASS
+src/features/management/pages/PromotionManagementPage.tsx,19,Button,"dispatch(setPromotionStatus( id:p.id,status:'paused' )) > Pause",onClick,PASS
+src/features/management/pages/PromotionManagementPage.tsx,19,Button,"dispatch(setPromotionStatus( id:p.id,status:'active' )) > Activate",onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,setCreating(v => !v) > New visitor,onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,Save draft,submit,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,button,setSelectedId(v.id) className= `rounded-xl border p-3 text-left $ selectedId === v.id ? 'border-sky-400 bg-sky-50' : 'border-slate-200 hover,onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,dispatch(submitVisitorRegistration( id: selected.id )); toast.success('Registration submitted'); >Submit registration,onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,dispatch(verifyVisitorEmail( id: selected.id )); toast.success('Contact verified'); >Verify contact,onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,"dispatch(setVisitorStatus( id: selected.id, status: 'Follow-up', actor, reason: 'Management follow-up' )); toast.info('Visitor moved to foll",onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,"dispatch(updateDueDiligenceCheck( visitorId: selected.id, key: check.key, status: 'Passed', actor )); toast.success(`$ check.label passed`);",onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,"setPending( kind: 'check', key: check.key, status: 'Needs Information' ) >Needs information",onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,"setPending( kind: 'check', key: check.key, status: 'Failed' ) >Failed",onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,"setPending( kind: 'recommend', decision: 'Approve' ) >Recommend approve",onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,"setPending( kind: 'recommend', decision: 'Visitor Only' ) >Visitor only",onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,"setPending( kind: 'recommend', decision: 'Reject' ) >Recommend reject",onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,"setPending( kind: 'decide', decision: 'Approved' ) >Approve",onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,"setPending( kind: 'decide', decision: 'Returned for Information' ) >Return for info",onClick,PASS
+src/features/management/pages/VisitorManagementPage.tsx,18,Button,"setPending( kind: 'decide', decision: 'Rejected' ) >Reject",onClick,PASS
+src/features/management/pages/WorkflowInboxPage.tsx,13,Button,"setScope(x) className=""capitalize""> x",onClick,PASS
+src/features/management/pages/WorkflowInboxPage.tsx,13,Button,"requiresValue(a)?setPending( id:t.id,action:a,title:t.title ):dispatch(workflowAction( id:t.id,action:a,actor,actorRole )) > a==='Request In",onClick,PASS
+src/features/member/analytics/AnalyticsSummary.tsx,22,button,"onOpen(item.route) aria-label= `$ item.label : $ item.value . $ item.description ` className=""group flex min-h-[82px] flex-col justify-betwe",onClick,PASS
+src/features/member/components/EnterpriseMemberUI.tsx,21,Button,actionLabel,onClick,PASS
+src/features/member/components/EnterpriseMemberUI.tsx,22,Button,actionLabel,onClick,PASS
+src/features/member/components/EnterpriseMemberUI.tsx,26,button,label ×,onClick,PASS
+src/features/member/components/MemberJourneyScopeBar.tsx,26,button,onChange(key) > label,onClick,PASS
+src/features/member/dashboard/ChapterInsightsView.tsx,12,button,"m.available&&go(qs(m.drill.route,m.drill.params), label:'Chapter Insights' ) className=""flex w-full items-center gap-3 text-left disabled:cu",onClick,PASS
+src/features/member/dashboard/OrganisationInsightsView.tsx,19,Button,setSelectedId(parent.id) > Up to parent.name,onClick,PASS
+src/features/member/dashboard/OrganisationInsightsView.tsx,19,button,"go(route, label:'Networking Intelligence' ) className=""min-h-24 w-full p-4 text-left hover:bg-slate-50""> label value",onClick,PASS
+src/features/member/dashboard/OrganisationInsightsView.tsx,19,button,"setSelectedId(unit.id) className=""rounded-xl border border-slate-200 bg-white p-4 text-left shadow-sm hover:border-sky-300""> <div className=",onClick,PASS
+src/features/member/navigation/NavigationGuardDialog.tsx,15,Button,saving?'Saving…':'Save Draft & Continue',onClick,PASS
+src/features/member/pages/AnnouncementsPage.tsx,14,Button,"setTab(v) className=""shrink-0""> l",onClick,PASS
+src/features/member/pages/AnnouncementsPage.tsx,14,Button,"void acknowledge(a.id,a.version) >Acknowledge",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,61,Button,back('/app/directory') >Return to directory,onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,79,Button,back('/app/directory') >Return to directory,onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,163,Button,back('/app/directory') >Back to discovery,onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,191,Button,"dispatch(toggleSavedBusiness( memberId: viewer.id, businessId: b.id )) > saved ? 'Remove saved' : 'Save business'",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,193,Button,"void connectionCommands.request(primary.id, `Business discussion with $ b.tradeName ?? b.name `) > Connect to representative",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,197,Button,Connection request sent,disabled-only,PASS
+src/features/member/pages/BusinessDetailPage.tsx,200,Button,void message() > Converse,onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,201,Button,setNoteOpen(true) > Add note,onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,202,Button,"go(`/app/one-to-one?member=$ primary.id &business=$ b.id `, label: b.name ) > Schedule meeting",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,205,Button,"go(`/app/references?business=$ b.id `, label: b.name ) >View references",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,206,Button,Share,onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,207,Button,"go(`/app/support?report=business&id=$ b.id `, label: b.name ) > Report",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,216,Button,"void connectionCommands.request(primary.id, `Business discussion with $ b.tradeName ?? b.name `) >Connect with representative",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,284,button,"go(`/app/members/$ m.id `, label: b.name ) > <div className=""text-lg font-black text-[var(--n",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,308,button,"other && go(`/app/businesses/$ other.id `, label: b.name ) > r.type other?.tradeName ?? other?.name ?? otherId r.source ?? 'Verified network",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,322,button,"go(`/app/opportunities/$ o.id `, label: b.name ) > o.title o.type ?? 'Requirement' o.description Closes friendlyDate(o.closingDate)",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,355,button,"go(`/app/members/$ primary.id `, label: b.name ) > primary.name",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,365,Button,"go(`/app/references?business=$ b.id `, label: b.name ) > referenceCount reference referenceCount === 1 ? '' : 's'",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,366,Button,"go(`/app/transactions?business=$ b.id `, label: b.name ) > outcomeCount business outcome outcomeCount === 1 ? '' : 's'",onClick,PASS
+src/features/member/pages/BusinessDetailPage.tsx,366,Button,setNoteOpen(true) >Add relationship note,onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,43,Button,"go('/app/references/new', label:'Business References' ) >Create reference",onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,45,Button,"const copy=new URLSearchParams(params);copy.delete('member');copy.delete('business');copy.delete('reference');setParams(copy, replace:true )",onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,46,Button,setTab(x) > x,onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,48,button,"business&&go(`/app/businesses/$ business.id `, label:'Business References' ) > business?.name??'Business reference'",onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,48,button,"from&&go(`/app/members/$ from.id `, label:'Business References' ) > from?.name??r.fromMemberId",onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,48,button,"to&&go(`/app/members/$ to.id `, label:'Business References' ) > to?.name??r.toMemberId",onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,48,Button,"go(`/app/transactions?reference=$ r.id `, label:'Business References' ) > outcomes.length linked outcome outcomes.length===1?'':'s'",onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,48,Button,"void changeStatus(r,'Acknowledged') >Acknowledge",onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,48,Button,"void changeStatus(r,'Accepted') >Accept",onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,48,Button,"void changeStatus(r,'Declined') >Decline",onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,48,Button,setFollowUpId(r.id) >In progress,onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,48,Button,"void changeStatus(r,'Closed') >Close",onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,49,Button,Previous,onClick,PASS
+src/features/member/pages/BusinessReferencesPage.tsx,49,Button,Next,onClick,PASS
+src/features/member/pages/CalendarPage.tsx,66,Button,"go('/workspace', label: 'Calendar' ) >Return to workspace",onClick,PASS
+src/features/member/pages/CalendarPage.tsx,147,Button,"go('/app/one-to-one', label: 'Calendar' ) >Schedule One-to-One",onClick,PASS
+src/features/member/pages/CalendarPage.tsx,147,Button,"go('/app/events', label: 'Calendar' ) >Browse Events",onClick,PASS
+src/features/member/pages/CalendarPage.tsx,154,Button,"moveMonth(-1) aria-label=""Previous month"">",onClick,PASS
+src/features/member/pages/CalendarPage.tsx,155,Button,Today,onClick,PASS
+src/features/member/pages/CalendarPage.tsx,156,Button,"moveMonth(1) aria-label=""Next month"">",onClick,PASS
+src/features/member/pages/CalendarPage.tsx,160,Button,"setParam('view', undefined) >Schedule view",onClick,PASS
+src/features/member/pages/CalendarPage.tsx,161,Button,"setParam('view', 'month') >Month",onClick,PASS
+src/features/member/pages/CalendarPage.tsx,167,Button,"setParam('filter', key === 'all' ? undefined : key) > label",onClick,PASS
+src/features/member/pages/CalendarPage.tsx,175,button,"go(item.href, label: 'Calendar' ) className=""flex min-h-20 w-full items-center gap-4 rounded-2xl p-4 text-left hover:bg-slate-50 focus-visib",onClick,PASS
+src/features/member/pages/CalendarPage.tsx,176,Button,go(filter === 'events' ? '/app/events' : filter === 'opportunities' ? '/app/opportunities' : filter === 'payments' ? '/app/payments' : '/app,onClick,PASS
+src/features/member/pages/CategoryIndexPage.tsx,9,Button,"go(`/app/directory?category=$ encodeURIComponent(c.id) `, label:'Business Categories' ) >Browse network",onClick,PASS
+src/features/member/pages/CategoryIndexPage.tsx,9,Button,"go(`/app/opportunities?category=$ encodeURIComponent(c.id) `, label:'Business Categories' ) >View opportunities",onClick,PASS
+src/features/member/pages/ConnectionSuggestionsPage.tsx,12,button,"go(`/app/members/$ m.id `, label:'Connection Suggestions' ) > m.name",onClick,PASS
+src/features/member/pages/ConnectionSuggestionsPage.tsx,12,Button,"go(`/app/members/$ m.id `, label:'Connection Suggestions' ) >View profile",onClick,PASS
+src/features/member/pages/ConnectionSuggestionsPage.tsx,12,Button,"void connectionCommands.request(m.id,'Business introduction') > Connect",onClick,PASS
+src/features/member/pages/ConnectionSuggestionsPage.tsx,12,Button,"go('/app/directory', label:'Connection Suggestions' ) >Explore Directory",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,129,Button,"go('/app/suggestions', label: 'Connections' ) >Find relevant people",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,138,Button,setStatus('received') >Review requests,onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,146,Button,setStatus(key) > label counts[key] ?? 0,onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,162,button,"go(`/app/members/$ member.id `, label: 'Connections' ) > member.name",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,185,button,"go(`/app/meetings/$ upcoming.id `, label: 'Connections' ) > Upcoming: upcoming.title new Date(upcoming.dateTime).toLocaleString('en-IN')",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,195,Button,"void runConnectionCommand('connection.respond','connection.respond',member.id, ownerId:memberId,targetId:member.id,status:'connected' ,()=>d",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,196,Button,"void runConnectionCommand('connection.respond','connection.respond',member.id, ownerId:memberId,targetId:member.id,status:'declined' ,()=>di",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,199,Button,"void runConnectionCommand('connection.cancel','connection.cancel',member.id, ownerId:memberId,targetId:member.id ,()=>dispatch(cancelConnect",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,202,Button,"void message(member.id, business?.id) > Converse",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,203,Button,"go(`/app/one-to-one?member=$ member.id $ business ? `&business=$ business.id ` : '' `, label: 'Connections' ) >Meeting",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,204,Button,"go(`/app/references?member=$ member.id `, label: 'Connections' ) >References",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,205,Button,"void runConnectionCommand('connection.remove','connection.remove',member.id, memberId,targetId:member.id ,()=>dispatch(removeConnection( mem",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,208,Button,"setBlockTarget( id: member.id, name: member.name ) > Block",onClick,PASS
+src/features/member/pages/ConnectionsPage.tsx,213,Button,"go('/app/directory', label: 'Connections' ) >Discover members",onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,32,Button,"go('/workspace', label:'Converse' ) >Return to workspace",onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,54,Button,setGroupOpen(v=>!v) > Enable Chapter group,onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,56,Button,void createGroup() >Enable group,onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,56,Button,setGroupOpen(false);setParticipants([]) >Cancel,onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,59,button,"participant?go(`/app/messages/$ c.id `, label:'Converse' ):undefined > display kind==='chapt",onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,59,Button,void join(c) > kind==='chapter'?'Open Chapter Converse':'Join group',onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,59,button,"flag(c,'pinned') >",onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,59,button,"flag(c,'archived') >",onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,59,Button,"go('/app/directory', label:'Converse' ) >Continue Member journey",onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,59,Button,Previous,onClick,PASS
+src/features/member/pages/ConverseInboxPage.tsx,59,Button,Next,onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,30,Button,void join(candidate) > candidate.kind==='chapter'?'Open Chapter Converse':'Join group',onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,30,Button,back('/app/messages') >Back to Converse,onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,37,Button,void mutateFlag('pinned') > pinned?'Unpin':'Pin',onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,37,Button,void mutateFlag('muted') > muted?'Unmute':'Mute',onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,37,Button,void mutateFlag('archived').then(r=> if(r.ok&&!archived)back('/app/messages') ) > archived?'Restore':'Archive',onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,40,Button,"go(contextTarget.href, label:'Converse' ) >Open related contextTarget.type.toLowerCase()",onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,41,Button,"go(`/app/members/$ other.id `, label:'Converse' ) > View member",onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,41,Button,go(`/app/one-to-one?member=$ other.id $ contextType==='business'?`&business=$ contextId `:'' $ contextType==='opportunity'?`&opportunity=$ c,onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,42,Button,Older messages,onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,42,button,"sender&&go(`/app/members/$ sender.id `, label:'Converse' ) > sender?.name",onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,42,button,"setReplyTo(m.id) className=""inline-flex min-h-9 items-center gap-1 rounded-lg px-2""> Reply",onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,42,button,"setReplyTo(undefined) className=""min-h-9 shrink-0 font-bold"">Cancel",onClick,PASS
+src/features/member/pages/ConverseThreadPage.tsx,42,Button,Send,submit,PASS
+src/features/member/pages/ConverseThreadPage.tsx,43,Button,void leave() > Leave group,onClick,PASS
+src/features/member/pages/CreateOpportunityPage.tsx,54,Button,go('/app/opportunities/my') >My Opportunities,onClick,PASS
+src/features/member/pages/CreateOpportunityPage.tsx,55,Button,go(`/app/opportunities/$ existing.id `) >View Opportunity,onClick,PASS
+src/features/member/pages/CreateOpportunityPage.tsx,90,Button,back('/app/opportunities/my') >Back,onClick,PASS
+src/features/member/pages/CreateOpportunityPage.tsx,98,Button,void persist(existing ? existing.status === 'draft' ? 'draft' : 'open' : 'open') > command.busy?'Saving…':existing ? 'Save Changes' : 'Publi,onClick,PASS
+src/features/member/pages/CreateOpportunityPage.tsx,98,Button,setReview(false) >Edit requirement,onClick,PASS
+src/features/member/pages/CreateOpportunityPage.tsx,98,Button,void persist('draft') >Save Draft,onClick,PASS
+src/features/member/pages/CreateOpportunityPage.tsx,106,Button,if(validate())setReview(true) >Review existing ? 'Changes' : '& Publish',onClick,PASS
+src/features/member/pages/CreateOpportunityPage.tsx,106,Button,persist('draft') >Save Draft,onClick,PASS
+src/features/member/pages/CreateOpportunityPage.tsx,106,Button,back('/app/opportunities/my') >Cancel,onClick,PASS
+src/features/member/pages/CreateReferencePage.tsx,93,Button,"go('/app/directory', label: 'Create Reference' ) >Discover members",onClick,PASS
+src/features/member/pages/CreateReferencePage.tsx,98,Button,back('/app/references') >Back to references,onClick,PASS
+src/features/member/pages/CreateReferencePage.tsx,131,Button,command.busy?'Sending…':'Send business reference',submit,PASS
+src/features/member/pages/CreateReferencePage.tsx,132,Button,Save as Draft,onClick,PASS
+src/features/member/pages/CreateReferencePage.tsx,133,Button,back('/app/references') >Cancel,onClick,PASS
+src/features/member/pages/EventsPage.tsx,18,Button,"const next=new URLSearchParams(params);next.set('view',v);setParams(next, replace:true ) className=""shrink-0""> l",onClick,PASS
+src/features/member/pages/EventsPage.tsx,18,button,"go(`/app/events/$ e.id `, label:'Events' ) className=""text-left text-lg font-black leading-6 hover:text-sky-700 hover:underline""> e.name",onClick,PASS
+src/features/member/pages/EventsPage.tsx,18,Button,"go(`/app/events/$ e.id `, label:'Events' ) > attending?<> Manage registration :waiting?'View waitlist status':'View & register'",onClick,PASS
+src/features/member/pages/FamilyInformationPage.tsx,15,Button,Add person,onClick,PASS
+src/features/member/pages/FamilyInformationPage.tsx,15,Button,"setEntries(entries.filter((_,j)=>j!==i)) aria-label= `Remove $ e.name||'family entry' ` > Remove",onClick,PASS
+src/features/member/pages/FamilyInformationPage.tsx,15,Button,void save() disabled= !dirty||!valid||command.busy >Save information,onClick,PASS
+src/features/member/pages/InstallOfflinePage.tsx,106,Button,"toast.info(online ? 'Connection is active & responsive' : 'No connection detected', 'Connection Status'); className=""shrink-0 hidden sm:flex",onClick,PASS
+src/features/member/pages/InstallOfflinePage.tsx,138,Button,isEffectivelyInstalled ? ( <> SETHU Installed ) : ( <> Install SETHU ),onClick,PASS
+src/features/member/pages/InstallOfflinePage.tsx,156,Button,setSimulatedStandalone(!simulatedStandalone); toast.success( !simulatedStandalone ? 'Simulated Standalone PWA mode activated' : 'Restored st,onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,39,Button,back('/app/one-to-one') >Return to meetings,onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,85,Button,back('/app/one-to-one') >Back to meetings,onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,95,Button,void update( status:'confirmed' ) >Accept meeting,onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,95,Button,void update( status:'declined' ) >Decline,onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,96,Button,void update( status:'cancelled' ) >Cancel meeting,onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,97,Button,setCompletionOpen(true) >Complete meeting,onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,106,Button,void submitAlternate() >Suggest new time,onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,111,Button,"void update( status:'confirmed',dateTime:meeting.alternateDateTime ) >Accept new time",onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,117,button,"go(`/app/members/$ person.id `, label: meeting.title ) > person.name",onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,117,Button,"go(`/app/businesses/$ business.id `, label: meeting.title ) >View business.name",onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,118,Button,"go(`/app/references/new?member=$ other.id $ otherBusiness ? `&business=$ otherBusiness.id ` : '' `, label: meeting.title ) >Give Business Re",onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,118,Button,setOutcomeOpen(true) >Record Business Outcome,onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,118,Button,"go(`/app/thank-you-notes?meeting=$ meeting.id `, label: meeting.title ) >Send Thank You / Follow-up",onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,119,Button,"go(`/app/members/$ person.id `, label: meeting.title ) >View person.name",onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,119,Button,"go(`/app/businesses/$ otherBusiness.id `, label: meeting.title ) > otherBusiness.name",onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,119,Button,"go(`/app/references?member=$ other?.id ?? '' `, label: meeting.title ) > relatedReferences.length related reference relatedReferences.length",onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,119,Button,"go(`/app/opportunities/$ relatedOpportunity.id `, label: meeting.title ) >Opportunity: relatedOpportunity.title",onClick,PASS
+src/features/member/pages/MeetingDetailAttendancePollPage.tsx,124,Button,void poll(choice) > choice,onClick,PASS
+src/features/member/pages/MemberActionCentrePage.tsx,11,button,setDomain(x) className= `rounded-full px-3 py-2 text-sm font-bold $ domain===x?'bg-[var(--navy-950)] text-white':'border border-slate-200 bg,onClick,PASS
+src/features/member/pages/MemberActionCentrePage.tsx,11,button,"go(a.route, label:'Action Centre' ) className=""flex w-full items-center gap-4 p-4 text-left""> a.title <StatusPill tone=",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,21,button,"metric.definition.label <ChevronRight className=""size-4 text-slate-300 transition g",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,67,Button,setTab('dashboard') >Return to Dashboard,onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,68,Button,"go('/app/home', label: 'Dashboard' ) >Discover network",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,71,Button,"go('/app/activity?view=actions', label:'Dashboard' ) > intelligence.pendingTotal pending",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,72,Button,"go('/app/activity?view=actions', label: 'Dashboard' ) >View all actions",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,72,button,"go(a.route, label: 'Dashboard' ) className=""flex items-center gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-left hover:bord",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,74,button,"go(`/app/businesses/$ b.businessId `, label: 'Dashboard' ) className=""text-left text-lg font-black hover:text-sky-700 hover:underline""> b.na",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,74,Button,"go(`/app/businesses/$ b.businessId `, label: 'Dashboard' ) >View business",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,74,Button,"go('/app/businesses', label: 'Dashboard' ) >Manage affiliation",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,75,button,"go(x.route, label: 'Dashboard' ) className=""flex items-center gap-3 rounded-xl border border-slate-200 p-3 text-left hover:border-sky-300""> ",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,75,button,"go(r.route, label: 'Dashboard' ) className=""rounded-xl border border-slate-200 p-4 text-left hover:border-sky-300""> r.title Why: r.why",onClick,PASS
+src/features/member/pages/MemberDashboardPage.tsx,76,button,"go(x.route, label: 'Dashboard' ) className=""flex w-full items-center gap-3 py-3 text-left hover:bg-slate-50""> x.label x.detail new Date(x.at",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,83,Button,back('/workspace') >Return to workspace,onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,96,Button,back('/app/directory') >Return to directory,onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,193,Button,back('/app/directory') >Back to discovery,onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,227,Button,setShowConnectionComposer(true) > Connect,onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,229,Button,"void connectionCommands.cancel(target.id).then(r=> if(r.ok)toast.info('Connection request cancelled', 'Request Cancelled') ) > Cancel reques",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,235,Button,"void connectionCommands.respond(target.id,'connected').then(r=> if(r.ok)toast.success(`Connected with $ target.name !`, 'Connection Accepted",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,238,Button,"void connectionCommands.respond(target.id,'declined').then(r=> if(r.ok)toast.info('Connection request declined', 'Declined') ) >Decline",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,243,Button,void message() > Converse,onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,244,Button,"go(`/app/one-to-one?member=$ target.id `, label: target.name ) > Schedule meeting",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,245,Button,setNoteOpen(true) > Add note,onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,246,Button,"go(`/app/references/new?member=$ target.id $ business ? `&business=$ business.id ` : '' `, label: target.name ) >Give reference",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,247,Button,"void connectionCommands.remove(target.id).then(r=> if(r.ok)toast.warning(`Connection with $ target.name removed.`, 'Removed') ) > Remove",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,250,Button,"void connectionCommands.block(target.id).then(r=> if(r.ok)toast.error(`Member $ target.name blocked.`, 'Member Blocked') ) > Block",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,251,Button,"go(`/app/support?report=member&id=$ target.id `, label: target.name ) > Report",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,278,Button,void sendConnectionRequest() >Send connection request,onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,279,Button,setShowConnectionComposer(false) >Cancel,onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,287,Button,"go('/app/connections?status=sent', label: target.name ) >View sent requests",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,318,button,"go(`/app/businesses/$ business.id `, label: target.name ) > business.tradeName ?? business.name",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,322,Button,"go(`/app/businesses/$ business.id `, label: target.name ) > View business",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,323,Button,"dispatch(toggleSavedBusiness( memberId: viewer.id, businessId: business.id )) >Save business",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,335,Button,"go(`/app/one-to-one?member=$ target.id `, label: target.name ) > meetingsWithTarget.length meeting meetingsWithTarget.length === 1 ? '' : 's",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,336,Button,"go(`/app/references?member=$ target.id `, label: target.name ) > referencesWithTarget.length reference referencesWithTarget.length === 1 ? '",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,337,Button,"go(`/app/opportunities?business=$ business.id `, label:target.name ) > opportunitiesWithTarget.length opportunit opportunitiesWithTarget.len",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,338,Button,"go(`/app/transactions?business=$ business.id `, label: target.name ) > outcomesWithTarget.length business outcome outcomesWithTarget.length ",onClick,PASS
+src/features/member/pages/MemberDetailPage.tsx,339,Button,setNoteOpen(true) > visibleNotes.length note visibleNotes.length===1?'':'s',onClick,PASS
+src/features/member/pages/MemberEventDetailPage.tsx,20,Button,"go('/app/events', label:'Event' ) >Return to Events",onClick,PASS
+src/features/member/pages/MemberEventDetailPage.tsx,25,Button,Add to Calendar,onClick,PASS
+src/features/member/pages/MemberEventDetailPage.tsx,25,Button,Cancel attending?'registration':'waitlist place',onClick,PASS
+src/features/member/pages/MemberEventDetailPage.tsx,25,Button,full?'Join Waitlist':'Confirm Registration',onClick,PASS
+src/features/member/pages/MemberEventDetailPage.tsx,25,button,"go(`/app/members/$ m.id `, label:event.name ) className=""rounded-xl border border-slate-200 bg-white p-4 text-left hover:border-sky-300""> m.",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,22,Button,"go('/workspace', label:'Member Journey' ) >Return to workspace",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,32,Button,"go('/app/dashboard', label:'Member Journey' ) >My Dashboard",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,34,Button,"go('/app/dashboard', label:'Member Journey' ) > intelligence.pendingTotal pending",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,36,Button,"go(`/app/directory?scope=$ scope `, label:'Member Journey' ) >Open Directory",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,36,Button,setScope('network') >Open Your Network,onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,37,Button,"go('/app/messages?view=chapter', label:'Your Chapter' ) > Open Converse",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,37,button,"go(`/app/messages/$ c.id `, label:'Your Chapter' ) className=""min-h-16 rounded-2xl border border-slate-200 bg-white p-4 text-left hover:bord",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,38,Button,"go('/app/suggestions', label:'Member Journey' ) >Review suggestions",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,39,Button,"go('/app/opportunities', label:'Member Journey' ) >View Marketplace",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,39,Button,"go('/app/opportunities', label:'Member Journey' ) >View Marketplace",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,40,Button,"go(`/app/promotions/$ p.id `, label:'Member Journey' ) >View Promotion",onClick,PASS
+src/features/member/pages/MemberHomePage.tsx,41,Button,"go('/app/events', label:'Member Journey' ) >View all events",onClick,PASS
+src/features/member/pages/MemberSupportPage.tsx,16,Button,Submit support request,submit,PASS
+src/features/member/pages/MembershipPage.tsx,20,Button,void beginRenewal() > busy?'Starting…':previewPayment?'Record preview renewal':'Pay renewal securely',onClick,PASS
+src/features/member/pages/MembershipPage.tsx,20,Button,"go('/app/payments', label:'Membership' ) >View all payments",onClick,PASS
+src/features/member/pages/MyActivityPage.tsx,22,Button,"go('/app/activity?view=actions', label:'My Activity' ) >Action Centre",onClick,PASS
+src/features/member/pages/MyActivityPage.tsx,22,button,setKind(k) className= `min-h-11 rounded-full border px-4 text-sm font-bold $ kind===k?'border-sky-700 bg-sky-700 text-white':'border-slate-3,onClick,PASS
+src/features/member/pages/MyActivityPage.tsx,22,button,"go(r.href, label:'My Activity' ) > icon(r.kind) r.title r.kind r.detail date(r.date)",onClick,PASS
+src/features/member/pages/MyAttendancePage.tsx,19,button,"event&&go(`/app/events/$ event.id `, label:'My Attendance' ) > event?.name??r.eventId",onClick,PASS
+src/features/member/pages/MyAttendancePage.tsx,19,Button,setPending( eventId:r.eventId ) >Request correction,onClick,PASS
+src/features/member/pages/MyAttendancePage.tsx,19,Button,Previous,onClick,PASS
+src/features/member/pages/MyAttendancePage.tsx,19,Button,Next,onClick,PASS
+src/features/member/pages/MyBusinessesPage.tsx,30,Button,void requestAffiliation() > command.busy?'Submitting…':'Request affiliation',onClick,PASS
+src/features/member/pages/MyBusinessesPage.tsx,32,button,setSelectedId(b.id) className= `rounded-2xl border p-4 text-left $ selectedId===b.id?'border-sky-500 bg-sky-50':'border-slate-200 bg-white h,onClick,PASS
+src/features/member/pages/MyBusinessesPage.tsx,32,button,"setRequestOpen(!requestOpen) className=""rounded-2xl border border-dashed border-sky-300 bg-sky-50/50 p-4 text-left hover:bg-sky-50""> Add you",onClick,PASS
+src/features/member/pages/MyBusinessesPage.tsx,33,Button,void requestAffiliation() >Submit for verification,onClick,PASS
+src/features/member/pages/MyBusinessesPage.tsx,36,button,"setDraft( ...draft,taxonomyRefs:(draft.taxonomyRefs??[]).filter(x=>x.taxonomyId!==ref.taxonomyId) ) className=""rounded-full border border-sk",onClick,PASS
+src/features/member/pages/MyBusinessesPage.tsx,36,Button,"if(!taxonomyPick)return;setDraft( ...draft,taxonomyRefs:[...(draft.taxonomyRefs??[]), taxonomyId:taxonomyPick,source:'Declared' ] );setTaxon",onClick,PASS
+src/features/member/pages/MyBusinessesPage.tsx,37,Button,Add certification record,onClick,PASS
+src/features/member/pages/MyBusinessesPage.tsx,38,Button,command.busy?'Saving…':'Save business',submit,PASS
+src/features/member/pages/MyBusinessesPage.tsx,38,Button,setEndOpen(true) >End this affiliation,onClick,PASS
+src/features/member/pages/MyOpportunitiesPage.tsx,33,Button,"go('/app/opportunities/new', label:'My Opportunities' ) > Post Opportunity",onClick,PASS
+src/features/member/pages/MyOpportunitiesPage.tsx,34,button,"const next=new URLSearchParams(params);next.set('tab',g.key);next.delete('view');setParams(next, replace:true ) className= `min-h-11 shrink-",onClick,PASS
+src/features/member/pages/MyOpportunitiesPage.tsx,35,button,"go(`/app/opportunities/$ o.id `, label:'My Opportunities' ) > o.title",onClick,PASS
+src/features/member/pages/MyOpportunitiesPage.tsx,35,Button,"go(`/app/opportunities/$ o.id `, label:'My Opportunities' ) > responses.length?'Review Responses':'View Opportunity'",onClick,PASS
+src/features/member/pages/MyOpportunitiesPage.tsx,35,Button,"go(`/app/opportunities/new?edit=$ o.id `, label:o.title ) >Edit",onClick,PASS
+src/features/member/pages/MyOpportunitiesPage.tsx,35,Button,"status(o,'open') >Publish",onClick,PASS
+src/features/member/pages/MyOpportunitiesPage.tsx,35,Button,"extend(o,7) >Extend 7 days",onClick,PASS
+src/features/member/pages/MyOpportunitiesPage.tsx,35,Button,"status(o,'closed') >Close",onClick,PASS
+src/features/member/pages/MyOpportunitiesPage.tsx,35,Button,"go('/app/opportunities/new', label:'My Opportunities' ) >Post Opportunity",onClick,PASS
+src/features/member/pages/MyPaymentsPage.tsx,22,Button,requestPayment(p.id) > busy===p.id?'Starting…':previewPayment?'Record preview payment':'Pay securely',onClick,PASS
+src/features/member/pages/MyProfilePage.tsx,15,Button,"setVerifyBusy(true);setVerifyError('');try const c=await requestContactVerification(member.id,draft.email||draft.phone);setVerifyChallenge(c",onClick,PASS
+src/features/member/pages/MyProfilePage.tsx,15,Button,"setVerifyBusy(true);setVerifyError('');try const r=await verifyContactVerification(verifyChallenge,verifyCode,member.id);if(r.ok)setVerified",onClick,PASS
+src/features/member/pages/MyProfilePage.tsx,15,Button,command.busy?'Saving…':'Save profile',submit,PASS
+src/features/member/pages/MyProfilePage.tsx,15,Button,"go('/app/settings/privacy', label:'My Profile' ) >Open privacy settings",onClick,PASS
+src/features/member/pages/MyResponsesPage.tsx,24,button,"const next=new URLSearchParams(params);next.set('tab',g.key);next.delete('status');setParams(next, replace:true ) className= `min-h-11 shrin",onClick,PASS
+src/features/member/pages/MyResponsesPage.tsx,25,button,"o&&go(`/app/opportunities/$ o.id `, label:'My Responses' ) > o?.title??'Opportunity no longer available'",onClick,PASS
+src/features/member/pages/MyResponsesPage.tsx,25,Button,"go(`/app/opportunities/$ o.id /respond`, label:'My Responses' ) >Continue Draft",onClick,PASS
+src/features/member/pages/MyResponsesPage.tsx,25,Button,"go(`/app/opportunities/$ o.id `, label:'My Responses' ) >Open Opportunity",onClick,PASS
+src/features/member/pages/MyResponsesPage.tsx,25,Button,void withdraw(r) >Withdraw,onClick,PASS
+src/features/member/pages/MyResponsesPage.tsx,25,Button,"go(`/app/transactions?opportunity=$ o.id `, label:'My Responses' ) >Business Outcome",onClick,PASS
+src/features/member/pages/MyResponsesPage.tsx,25,Button,"go('/app/opportunities', label:'My Responses' ) >Browse Opportunities",onClick,PASS
+src/features/member/pages/NewsPage.tsx,10,Button,setTab('updates') >Network Updates,onClick,PASS
+src/features/member/pages/NewsPage.tsx,10,Button,setTab('events') >Event Briefing,onClick,PASS
+src/features/member/pages/NewsPage.tsx,10,Button,"go(`/app/events/$ e.id `, label:'News' ) >View event",onClick,PASS
+src/features/member/pages/NotificationSettingsPage.tsx,28,Button,Save notification settings,onClick,PASS
+src/features/member/pages/NotificationsPage.tsx,36,Button,Mark all read,onClick,PASS
+src/features/member/pages/NotificationsPage.tsx,37,button,"if(await markRead(n.id))go(safeNavigationTarget(n.href), label:'Notifications' ) className=""min-w-0 flex-1 text-left""> n.text category(n.hre",onClick,PASS
+src/features/member/pages/NotificationsPage.tsx,37,Button,void acknowledge(n.id) > Acknowledge,onClick,PASS
+src/features/member/pages/NotificationsPage.tsx,37,button,"if(await markRead(n.id))go(safeNavigationTarget(n.href), label:'Notifications' ) className=""grid size-11 place-items-center rounded-xl hover",onClick,PASS
+src/features/member/pages/NotificationsPage.tsx,37,Button,Previous,onClick,PASS
+src/features/member/pages/NotificationsPage.tsx,37,Button,Next,onClick,PASS
+src/features/member/pages/OneToOneMeetingsPage.tsx,160,Button,setShow(v => !v) disabled= !connected.length > Schedule meeting,onClick,PASS
+src/features/member/pages/OneToOneMeetingsPage.tsx,168,Button,setView('action') >Review invitations,onClick,PASS
+src/features/member/pages/OneToOneMeetingsPage.tsx,176,Button,setView(key) > label key === 'action' && actionCount > 0 ? ` ($ actionCount )` : '',onClick,PASS
+src/features/member/pages/OneToOneMeetingsPage.tsx,221,Button,Send meeting request,submit,PASS
+src/features/member/pages/OneToOneMeetingsPage.tsx,221,Button,setShow(false) >Cancel,onClick,PASS
+src/features/member/pages/OneToOneMeetingsPage.tsx,232,button,"go(`/app/meetings/$ meeting.id `, label: 'One-to-One Meetings' ) className=""rounded-2xl border border-slate-200 bg-white p-5 text-left hover",onClick,PASS
+src/features/member/pages/OneToOneMeetingsPage.tsx,245,Button,setShow(true) >Schedule meeting,onClick,PASS
+src/features/member/pages/OneToOneMeetingsPage.tsx,245,Button,"go('/app/directory', label: 'Meetings' ) >Discover members",onClick,PASS
+src/features/member/pages/OneToOneMeetingsPage.tsx,247,Button,Previous,onClick,PASS
+src/features/member/pages/OneToOneMeetingsPage.tsx,247,Button,Next,onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,40,Button,back('/app/opportunities') >Return to marketplace,onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,93,Button,back(ownerView ? '/app/opportunities/my' : '/app/opportunities') >Back,onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,93,Button,"dispatch(toggleSavedOpportunity( memberId, opportunityId: opportunity.id )) > saved ? 'Remove saved' : 'Save opportunity'",onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,101,button,"business && go(`/app/businesses/$ business.id `, label: opportunity.title ) className=""mt-4 text-lg font-black text-sky-800 hover:underline""",onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,105,Button,"go(`/app/opportunities/$ opportunity.id /respond`, label: opportunity.title ) >Respond to Opportunity",onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,106,Button,"go('/app/responses/my', label: opportunity.title ) >View My Response",onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,107,Button,void messageOwner() > Converse with buyer,onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,108,Button,"go(`/app/one-to-one?member=$ owner.id &business=$ opportunity.businessId &opportunity=$ opportunity.id `, label: opportunity.title ) > Sched",onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,109,Button,setNoteOpen(true) > Add opportunity note,onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,110,Button,void changeOpportunityStatus('open') >Publish draft,onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,111,Button,void changeOpportunityStatus('closed') >Close opportunity,onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,128,Button,"go('/app/responses/my', label: opportunity.title ) >Track response",onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,135,Button,"void answer(q,answers[q.id]??'') >Answer",onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,136,Button,void ask() disabled= question.trim().length Ask question,onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,142,button,"supplier && go(`/app/businesses/$ supplier.id `, label: opportunity.title ) > supplier?.name ?? respondent?.name",onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,142,Button,"void updateResponse(r,'shortlisted') >Shortlist",onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,142,Button,void discuss(r) >Discuss,onClick,PASS
+src/features/member/pages/OpportunityDetailPage.tsx,142,Button,void selectSupplier(r) >Select supplier,onClick,PASS
+src/features/member/pages/OpportunityMarketplacePage.tsx,111,Button,"go('/app/opportunities/my', label: 'Opportunity Marketplace' ) >My Opportunities",onClick,PASS
+src/features/member/pages/OpportunityMarketplacePage.tsx,111,Button,"go('/app/responses/my', label: 'Opportunity Marketplace' ) >My Responses",onClick,PASS
+src/features/member/pages/OpportunityMarketplacePage.tsx,111,Button,"go('/app/opportunities/new', label: 'Opportunity Marketplace' ) > Post Opportunity",onClick,PASS
+src/features/member/pages/OpportunityMarketplacePage.tsx,124,Button,"set('saved', savedOnly ? '' : '1') > savedOnly ? 'Showing saved' : 'Show saved'",onClick,PASS
+src/features/member/pages/OpportunityMarketplacePage.tsx,126,Button,setSp(new URLSearchParams()) >Clear all,onClick,PASS
+src/features/member/pages/OpportunityMarketplacePage.tsx,131,Button,setSp(new URLSearchParams()) >Clear filters,onClick,PASS
+src/features/member/pages/OpportunityMarketplacePage.tsx,131,Button,Previous,onClick,PASS
+src/features/member/pages/OpportunityMarketplacePage.tsx,131,Button,Next,onClick,PASS
+src/features/member/pages/OpportunityResponsePage.tsx,44,Button,back('/app/opportunities') >Return to marketplace,onClick,PASS
+src/features/member/pages/OpportunityResponsePage.tsx,48,Button,"go('/app/responses/my', label: opportunity.title ) >View My Responses",onClick,PASS
+src/features/member/pages/OpportunityResponsePage.tsx,64,Button,back(`/app/opportunities/$ opportunity.id `) >Back to requirement,onClick,PASS
+src/features/member/pages/OpportunityResponsePage.tsx,74,Button,void submit() > command.busy?'Submitting…':'Submit Response',onClick,PASS
+src/features/member/pages/OpportunityResponsePage.tsx,74,Button,setReview(false) >Edit response,onClick,PASS
+src/features/member/pages/OpportunityResponsePage.tsx,74,Button,Save Draft,onClick,PASS
+src/features/member/pages/OpportunityResponsePage.tsx,88,Button,Review & Submit,submit,PASS
+src/features/member/pages/OpportunityResponsePage.tsx,88,Button,Save Draft,onClick,PASS
+src/features/member/pages/OpportunityResponsePage.tsx,88,Button,back(`/app/opportunities/$ opportunity.id `) >Cancel,onClick,PASS
+src/features/member/pages/PartnersPage.tsx,14,Button,"go(`/app/directory?q=$ encodeURIComponent(query) `, label:'Partners' ) >Discover in network",onClick,PASS
+src/features/member/pages/PhotoGalleryPage.tsx,126,button,"e.stopPropagation(); openZoom(item); className=""absolute bottom-3 right-3 flex items-center gap-1.5 rounded-xl bg-black/60 backdrop-blur-md ",onClick,PASS
+src/features/member/pages/PhotoGalleryPage.tsx,151,Button,"go(`/app/events/$ event.id `, label: 'Gallery' ) > View related event",onClick,PASS
+src/features/member/pages/PhotoGalleryPage.tsx,196,button,"setZoomLevel((z) => Math.min(2.5, z + 0.25)) className=""grid size-10 place-items-center rounded-xl bg-white/10 hover:bg-white/20 text-white ",onClick,PASS
+src/features/member/pages/PhotoGalleryPage.tsx,205,button,"setZoomLevel((z) => Math.max(0.75, z - 0.25)) className=""grid size-10 place-items-center rounded-xl bg-white/10 hover:bg-white/20 text-white",onClick,PASS
+src/features/member/pages/PhotoGalleryPage.tsx,214,button,"setZoomLevel(1) className=""grid size-10 place-items-center rounded-xl bg-white/10 hover:bg-white/20 text-white transition"" title=""Reset Zoom",onClick,PASS
+src/features/member/pages/PhotoGalleryPage.tsx,223,button,"setActiveItem(null) className=""ml-2 grid size-10 place-items-center rounded-xl bg-red-600/80 hover:bg-red-600 text-white transition"" title=""",onClick,PASS
+src/features/member/pages/PhotoGalleryPage.tsx,242,button,"setActiveItem(cards[activeIndex - 1]); setZoomLevel(1); className=""absolute left-4 top-1/2 -translate-y-1/2 z-20 grid size-12 place-items-ce",onClick,PASS
+src/features/member/pages/PhotoGalleryPage.tsx,281,button,"setActiveItem(cards[activeIndex + 1]); setZoomLevel(1); className=""absolute right-4 top-1/2 -translate-y-1/2 z-20 grid size-12 place-items-c",onClick,PASS
+src/features/member/pages/PrivacySettingsPage.tsx,28,Button,Save privacy settings,onClick,PASS
+src/features/member/pages/PromotionDetailPage.tsx,14,Button,"go('/app/home', label:'Promotion' ) >Return to Home",onClick,PASS
+src/features/member/pages/PromotionDetailPage.tsx,14,Button,"go('/app/home', label:'Promotion' ) >Return to Home",onClick,PASS
+src/features/member/pages/PromotionDetailPage.tsx,14,Button,"dispatch(toggleSavedBusiness( memberId,businessId:business.id )) > savedBusinesses(n,memberId).includes(business.id)?'Business Saved':'Save ",onClick,PASS
+src/features/member/pages/PromotionDetailPage.tsx,14,Button,"void recordEvent('businessView');go(`/app/businesses/$ business.id `, label:'Promotion' ) >View Business",onClick,PASS
+src/features/member/pages/PromotionDetailPage.tsx,14,Button,"void connect() className=""border-white/25 bg-white/10 text-white hover:bg-white/20"">Connect",onClick,PASS
+src/features/member/pages/PromotionDetailPage.tsx,14,Button,"void enquire() className=""border-white/25 bg-white/10 text-white hover:bg-white/20""> Converse",onClick,PASS
+src/features/member/pages/PromotionDetailPage.tsx,14,button,"go(`/app/businesses/$ business.id `, label:'Promotion' ) className=""mt-4 text-lg font-black hover:underline""> business.name",onClick,PASS
+src/features/member/pages/ResourcesPage.tsx,65,Button,"setTopic('All');setQ(''); className=""shrink-0 text-red-600 hover:text-red-700 hover:bg-red-50""> Clear",onClick,PASS
+src/features/member/pages/ResourcesPage.tsx,86,Button,"download(r) className=""shrink-0""> Download",onClick,PASS
+src/features/member/pages/ResourcesPage.tsx,91,Button,setTopic('All');setQ(''); >Show all resources,onClick,PASS
+src/features/member/pages/SavedItemsPage.tsx,8,Button,"go('/app/directory', label:'Saved' ) >Browse Directory",onClick,PASS
+src/features/member/pages/SavedItemsPage.tsx,8,Button,"go('/app/opportunities', label:'Saved' ) >Explore Opportunities",onClick,PASS
+src/features/member/pages/SecuritySettingsPage.tsx,15,Button,busy?'Updating…':'Update password',onClick,PASS
+src/features/member/pages/SecuritySettingsPage.tsx,17,Button,"dispatch(revokeOtherSessions( accountId:account.id,actor:account.name )) > Sign out other sessions",onClick,PASS
+src/features/member/pages/SecuritySettingsPage.tsx,17,Button,"dispatch(revokeSession( sessionId:s.id,accountId:account.id,actor:account.name )) >Sign out",onClick,PASS
+src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx,36,Button,setFiltersOpen(true) > Filters,onClick,PASS
+src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx,36,button,"set('view','grid') >",onClick,PASS
+src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx,36,button,"set('view','list') >",onClick,PASS
+src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx,36,button,"const next=new URLSearchParams();next.set('mode',mode);setParams(next) className=""min-h-9 px-2 text-sm font-bold text-red-700"">Clear All",onClick,PASS
+src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx,36,Button,"const next=new URLSearchParams();next.set('mode',mode);setParams(next) >Clear filters and start again",onClick,PASS
+src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx,36,Button,Previous,onClick,PASS
+src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx,36,Button,Next,onClick,PASS
+src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx,36,button,"setFiltersOpen(false) aria-label=""Close directory filters"">",onClick,PASS
+src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx,36,Button,setFiltersOpen(false) >Show rows.length results,onClick,PASS
+src/features/member/pages/ThankYouNotesPage.tsx,45,Button,"go(`/app/meetings/$ selected.id `, label: 'Follow-up' ) >View meeting",onClick,PASS
+src/features/member/pages/ThankYouNotesPage.tsx,60,Button,Send follow-up note,submit,PASS
+src/features/member/pages/ThankYouNotesPage.tsx,63,Button,"go('/app/one-to-one', label: 'Follow-up' ) >View meetings",onClick,PASS
+src/features/member/pages/ThankYouNotesPage.tsx,69,Button,"go(`/app/meetings/$ note.meetingId `, label: 'Follow-up' ) >View meeting",onClick,PASS
+src/features/member/pages/ThankYouNotesPage.tsx,69,Button,"void command.execute( domain:'member',policyId:'thank-you.acknowledge',command:'thank-you.acknowledge',aggregateType:'ThankYouNote',aggregat",onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,34,Button,"go('/app/one-to-one?view=completed', label:'Business Outcomes' ) >Record from Meeting",onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,34,Button,"go('/app/references?tab=action-needed', label:'Business Outcomes' ) >Review References",onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,36,Button,Clear Filters,onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,38,button,"buyer&&go(`/app/businesses/$ buyer.id `, label:'Business Outcomes' ) > buyer?.name??'Buyer'",onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,38,button,"counter&&go(`/app/businesses/$ counter.id `, label:'Business Outcomes' ) > counter?.name??'Counterparty'",onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,38,Button,"go(`/app/opportunities/$ opportunity.id `, label:'Business Outcomes' ) >Opportunity: opportunity.title",onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,38,Button,"go(`/app/references?reference=$ reference.id `, label:'Business Outcomes' ) >Linked Reference",onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,38,Button,"setNoteTarget( transaction:t,targetMemberId,businessId:counterpartyBusinessId ) >Add transaction note",onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,38,Button,"void changeStatus(t,status) > status==='won'?'Mark Won':status==='closed-without-transaction'?'Close Without Business':status==='correction-",onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,38,Button,"go('/app/opportunities', label:'Business Outcomes' ) >Explore Opportunities",onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,38,Button,Previous,onClick,PASS
+src/features/member/pages/TransactionsPage.tsx,38,Button,Next,onClick,PASS
+src/features/network/components/NetworkUI.tsx,14,button,body View details,onClick,PASS
+src/features/network/components/NetworkUI.tsx,18,button,"go(`/app/businesses/$ business.id `, label:'Discovery' ) className=""overflow-hidden rounded-xl"">",onClick,PASS
+src/features/network/components/NetworkUI.tsx,18,button,"go(`/app/businesses/$ business.id `, label:'Discovery' ) className=""text-left text-lg font-black leading-6 text-[var(--navy-950)] hover:text",onClick,PASS
+src/features/network/components/NetworkUI.tsx,18,button,,onClick,PASS
+src/features/network/components/NetworkUI.tsx,18,button,"go(`/app/businesses/$ business.id `, label:'Discovery' ) className=""mt-auto inline-flex min-h-11 items-center gap-1 text-base font-bold text",onClick,PASS
+src/features/network/components/NetworkUI.tsx,19,button,"go(`/app/members/$ member.id `, label:'Discovery' ) className=""text-left text-lg font-black leading-6 text-[var(--navy-950)] hover:text-sky-",onClick,PASS
+src/features/network/components/NetworkUI.tsx,19,Button,"go(`/app/members/$ member.id `, label:'Discovery' ) className=""flex-1"">View Profile",onClick,PASS
+src/features/network/components/NetworkUI.tsx,19,Button,connectionLabel??'Connect',onClick,PASS
+src/features/network/components/NetworkUI.tsx,20,button,"go(`/app/opportunities/$ opportunity.id `, label:'Discovery' ) className=""text-left text-lg font-black leading-6 text-[var(--navy-950)] hove",onClick,PASS
+src/features/network/components/NetworkUI.tsx,20,button,,onClick,PASS
+src/features/network/components/NetworkUI.tsx,20,button,"go(`/app/opportunities/$ opportunity.id `, label:'Discovery' ) className=""min-h-10 font-bold text-sky-700"">View requirement",onClick,PASS
+src/features/network/components/NetworkUI.tsx,21,button,"go(`/app/events/$ event.id `, label:'Community' ) className=""text-left text-lg font-black leading-6 text-[var(--navy-950)] hover:text-sky-70",onClick,PASS
+src/features/network/components/NetworkUI.tsx,21,Button,"go(`/app/events/$ event.id `, label:'Community' ) >Details",onClick,PASS
+src/features/network/components/NetworkUI.tsx,21,Button,attending?'Cancel Registration':'Register',onClick,PASS
+src/features/platform-admin/access-control/OrganisationHierarchyPageV6.tsx,11,Button,edit.id?'Create governed revision':'Create governed draft',onClick,PASS
+src/features/platform-admin/access-control/OrganisationHierarchyPageV6.tsx,11,Button,setEdit(empty());setErrors([]) >Cancel revision,onClick,PASS
+src/features/platform-admin/access-control/OrganisationHierarchyPageV6.tsx,11,Button,revise(u) >Create revision,onClick,PASS
+src/features/platform-admin/access-control/RACIPageV6.tsx,27,Button,New RACI rule,onClick,PASS
+src/features/platform-admin/access-control/RACIPageV6.tsx,28,Button,setEdit(null);setErrors([]) >Cancel,onClick,PASS
+src/features/platform-admin/access-control/RACIPageV6.tsx,28,Button,Create governed cp.raci.some(r=>r.id===edit.id)?'revision':'draft',onClick,PASS
+src/features/platform-admin/access-control/RACIPageV6.tsx,29,Button,revise(r) >Revise,onClick,PASS
+src/features/platform-admin/access-control/RBACPageV6.tsx,52,Button,"setPermEdit( ...p,version:p.version+1 );setPermReason(`Revise $ p.code `);setErrors([]) >Revise",onClick,PASS
+src/features/platform-admin/access-control/RBACPageV6.tsx,53,Button,"setPolicyEdit( ...r,roleCodes:[...r.roleCodes],explicitUnitIds:[...(r.explicitUnitIds??[])],version:r.version+1 );setPolicyReason(`Revise $ ",onClick,PASS
+src/features/platform-admin/access-control/RBACPageV6.tsx,56,Button,setPermEdit(null);setErrors([]) >Cancel,onClick,PASS
+src/features/platform-admin/access-control/RBACPageV6.tsx,56,Button,Create governed permission revision,onClick,PASS
+src/features/platform-admin/access-control/RBACPageV6.tsx,57,Button,setPolicyEdit(null);setErrors([]) >Cancel,onClick,PASS
+src/features/platform-admin/access-control/RBACPageV6.tsx,57,Button,Create governed policy revision,onClick,PASS
+src/features/platform-admin/access-control/RoleCatalogueAssignmentsPageV6.tsx,11,Button,New role definition,onClick,PASS
+src/features/platform-admin/access-control/RoleCatalogueAssignmentsPageV6.tsx,11,Button,Create governed cp.roles.some(r=>r.id===roleEdit.id)?'revision':'draft',onClick,PASS
+src/features/platform-admin/access-control/RoleCatalogueAssignmentsPageV6.tsx,11,Button,setRoleEdit(null) >Cancel,onClick,PASS
+src/features/platform-admin/access-control/RoleCatalogueAssignmentsPageV6.tsx,11,Button,reviseRole(r) >Revise,onClick,PASS
+src/features/platform-admin/access-control/RoleCatalogueAssignmentsPageV6.tsx,11,Button,Create assignment,onClick,PASS
+src/features/platform-admin/access-control/RoleCatalogueAssignmentsPageV6.tsx,11,Button,"setHandover( assignment:r,status:handoverTargets(r.handoverStatus)[0],successor:r.successor??'' ) >Manage handover",onClick,PASS
+src/features/platform-admin/access-control/RoleCatalogueAssignmentsPageV6.tsx,11,Button,setRevoke(r) >Revoke,onClick,PASS
+src/features/platform-admin/access-control/RoleCatalogueAssignmentsPageV6.tsx,11,Button,setHandover(null) >Cancel,onClick,PASS
+src/features/platform-admin/access-control/RoleCatalogueAssignmentsPageV6.tsx,11,Button,"dispatch(updateHandover( id:handover.assignment.id,status:handover.status,successor:handover.successor.trim()||undefined,actor ));setHandove",onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,91,Button,New form draft,onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,95,button,openSaved(d) > d.definition.name||'Untitled form' d.definition.code||'No code' · d.definition.purpose · v d.definition.version d.savedAt?`Sa,onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,95,Button,"setConfirm( mode:'delete-draft',draftId:d.id ) >Discard draft",onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,96,Button,startRevision(f) >Create new version,onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,98,Button,New form draft,onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,99,Button,Save Draft,onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,99,Button,setPreviewOpen(x=>!x) > previewOpen?'Hide preview':'Preview Form',onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,99,Button,Close editor,onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,101,Button,Add field,onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,101,Button,setFieldEditor(clone(field)) >Edit,onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,101,Button,"moveField(field.id,-1) >Move up",onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,101,Button,"moveField(field.id,1) >Move down",onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,101,Button,duplicateField(field) >Duplicate,onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,101,Button,"setConfirm( mode:'delete-field',fieldId:field.id ) >Delete",onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,101,Button,Add first field,onClick,PASS
+src/features/platform-admin/form-builder/FormBuilderPageV6.tsx,103,Button,Prepare Release,onClick,PASS
+src/features/platform-admin/form-builder/FormFieldEditor.tsx,17,Button,Close,onClick,PASS
+src/features/platform-admin/form-builder/FormFieldEditor.tsx,17,Button,0 >Save field,onClick,PASS
+src/features/platform-admin/form-builder/FormFieldEditor.tsx,17,Button,Cancel,onClick,PASS
+src/features/platform-admin/identity/IdentityAdministrationPageV6.tsx,17,Button,"setPending( record:i,kind:'revoke-session',sessionId:s.id ) >Revoke",onClick,PASS
+src/features/platform-admin/identity/IdentityAdministrationPageV6.tsx,17,Button,"setPending( record:i,kind:'status',nextStatus:i.status==='Suspended'?'Active':'Suspended' ) > i.status==='Suspended'?'Reactivate':'Suspend'",onClick,PASS
+src/features/platform-admin/identity/IdentityAdministrationPageV6.tsx,17,Button,"setPending( record:i,kind:'mfa',nextMfa:!i.mfaRequired ) > i.mfaRequired?'Make MFA optional':'Require MFA'",onClick,PASS
+src/features/platform-admin/identity/IdentityAdministrationPageV6.tsx,17,Button,"setPending( record:i,kind:'revoke-others' ) >Revoke other sessions",onClick,PASS
+src/features/platform-admin/operations/ImportCentrePageV6.tsx,23,Button,Stage reference batch,onClick,PASS
+src/features/platform-admin/operations/ImportCentrePageV6.tsx,25,Button,"d(validateImport( id:b.id,actor )) >Validate",onClick,PASS
+src/features/platform-admin/operations/ImportCentrePageV6.tsx,25,Button,"d(submitImportForCheck( id:b.id,actor )) >Submit maker",onClick,PASS
+src/features/platform-admin/operations/ImportCentrePageV6.tsx,25,Button,"d(approveImport( id:b.id,actor )) >Checker approve",onClick,PASS
+src/features/platform-admin/operations/ImportCentrePageV6.tsx,25,Button,"d(postImport( id:b.id,actor )) >Post",onClick,PASS
+src/features/platform-admin/operations/ImportCentrePageV6.tsx,25,Button,"d(reconcileImport( id:b.id,actor )) >Reconcile",onClick,PASS
+src/features/platform-admin/operations/ImportCentrePageV6.tsx,25,Button,setReverse(b.id) >Reverse,onClick,PASS
+src/features/platform-admin/operations/IntegrationAdministrationPageV6.tsx,4,Button,health(i) >Safe health test,onClick,PASS
+src/features/platform-admin/operations/IntegrationAdministrationPageV6.tsx,4,Button,setEdit(structuredClone(i)) >Create configuration revision,onClick,PASS
+src/features/platform-admin/operations/IntegrationAdministrationPageV6.tsx,4,Button,Create governed revision,onClick,PASS
+src/features/platform-admin/operations/IntegrationAdministrationPageV6.tsx,4,Button,setEdit(null) >Cancel,onClick,PASS
+src/features/platform-admin/operations/IntegrationAdministrationPageV6.tsx,4,Button,setHook(structuredClone(w)) >Revise webhook,onClick,PASS
+src/features/platform-admin/operations/IntegrationAdministrationPageV6.tsx,4,Button,Create governed webhook revision,onClick,PASS
+src/features/platform-admin/operations/IntegrationAdministrationPageV6.tsx,4,Button,setHook(null) >Cancel,onClick,PASS
+src/features/platform-admin/operations/NotificationAdministrationPageV6.tsx,5,Button,setEdit(structuredClone(t)) >Create next version,onClick,PASS
+src/features/platform-admin/operations/NotificationAdministrationPageV6.tsx,5,Button,0 onClick= saveTemplate >Create governed revision,disabled-only,PASS
+src/features/platform-admin/operations/NotificationAdministrationPageV6.tsx,5,Button,setEdit(null) >Cancel,onClick,PASS
+src/features/platform-admin/operations/NotificationAdministrationPageV6.tsx,5,Button,setRoute(structuredClone(r)) >Revise route,onClick,PASS
+src/features/platform-admin/operations/NotificationAdministrationPageV6.tsx,5,Button,0 onClick= saveRoute >Create governed route revision,disabled-only,PASS
+src/features/platform-admin/operations/NotificationAdministrationPageV6.tsx,5,Button,setRoute(null) >Cancel,onClick,PASS
+src/features/platform-admin/pages/AuditExplorerPage.tsx,13,button,"go(resourceTarget(e.resource,e.recordId)!, label:'Audit source record' ) >Open affected record",onClick,PASS
+src/features/platform-admin/pages/DataQualityCentrePage.tsx,17,button,"go(resourceTarget(x.entity,x.recordId)!, label:'Data-quality source record' ) >Open source record",onClick,PASS
+src/features/platform-admin/pages/DataQualityCentrePage.tsx,17,Button,"setDialog( id:x.id,mode:'assign' ) > x.owner?'Reassign':'Assign'",onClick,PASS
+src/features/platform-admin/pages/DataQualityCentrePage.tsx,17,Button,"setDialog( id:x.id,mode:'resolve' ) >Propose resolution",onClick,PASS
+src/features/platform-admin/pages/DataQualityCentrePage.tsx,17,Button,"dispatch(applyDataQualityDecision( id:x.id,approved:true,actor )) >Approve resolution",onClick,PASS
+src/features/platform-admin/pages/DataQualityCentrePage.tsx,17,Button,"dispatch(applyDataQualityDecision( id:x.id,approved:false,actor )) >Reject resolution",onClick,PASS
+src/features/platform-admin/pages/DataQualityCentrePage.tsx,18,Button,"newFindings.forEach(f=>dispatch(registerDataQualityIssue( ruleCode:f.ruleCode,entity:f.entity,recordId:f.recordId,issue:f.message,severity:f",onClick,PASS
+src/features/platform-admin/pages/ModerationQueuePage.tsx,16,button,"go(resourceTarget(c.resource,c.recordId)!, label:'Moderation source record' ) >Open governed record",onClick,PASS
+src/features/platform-admin/pages/ModerationQueuePage.tsx,16,Button,"dispatch(claimModerationCase( id:c.id,actor )) >Claim",onClick,PASS
+src/features/platform-admin/pages/ModerationQueuePage.tsx,16,Button,"setPending( id:c.id,resolution:'Verified',title:`Verify certification $ c.recordId ` ) >Verify evidence",onClick,PASS
+src/features/platform-admin/pages/ModerationQueuePage.tsx,16,Button,"setPending( id:c.id,resolution:'Rejected',title:`Reject certification $ c.recordId ` ) >Reject evidence",onClick,PASS
+src/features/platform-admin/pages/ModerationQueuePage.tsx,16,Button,"setPending( id:c.id,resolution:'Remediated',title:`Resolve $ c.resource case` ) >Resolve",onClick,PASS
+src/features/platform-admin/pages/ModerationQueuePage.tsx,16,Button,"setPending( id:c.id,resolution:'No Action',title:`Dismiss $ c.resource case` ) >Dismiss",onClick,PASS
+src/features/platform-admin/policies/PromotionPolicyPageV6.tsx,13,Button,setEdit(structuredClone(p));setReason(`Revise $ p.name `) >Create policy revision,onClick,PASS
+src/features/platform-admin/policies/PromotionPolicyPageV6.tsx,13,Button,setEdit(null);setReason('') >Close,onClick,PASS
+src/features/platform-admin/policies/PromotionPolicyPageV6.tsx,13,Button,0 onClick= save >Create governed revision,disabled-only,PASS
+src/features/platform-admin/policies/PromotionPolicyPageV6.tsx,13,Button,setEdit(null);setReason('') >Cancel,onClick,PASS
+src/features/platform-admin/settings/PlatformSettingsPageV6.tsx,21,Button,open(s) >Propose change,onClick,PASS
+src/features/platform-admin/settings/PlatformSettingsPageV6.tsx,22,Button,setEdit(null) >Cancel,onClick,PASS
+src/features/platform-admin/settings/PlatformSettingsPageV6.tsx,22,Button,Create governed setting draft,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/TaxonomyPageV6.tsx,34,Button,Create taxonomy term,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/TaxonomyPageV6.tsx,35,Button,setEdit(null) >Cancel,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/TaxonomyPageV6.tsx,35,Button,Prepare governed draft,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/TaxonomyPageV6.tsx,38,Button,openRevision(t) >Create new version,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/TaxonomyPageV6.tsx,38,Button,supersede(t) >Supersede,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,59,Button,Create workflow draft,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,60,Button,setEditor(null) >Cancel,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,60,Button,Prepare governed draft,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,63,Button,setTransition(blankTransition(editor.draft.states));setTransitionIndex(null) >Add transition,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,63,Button,setTransition(structuredClone(t));setTransitionIndex(i) >Edit,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,63,Button,removeTransition(i) >Delete,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,64,Button,Save transition,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,64,Button,setTransition(null);setTransitionIndex(null) >Cancel,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,65,Button,openRevision(w) >Create new version,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,66,Button,setSlaEdit(structuredClone(p)) >Revise,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,66,Button,setMcEdit(structuredClone(p)) >Revise,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,67,Button,"dispatch(proposeConfigurationChange( artifactType:'SLA Policy',artifactId:slaEdit.id,draft: ...slaEdit,version:slaEdit.version+1 ,actor,chan",onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,67,Button,setSlaEdit(null) >Cancel,onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,68,Button,"dispatch(proposeConfigurationChange( artifactType:'Maker Checker',artifactId:mcEdit.id,draft: ...mcEdit,version:mcEdit.version+1 ,actor,chan",onClick,PASS
+src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx,68,Button,setMcEdit(null) >Cancel,onClick,PASS
+src/features/public/components/PublicShell.tsx,3,Link,Home,link,PASS
+src/features/public/components/PublicShell.tsx,3,Link,Events,link,PASS
+src/features/public/components/PublicShell.tsx,3,Link,News,link,PASS
+src/features/public/components/PublicShell.tsx,3,Link,Visitor registration,link,PASS
+src/features/public/components/PublicShell.tsx,3,Link,Privacy,link,PASS
+src/features/public/components/PublicShell.tsx,3,Link,Terms,link,PASS
+src/features/public/pages/ActivationPage.tsx,5,LinkButton,Continue to sign in,link,PASS
+src/features/public/pages/ForgotAccessPage.tsx,8,Button,busy?'Sending…':'Send recovery code',submit,PASS
+src/features/public/pages/ForgotAccessPage.tsx,8,Button,busy?'Resetting…':'Reset password',submit,PASS
+src/features/public/pages/ForgotAccessPage.tsx,8,Link,Back to sign in,link,PASS
+src/features/public/pages/LoginPage.tsx,56,Link,Forgot access?,link,PASS
+src/features/public/pages/LoginPage.tsx,57,Link,New visitor registration,link,PASS
+src/features/public/pages/OtpVerificationPage.tsx,13,Button,busy?'Verifying…':'Verify and continue',submit,PASS
+src/features/public/pages/PublicEventDetailPage.tsx,5,LinkButton,Register interest,link,PASS
+src/features/public/pages/PublicEventDetailPage.tsx,5,LinkButton,Member sign in,link,PASS
+src/features/public/pages/PublicEventsPage.tsx,4,Link,Event details →,link,PASS
+src/features/public/pages/PublicLandingPage.tsx,73,LinkButton,Member sign in,link,PASS
+src/features/public/pages/PublicLandingPage.tsx,76,LinkButton,Register as visitor,link,PASS
+src/features/public/pages/PublicLandingPage.tsx,202,LinkButton,View public events,link,PASS
+src/features/public/pages/PublicLandingPage.tsx,203,LinkButton,Read network news,link,PASS
+src/features/public/pages/PublicLandingPage.tsx,212,LinkButton,Begin visitor registration,link,PASS
+src/features/public/pages/PublicNewsPage.tsx,4,Link,Read →,link,PASS
+src/features/public/pages/VisitorRegistrationPage.tsx,31,Button,Save for this session,onClick,PASS
+src/features/public/pages/VisitorRegistrationPage.tsx,31,Button,busy?'Submitting…':'Verify and submit',submit,PASS
+src/features/public/pages/VisitorRegistrationSuccessPage.tsx,5,LinkButton,Return home,link,PASS
+src/features/public/pages/VisitorRegistrationSuccessPage.tsx,5,LinkButton,View public events,link,PASS
+src/features/public/pages/VisitorVerificationPage.tsx,10,Button,busy?'Verifying…':'Verify registration',submit,PASS
+src/features/workspaces/pages/WorkspaceHubPage.tsx,75,button,dispatch(signOut()); navigate('/login'); > Sign out,onClick,PASS
+src/features/workspaces/pages/WorkspaceHubPage.tsx,96,button,"choose(workspace) className=""group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 text-left shadow-sm transition ",onClick,PASS
+src/pages/AccessStatusPage.tsx,4,LinkButton,Return to sign in,link,PASS
+src/pages/NotFoundPage.tsx,1,Button,history.back() >Go back,onClick,PASS
+src/pages/NotFoundPage.tsx,1,Link,Sign in,link,PASS
+src/pages/UnauthorizedPage.tsx,1,Button,n('/workspace') >Workspace Hub,onClick,PASS
+src/pages/UnauthorizedPage.tsx,1,Button,n(-1) >Back,onClick,PASS

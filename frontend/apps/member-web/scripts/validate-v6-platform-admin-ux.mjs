@@ -1,0 +1,15 @@
+import fs from 'node:fs';import path from 'node:path';
+const root=process.cwd();const read=p=>fs.readFileSync(path.join(root,p),'utf8');let passed=0;const failures=[];const check=(n,o)=>{if(o){passed++;console.log(`PASS: ${n}`)}else{failures.push(n);console.error(`FAIL: ${n}`)}};
+const dialog=read('src/components/ui/ActionDialog.tsx');const giant=read('src/features/control-plane/pages/PlatformAdminV6Pages.tsx');
+const platformDir=path.join(root,'src/features/platform-admin');const files=[];const walk=d=>{for(const e of fs.readdirSync(d,{withFileTypes:true})){const p=path.join(d,e.name);if(e.isDirectory())walk(p);else if(/\.tsx?$/.test(e.name))files.push(p)}};walk(platformDir);const source=files.map(f=>fs.readFileSync(f,'utf8')).join('\n');
+check('ActionDialog traps focus and handles Escape',dialog.includes("e.key==='Escape'")&&dialog.includes("e.key!=='Tab'")&&dialog.includes('previous?.focus?.()'));
+check('ActionDialog is short-viewport safe',dialog.includes('max-h-[calc(100dvh-2rem)]')&&dialog.includes('overflow-y-auto')&&dialog.includes('sticky bottom-0'));
+check('Platform Admin has no native prompt/confirm',!source.includes('window.prompt(')&&!source.includes('window.confirm('));
+check('Platform Admin has no empty click handlers',!source.match(/onClick=\{\(\)=>\{\s*\}\}/));
+check('Moved P05/P06/P07 implementations are not duplicated in giant page',!['WorkflowDesignerV6','TaxonomyV6','ImportCentreV6','IntegrationAdministrationV6','NotificationAdministrationV6','PlatformSettingsV6'].some(x=>giant.includes(`export function ${x}`)));
+check('Form Builder uses responsive grids/wrapping',read('src/features/platform-admin/form-builder/FormBuilderPageV6.tsx').includes('md:grid-cols')&&read('src/features/platform-admin/form-builder/FormBuilderPageV6.tsx').includes('flex-wrap'));
+check('Access-control pages use responsive layout primitives', ['OrganisationHierarchyPageV6.tsx','RoleCatalogueAssignmentsPageV6.tsx','RBACPageV6.tsx','RACIPageV6.tsx'].every(f=>{const s=read(`src/features/platform-admin/access-control/${f}`);return s.includes('grid')&&s.includes('flex')}));
+check('Workflow/Taxonomy pages wrap action rows',read('src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx').includes('flex-wrap')&&read('src/features/platform-admin/workflow-taxonomy/TaxonomyPageV6.tsx').includes('flex-wrap'));
+check('Operations pages constrain long content',read('src/features/platform-admin/operations/IntegrationAdministrationPageV6.tsx').includes('break-words')&&read('src/features/platform-admin/operations/NotificationAdministrationPageV6.tsx').includes('break-words'));
+check('Settings release filters are responsive',read('src/features/platform-admin/settings/PlatformSettingsPageV6.tsx').includes('sm:grid-cols-3')&&read('src/features/platform-admin/settings/PlatformSettingsPageV6.tsx').includes('lg:flex-row'));
+console.log(`\nPlatform Admin UX source audit: ${passed} groups passed.`);if(failures.length){console.error(failures.map(x=>`- ${x}`).join('\n'));process.exit(1)}console.log('PASS: shared dialog and Platform Admin source patterns satisfy the P08 responsive/accessibility hardening contract.');

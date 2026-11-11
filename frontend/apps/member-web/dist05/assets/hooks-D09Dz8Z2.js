@@ -1,0 +1,1 @@
+import{h as s,c0 as i,bY as o,bZ as a,cu as u}from"./index-PjpCc3ra.js";const l=(t,n)=>s(e=>u(e,t,n));function f(t,n){return s(e=>i({account:e.auth.account,identity:a(e).find(c=>c.accountId===e.auth.account?.id),enterpriseAssignments:o(e),state:e.controlPlane,permissionCode:t,unitName:n}))}export{l as a,f as u};

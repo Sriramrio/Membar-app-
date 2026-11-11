@@ -1,0 +1,58 @@
+import type {Actor,OrgScope,OrgUnit,Task,ActionItem,Approval,Conversation,Message,MemberSummary,Committee,Meeting,MemberCase,Programme,EventItem,SupportRequest,Escalation,Handoff,AuditEvent,RiskItem,IssueItem,DecisionItem,JobItem,DocumentItem,GoalItem,OperationalPerson,NotificationItem,AlertItem,CommunicationItem,FeedbackItem,DataQualityFinding,OperationalExceptionItem,OrganisationRoleAssignment,ChapterCoordinatorResponsibility} from '@/domain/types';
+
+export const PREVIEW_SCOPE:OrgScope={level:'CHAPTER',id:'ch-chennai-central',name:'Chennai Central Chapter'};
+const REG:OrgScope={level:'REGION',id:'reg-chennai',name:'Chennai Region'};
+const ST:OrgScope={level:'STATE',id:'st-tn',name:'Tamil Nadu'};
+const units:OrgUnit[]=[
+  {id:PREVIEW_SCOPE.id,name:PREVIEW_SCOPE.name,level:'CHAPTER',parentId:REG.id,status:'Active',health:82,memberCount:126},
+  {id:'ch-chennai-south',name:'Chennai South Chapter',level:'CHAPTER',parentId:REG.id,status:'Active',health:73,memberCount:98},
+  {id:REG.id,name:REG.name,level:'REGION',parentId:ST.id,status:'Active',health:79,memberCount:512},
+  {id:ST.id,name:ST.name,level:'STATE',status:'Active',health:81,memberCount:4230},
+  {id:'nat-india',name:'India National',level:'NATIONAL',status:'Active',health:84,memberCount:32000}
+];
+export const PREVIEW_ACTOR:Actor={id:'u-sec-01',name:'Arun Kumar',position:'Chapter Secretary',scope:PREVIEW_SCOPE,effectiveFrom:'2026-04-01'};
+const now='2026-10-05T05:00:00Z';
+export const PREVIEW_STATE={
+  tasks:[
+    {id:'task-1',title:'Close September MC actions',description:'Follow up open items from the previous MC.',owner:'Arun Kumar',sourceType:'MOM',sourceId:'mom-9',due:'2026-10-05',priority:'HIGH',status:'IN_PROGRESS',version:2,scope:PREVIEW_SCOPE,timeline:[]} as Task,
+    {id:'task-2',title:'Confirm member orientation venue',description:'Confirm venue and capacity.',owner:'Meera S',sourceType:'EVENT',sourceId:'event-2',due:'2026-10-07',priority:'MEDIUM',status:'TODO',version:1,scope:PREVIEW_SCOPE,timeline:[]} as Task
+  ],
+  actions:[{id:'act-1',title:'Follow up inactive members',owner:'Membership Committee',sourceType:'CHAPTER_REVIEW',sourceId:PREVIEW_SCOPE.id,due:'2026-10-08',status:'TODO',priority:'HIGH',scope:PREVIEW_SCOPE,version:1} as ActionItem],
+  approvals:[{id:'ap-1',subject:'October MC MoM',requester:'Chapter Secretary',sourceType:'MOM',sourceId:'mom-10',due:'2026-10-06',status:'PENDING',risk:'Low',scope:PREVIEW_SCOPE,version:1} as Approval],
+  conversations:[
+    {id:'conv-mc',type:'CHAPTER_MC',name:'Chennai Central MC',participants:['Arun Kumar','Meera S','Ravi P'],unread:3,muted:false,lastActivity:now},
+    {id:'conv-membership',type:'WORKING_COMMITTEE',name:'Membership Working Committee',participants:['Arun Kumar','Vijay R'],unread:1,muted:false,lastActivity:now}
+  ] as Conversation[],
+  messages:[{id:'msg-1',conversationId:'conv-mc',sender:'Meera S',senderRole:'Chapter President',text:'Please add the pending member orientation venue to the next MC agenda.',createdAt:now,status:'DELIVERED'} as Message],
+  members:[
+    {id:'m-1',name:'Vijay R',business:'VR Industrial Services',specialisation:'Industrial Automation',chapter:PREVIEW_SCOPE.name,baseChapterId:PREVIEW_SCOPE.id,status:'Active',engagement:78,duesStatus:'Paid'},
+    {id:'m-2',name:'Lakshmi P',business:'LP Foods',specialisation:'Corporate Catering',chapter:PREVIEW_SCOPE.name,baseChapterId:PREVIEW_SCOPE.id,status:'Renewal Due',engagement:44,duesStatus:'Due'}
+  ] as MemberSummary[],
+  units,
+  committees:[{id:'com-1',name:'Membership Working Committee',mandate:'Grow and engage quality membership.',convener:'Vijay R',members:['Vijay R','Arun Kumar'],status:'Active',termEnd:'2027-03-31',scope:PREVIEW_SCOPE}] as Committee[],
+  meetings:[{id:'meet-1',title:'October Chapter MC',type:'CHAPTER_MC',scope:PREVIEW_SCOPE,scheduledAt:'2026-10-10T13:30:00Z',status:'Agenda Open',participants:['Arun Kumar','Meera S','Ravi P'],quorumRequired:3,agenda:['Previous open actions','Membership','Events','Working Committee updates'],version:1}] as Meeting[],
+  cases:[{id:'case-1',memberId:'m-2',type:'Renewal',title:'Renewal follow-up',owner:'Arun Kumar',status:'Information Required',priority:'MEDIUM',scope:PREVIEW_SCOPE,internalNote:'Dues confirmation required.',memberMessage:'Please share your renewal payment reference.',version:1}] as MemberCase[],
+  programmes:[{id:'prog-1',name:'Member Engagement Sprint',owner:'Membership Committee',status:'Active',progress:58,nextMilestone:'Call inactive members',scope:PREVIEW_SCOPE,risk:'Medium'}] as Programme[],
+  events:[{id:'event-2',name:'New Member Orientation',date:'2026-10-18',status:'Planned',attendance:0,owner:'Membership Committee',scope:PREVIEW_SCOPE}] as EventItem[],
+  support:[] as SupportRequest[],
+  escalations:[] as Escalation[],
+  handoffs:[] as Handoff[],
+  operationalExceptions:[{id:'exc-1',title:'Event closure timeline extension',requester:'Events Committee',status:'Review',reason:'Venue invoice and attendance reconciliation are pending.',scope:PREVIEW_SCOPE,effectiveTo:'2026-10-20',version:1}] as OperationalExceptionItem[],
+  risks:[{id:'risk-1',title:'Member engagement decline',owner:'Membership Committee',status:'Monitoring',impact:'MEDIUM',likelihood:'MEDIUM',scope:PREVIEW_SCOPE,reviewDate:'2026-10-15',version:1}] as RiskItem[],
+  issues:[{id:'issue-1',title:'Orientation venue confirmation pending',owner:'Events Committee',status:'Open',impact:'MEDIUM',scope:PREVIEW_SCOPE,sourceType:'EVENT',sourceId:'event-2',version:1}] as IssueItem[],
+  decisions:[{id:'dec-1',subject:'Run October new-member orientation',authority:'Chapter MC',sourceType:'MEETING',sourceId:'meet-1',reason:'Improve onboarding completion and engagement.',effectiveDate:'2026-10-05',status:'Effective',scope:PREVIEW_SCOPE,version:1}] as DecisionItem[],
+  jobs:[{id:'job-1',kind:'REPORT',title:'Chapter Health Report',status:'Running',requestedBy:PREVIEW_ACTOR.name,scope:PREVIEW_SCOPE,requestedAt:now,progress:65},{id:'job-2',kind:'EXPORT',title:'Member operational export',status:'Completed',requestedBy:PREVIEW_ACTOR.name,scope:PREVIEW_SCOPE,requestedAt:now,progress:100}] as JobItem[],
+  documents:[{id:'doc-1',title:'How to conduct an MC meeting',type:'SOP',version:'v3',scope:PREVIEW_SCOPE,status:'Effective',owner:'Chapter Operations',visibility:'INTERNAL'},{id:'doc-2',title:'Membership Working Committee Charter',type:'Charter',version:'v2',scope:PREVIEW_SCOPE,status:'Effective',owner:'Membership Committee',visibility:'INTERNAL'},{id:'doc-3',title:'Event closure checklist',type:'Template',version:'v4',scope:PREVIEW_SCOPE,status:'Effective',owner:'Events Committee',visibility:'INTERNAL'},{id:'doc-4',title:'Role handover checklist',type:'Template',version:'v1',scope:PREVIEW_SCOPE,status:'Effective',owner:'Chapter Operations',visibility:'INTERNAL'}] as DocumentItem[],
+  people:[{id:'p-1',name:'Meera S',position:'Chapter President',scope:PREVIEW_SCOPE,effectiveFrom:'2026-04-01',effectiveTo:'2027-03-31',converseConversationId:'conv-mc'},{id:'p-2',name:PREVIEW_ACTOR.name,position:PREVIEW_ACTOR.position,scope:PREVIEW_SCOPE,effectiveFrom:PREVIEW_ACTOR.effectiveFrom,converseConversationId:'conv-mc'},{id:'p-3',name:'Ravi P',position:'Treasurer',scope:PREVIEW_SCOPE,effectiveFrom:'2026-04-01',effectiveTo:'2027-03-31',converseConversationId:'conv-mc'},{id:'p-4',name:'Vijay R',position:'Membership Committee Convener',scope:PREVIEW_SCOPE,effectiveFrom:'2026-04-01',effectiveTo:'2027-03-31',converseConversationId:'conv-membership'}] as OperationalPerson[],
+  goals:[{id:'goal-1',title:'Membership Growth',status:'Active',progress:68,owner:'Membership Committee',scope:PREVIEW_SCOPE,reviewCadence:'Monthly'},{id:'goal-2',title:'Member Engagement',status:'At Risk',progress:51,owner:'Chapter MC',scope:PREVIEW_SCOPE,reviewCadence:'Monthly'},{id:'goal-3',title:'Networking Outcomes',status:'Active',progress:72,owner:'Business Development Committee',scope:PREVIEW_SCOPE,reviewCadence:'Monthly'},{id:'goal-4',title:'Chapter Events',status:'Active',progress:80,owner:'Events Committee',scope:PREVIEW_SCOPE,reviewCadence:'Monthly'}] as GoalItem[],
+  communications:[{id:'comm-1',title:'Membership renewal reminder',status:'Scheduled',audience:'Chapter members with renewal due',scope:PREVIEW_SCOPE,acknowledgementRequired:false,version:1},{id:'comm-2',title:'October MC summary',status:'Draft',audience:'Chapter MC',scope:PREVIEW_SCOPE,acknowledgementRequired:true,version:1},{id:'comm-3',title:'Member orientation invitation',status:'Published',audience:'New members',scope:PREVIEW_SCOPE,acknowledgementRequired:false,version:2}] as CommunicationItem[],
+  feedback:[{id:'poll-1',kind:'POLL',title:'November networking meet date',status:'Open',responses:64,scope:PREVIEW_SCOPE,version:1},{id:'survey-1',kind:'SURVEY',title:'Orientation feedback',status:'Results Available',responses:28,scope:PREVIEW_SCOPE,version:1}] as FeedbackItem[],
+  dataQuality:[{id:'dq-1',title:'Expired leadership assignment review',status:'Open',category:'Assignment integrity',sourceType:'Assignment',sourceId:'assignment-review',scope:PREVIEW_SCOPE,version:1},{id:'dq-2',title:'Overdue MoM follow-through',status:'Assigned',category:'Operations Spine',sourceType:'Meeting',sourceId:'meet-1',scope:PREVIEW_SCOPE,version:1},{id:'dq-3',title:'Member transfer consistency review',status:'Investigating',category:'Member lifecycle',sourceType:'Member',sourceId:'m-2',scope:PREVIEW_SCOPE,version:1},{id:'dq-4',title:'Dues reconciliation mismatch',status:'Correction Proposed',category:'Reconciliation',sourceType:'Member',sourceId:'m-2',scope:PREVIEW_SCOPE,version:1}] as DataQualityFinding[],
+  notifications:[{id:'note-1',title:'Task assigned: Confirm member orientation venue',status:'Unread',sourceType:'Task',sourceId:'task-2',to:'/org/tasks/task-2',createdAt:now,scope:PREVIEW_SCOPE},{id:'note-2',title:'October MC agenda is ready for preparation',status:'Read',sourceType:'Meeting',sourceId:'meet-1',to:'/org/meetings/meet-1',createdAt:now,scope:PREVIEW_SCOPE},{id:'note-3',title:'Membership Working Committee has unread discussion',status:'Unread',sourceType:'Converse',sourceId:'conv-membership',to:'/org/converse?conversation=conv-membership',createdAt:now,scope:PREVIEW_SCOPE}] as NotificationItem[],
+  alerts:[{id:'alert-1',title:'September MC follow-through is due',severity:'CRITICAL',sourceType:'Task',sourceId:'task-1',to:'/org/tasks/task-1',createdAt:now,scope:PREVIEW_SCOPE,requiresAction:true},{id:'alert-2',title:'Member renewal requires operational follow-up',severity:'HIGH',sourceType:'Member Case',sourceId:'case-1',to:'/org/member-cases/case-1',createdAt:now,scope:PREVIEW_SCOPE,requiresAction:true},{id:'alert-3',title:'Membership Committee term review is approaching',severity:'MEDIUM',sourceType:'Committee',sourceId:'com-1',to:'/org/committees/com-1',createdAt:now,scope:PREVIEW_SCOPE,requiresAction:false}] as AlertItem[],
+  assignments:[{id:'asg-sec-1',memberId:'m-1',roleType:'CHAPTER_SECRETARY',organisationLevel:'CHAPTER',organisationUnitId:PREVIEW_SCOPE.id,effectiveFrom:'2026-04-01',effectiveTo:'2027-03-31',status:'ACTIVE',appointedBy:'Chapter MC',handoverStatus:'NOT_REQUIRED',version:1}] as OrganisationRoleAssignment[],
+  chapterCoordinatorResponsibilities:[{id:'ccr-1',memberId:'m-2',chapterId:PREVIEW_SCOPE.id,regionId:'reg-north',effectiveFrom:'2026-04-01',effectiveTo:'2027-03-31',status:'ACTIVE',version:1}] as ChapterCoordinatorResponsibility[],
+  networkingSummary:{source:'MEMBER_PREVIEW_READ_MODEL',period:'2026-10',connections:24,oneToOnes:18,referencesGiven:11,opportunityResponses:7,recordedOutcomeValue:420000},
+  audits:[] as AuditEvent[]
+};
+

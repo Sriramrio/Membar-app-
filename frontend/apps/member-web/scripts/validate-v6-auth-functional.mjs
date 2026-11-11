@@ -1,0 +1,30 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+const root=process.cwd();
+const read=(p)=>fs.readFileSync(path.join(root,p),'utf8');
+const auth=read('src/features/auth/authService.ts');
+const login=read('src/features/auth/components/LoginForm.tsx');
+const otp=read('src/features/public/pages/OtpVerificationPage.tsx');
+const forgot=read('src/features/public/pages/ForgotAccessPage.tsx');
+const mock=read('src/services/api/mockServer.ts');
+const required=[
+ ['member','member@sethu.local','Member'],['secretary','secretary@sethu.local','Chapter Secretary'],['treasurer','treasurer@sethu.local','Chapter Treasurer'],['regional','regional@sethu.local','Regional Convenor'],['board','board@sethu.local','Board Member'],['statereviewer','state-reviewer@sethu.local','State Reviewer'],['governancereviewer','governance-reviewer@sethu.local','Governance Reviewer'],['platform','platform@sethu.local','Platform Administrator'],['platformreviewer','platform-reviewer@sethu.local','Platform Reviewer'],['superadmin','superadmin@sethu.local','Super Administrator'],['qa','reviewer@sethu.local','Cross-Workspace Reviewer']
+];
+let fails=0;const check=(ok,msg)=>{console.log(`${ok?'PASS':'FAIL'}: ${msg}`);if(!ok)fails++};
+for(const [id,email,role] of required)check(auth.includes(`id:'${id}'`)&&auth.includes(`email:'${email}'`)&&auth.includes(`role:'${role}'`),`preview account ${id}`);
+check(auth.includes("DEFAULT_PREVIEW_PASSWORD='Sethu@123456'"),'deterministic local preview password');
+check(mock.includes("x.id.toLowerCase()===identifier||x.email.toLowerCase()===identifier"),'mock login accepts account ID or email');
+check(auth.includes('canAuthenticateAccountStatus(account.status)'),'OTP login enforces account status');
+check(login.includes('showPreviewCredentials=env.previewAuthEnabled&&previewMode'),'credential panel uses central development/explicit-preview environment gate');
+check(login.includes('isSafeLocalReturnPath(returnTo)')&&otp.includes('isSafeLocalReturnPath(returnTo)'),'password and OTP use shared local return-path guard');
+check(forgot.includes('minLength={12}'),'recovery UI matches 12-character password policy');
+const policyUrl=pathToFileURL(path.join(root,'src/features/auth/authPolicy.ts')).href;
+const policy=await import(policyUrl);
+check(policy.isSafeLocalReturnPath('/app/dashboard')===true,'local return path accepted');
+check(policy.isSafeLocalReturnPath('//evil.example')===false,'protocol-relative return denied');
+check(policy.isSafeLocalReturnPath('/%2F%2Fevil.example')===false,'encoded protocol-relative return denied');
+check(policy.isSafeLocalReturnPath('/\\evil')===false,'backslash return denied');
+check(policy.canAuthenticateAccountStatus('active')===true&&policy.canAuthenticateAccountStatus('suspended')===false&&policy.canAuthenticateAccountStatus('inactive')===false,'account status authentication policy');
+if(fails)process.exit(1);
+console.log(`\nSETHU V6.1 authentication functional source validation: PASS (${required.length} deterministic preview identities).`);

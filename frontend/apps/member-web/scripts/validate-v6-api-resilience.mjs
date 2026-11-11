@@ -1,0 +1,13 @@
+import fs from 'node:fs';let p=0,f=0;const ok=(c,m)=>{console.log(`${c?'PASS':'FAIL'}: ${m}`);c?p++:f++};const read=x=>fs.readFileSync(x,'utf8');
+const api=read('src/services/api/apiClient.ts');const mapper=read('src/services/api/errorMapper.ts');const axios=read('src/services/api/axiosInstance.ts');const interceptor=read('src/services/api/interceptors.ts');
+ok(axios.includes('timeout: 12_000'),'API client has an explicit request timeout');
+ok(api.includes('signal?: AbortSignal'),'API client accepts AbortSignal cancellation');
+ok(api.includes("retry?: 'none' | 'safe'"),'Retry policy is explicit per request');
+ok(api.includes('defaultRetry=false')&&api.includes('options,true'),'Automatic retry defaults to safe GET requests only');
+ok(api.includes('status===429')&&api.includes('status===503')&&api.includes('retryAfterMs'),'429/transient dependency retry and Retry-After handling are implemented');
+ok(api.includes('Math.min(options.maxRetries??2,3)'),'Retry attempts are bounded');
+ok(mapper.includes("type:'CANCELLED'")&&mapper.includes("code:'REQUEST_CANCELLED'"),'Cancellation maps to a non-retryable structured API error');
+ok(mapper.includes("typeof navigator !== 'undefined'"),'Offline detection is safe outside browser globals');
+ok(interceptor.includes("'Idempotency-Key'")&&interceptor.includes("'X-Request-ID'"),'Mutation idempotency and request identifiers remain enforced');
+ok(api.includes("'If-Match':version"),'Optimistic concurrency If-Match support remains enforced');
+console.log(`\nSETHU V6 API resilience validation: ${f?'FAIL':'PASS'} — ${p}/${p+f}`);process.exit(f?1:0);

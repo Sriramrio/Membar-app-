@@ -1,0 +1,49 @@
+﻿sector,segment,specialisation,categoryId,capability,product,service
+Technology & Digital,Software & SaaS,"Custom Software, SaaS & Mobile Applications",cat-it,Application engineering,Business software platforms,Custom product development
+Technology & Digital,"Cloud, Data & AI","Cloud, Data Analytics & AI Solutions",cat-it,Cloud and data engineering,Analytics and AI solutions,Cloud modernisation and analytics
+Technology & Digital,Cybersecurity & IT Services,"Cybersecurity, Managed IT & Infrastructure",cat-it,Cybersecurity and managed IT,Managed infrastructure services,Security assessment and IT support
+Financial Services,"Accounting, Tax & Audit","Chartered Accountancy, GST, Audit & Compliance",cat-services,Accounting and statutory compliance,Tax and audit services,"GST, tax, audit and compliance advisory"
+Financial Services,Wealth & Investments,"Wealth Management, Mutual Funds & Investment Advisory",cat-finance,Financial planning,Investment advisory,Wealth planning and investment support
+Financial Services,Insurance & Risk,"Life, Health & Business Insurance Advisory",cat-finance,Risk advisory,Insurance protection solutions,Insurance planning and servicing
+Financial Services,Business Finance,"Loans, Working Capital & SME Finance Advisory",cat-finance,Business finance advisory,SME funding solutions,Loan and working-capital facilitation
+Professional Services,Legal & Corporate,"Legal, Contracts & Corporate Advisory",cat-services,Legal advisory,Contracts and corporate services,Business legal and contract support
+Professional Services,Management Consulting,"Strategy, Family Business & Management Consulting",cat-services,Business strategy,Management advisory,"Strategy, governance and growth consulting"
+Professional Services,HR & Recruitment,"Recruitment, HR Advisory & Payroll Services",cat-services,People advisory,HR and recruitment services,Talent acquisition and HR operations
+Professional Services,Marketing & Branding,"Branding, Digital Marketing & Lead Generation",cat-services,Brand and growth marketing,Marketing services,Digital marketing and lead generation
+Professional Services,Design & Creative,"Graphic Design, Photography & Creative Studio",cat-services,Creative design,Visual communication services,"Design, photography and content production"
+Education & Learning,School & Academic Learning,"Tutoring, Coaching & Academic Learning Centres",cat-services,Academic education,Learning programmes,Tutoring and academic coaching
+Education & Learning,Higher Education & Careers,"Career Guidance, Overseas Education & Admissions",cat-services,Career and education guidance,Admissions advisory,Career counselling and higher-education support
+Education & Learning,Professional Skills,"Professional Training, Language & Digital Skills",cat-services,Skills development,Professional learning programmes,"Professional, language and digital-skills training"
+Healthcare & Wellness,Medical Practice,"Clinics, Specialist Consultation & Diagnostics",cat-services,Healthcare services,Clinical and diagnostic services,Consultation and diagnostics
+Healthcare & Wellness,Dental & Allied Health,"Dental, Physiotherapy & Allied Healthcare",cat-services,Allied healthcare,Dental and therapy services,"Dental, physiotherapy and rehabilitation services"
+Healthcare & Wellness,Ayurveda & Wellness,"Ayurveda, Yoga & Holistic Wellness",cat-services,Holistic wellness,Wellness programmes,"Ayurveda, yoga and wellbeing services"
+Food & Hospitality,Traditional Foods,"Traditional Foods, Snacks, Sweets & Ready Mixes",cat-services,Food production,Packaged traditional foods,Traditional food production and catering
+Food & Hospitality,Catering & Events,"Catering, Event Meals & Corporate Food Services",cat-services,Catering services,Event and corporate meals,Catering and food-service management
+Food & Hospitality,Restaurants & Cloud Kitchens,"Vegetarian Restaurants, Cafés & Cloud Kitchens",cat-services,Hospitality operations,Restaurant and food delivery,"Restaurant, café and cloud-kitchen services"
+Retail & Lifestyle,Textiles & Apparel,"Sarees, Handloom, Apparel & Boutique Retail",cat-services,Retail merchandising,Textile and apparel products,Retail and online commerce
+Retail & Lifestyle,Jewellery & Gifts,"Jewellery, Silverware, Gifts & Lifestyle Products",cat-services,Lifestyle retail,Jewellery and gift products,Retail and custom gifting
+Retail & Lifestyle,Home & Consumer,"Home Décor, Furnishings & Consumer Products",cat-services,Consumer retail,Home and lifestyle products,Retail distribution and e-commerce
+Real Estate & Built Environment,Real Estate Services,"Real Estate Advisory, Brokerage & Property Management",cat-services,Property advisory,Real estate services,Property transactions and management
+Real Estate & Built Environment,Architecture & Interiors,"Architecture, Interior Design & Renovation",cat-services,Design and build,Architecture and interiors,"Architecture, interiors and renovation"
+Real Estate & Built Environment,Construction Services,"Civil Contracting, Waterproofing & Building Services",cat-services,Construction services,Civil and building solutions,Civil works and building maintenance
+Trade & Commerce,Distribution & Wholesale,"FMCG, Industrial & Consumer Distribution",cat-services,Distribution network,Wholesale products,Distribution and channel development
+Trade & Commerce,Import & Export,"Import, Export & Cross-Border Trade Services",cat-services,Trade facilitation,Import-export services,Cross-border sourcing and trade
+Travel & Mobility,Travel & Tourism,"Domestic, International & Pilgrimage Travel Services",cat-services,Travel planning,Travel packages,Travel planning and tour operations
+Travel & Mobility,Transport Services,"Corporate Transport, Rentals & Mobility Services",cat-logistics,Passenger mobility,Transport and rental services,Corporate transport and mobility
+"Media, Arts & Culture",Music & Performing Arts,"Carnatic Music, Performing Arts & Training",cat-services,Performing arts,Music and arts programmes,"Performance, teaching and event programmes"
+"Media, Arts & Culture",Publishing & Content,"Publishing, Books, Translation & Content Services",cat-services,Publishing and content,Books and content services,"Publishing, editing and translation"
+"Media, Arts & Culture",Cultural & Ritual Services,"Vedic, Ritual, Temple & Cultural Services",cat-services,Cultural service coordination,Ceremonial and cultural services,"Ritual, cultural and event coordination"
+Events & Community Services,Events & Weddings,"Event Planning, Wedding Services & Décor",cat-services,Event management,Event production services,"Planning, coordination and décor"
+Events & Community Services,Matrimonial & Community,"Matrimonial, Community Directory & Member Services",cat-services,Community platforms,Community services,Matrimonial and community-directory services
+Home & Personal Services,Home Services,"Home Maintenance, Repairs & Facility Services",cat-services,Home services,Maintenance services,"Repairs, maintenance and facility support"
+Home & Personal Services,Personal Care,"Beauty, Grooming & Personal Care Services",cat-services,Personal care,Beauty and grooming services,Salon and personal care
+Agriculture & Sustainability,Organic & Farm Products,"Organic Foods, Farm Products & Natural Produce",cat-services,Sustainable agriculture,Farm and organic products,Farm sourcing and natural products
+Agriculture & Sustainability,Renewable Energy,"Solar, Energy Efficiency & Sustainability Advisory",cat-energy,Renewable energy,Solar and energy solutions,Energy assessment and solar solutions
+Manufacturing & Industrial,Precision & Equipment,"Precision Components, Equipment & Industrial Products",cat-precision,Industrial engineering,Engineered industrial products,Precision manufacturing and industrial supply
+Manufacturing & Industrial,Electrical & Automation,"Electrical Panels, Automation & Industrial Controls",cat-electrical,Industrial automation,Electrical and control systems,Automation and electrical integration
+Logistics & Supply Chain,Logistics & Fulfilment,"Warehousing, Courier, Freight & Fulfilment",cat-logistics,Logistics operations,Freight and fulfilment services,"Warehousing, courier and logistics"
+Startups & Innovation,Startup Products,"Startup, Product Innovation & Venture Services",cat-it,Startup innovation,New digital and physical products,Product strategy and startup execution
+Consulting & Knowledge,Research & Advisory,"Research, Analytics, Knowledge & Advisory Services",cat-services,Knowledge advisory,Research and analytical services,"Research, analysis and specialised advisory"
+Consulting & Knowledge,Astrology & Traditional Advisory,"Jyotisha, Panchanga & Traditional Advisory Services",cat-services,Traditional advisory,Traditional consultation services,Jyotisha and traditional advisory
+Security & Compliance,Safety & Compliance,"Fire Safety, Workplace Safety & Compliance Services",cat-safety,Safety compliance,Safety products and services,Safety assessment and compliance support
+Packaging & Printing,Printing & Packaging,"Printing, Publishing Production & Packaging",cat-packaging,Print and packaging,Printed and packaged products,Commercial printing and packaging

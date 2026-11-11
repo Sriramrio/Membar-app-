@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Sethu.Api": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SETHU_JWT_SIGNING_KEY": "sethu_development_jwt_secret_key_at_least_32_bytes_long_2026!"
+      },
+      "applicationUrl": "https://localhost:62935;http://localhost:62936"
+    }
+  }
+}

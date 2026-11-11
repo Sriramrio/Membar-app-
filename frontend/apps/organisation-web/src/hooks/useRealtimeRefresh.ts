@@ -1,0 +1,3 @@
+import {useEffect} from 'react';import {realtimeGateway,type OrgEvent} from '@/services/realtimeGateway';
+const matches=(rule:string,type:string)=>rule.endsWith('*')?type.startsWith(rule.slice(0,-1)):rule===type;
+export function useRealtimeRefresh(rules:readonly string[],refresh:()=>void,predicate?:(event:OrgEvent)=>boolean){useEffect(()=>{if(!rules.length)return;let timer:ReturnType<typeof setTimeout>|undefined;const unsub=realtimeGateway.subscribe('*',e=>{if(!rules.some(r=>matches(r,e.type))||predicate&&!predicate(e))return;if(timer)clearTimeout(timer);timer=setTimeout(refresh,150)});return()=>{if(timer)clearTimeout(timer);unsub()}},[refresh,predicate,...rules])}

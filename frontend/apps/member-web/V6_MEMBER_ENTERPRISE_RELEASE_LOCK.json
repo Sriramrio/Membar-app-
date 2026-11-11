@@ -1,0 +1,20 @@
+{
+  "release": "SETHU Enterprise Platform V6 Member Enterprise",
+  "version": "6.1.0",
+  "date": "2026-09-25",
+  "release_status": "FINAL_SOURCE_VERIFIED_RUNTIME_BLOCKED_ENVIRONMENT",
+  "dependency_certification": "BLOCKED_ENVIRONMENT",
+  "dependency_blockers": [
+    "npm registry EAI_AGAIN",
+    "offline cache ENOTCACHED"
+  ],
+  "browser_certification": "NOT_CLAIMED_ENVIRONMENT_BLOCKED",
+  "source_validation": "PASS",
+  "member_journey_validation": "PASS",
+  "manifest_file_count": 422,
+  "checkpoint_base": "M13 verified archive f28fbbb8b871ab83a60ba55dfbeb4b01606769bfd134ba96e87dcd9b310f7db6",
+  "post_m14_continuation": "M14R1_RUNTIME_CERTIFICATION_RETRY_AND_MANIFEST_RECONCILIATION",
+  "platform_admin_release_manifest_reconciled": true,
+  "runtime_retry_result": "BLOCKED_ENVIRONMENT_EAI_AGAIN",
+  "canonical_migration_phase": "C07_LEGACY_RETIREMENT"
+}

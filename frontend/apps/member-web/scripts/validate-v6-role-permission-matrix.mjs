@@ -1,0 +1,18 @@
+import fs from 'node:fs';import path from 'node:path';import { pathToFileURL } from 'node:url';
+const root=process.cwd(), read=p=>fs.readFileSync(path.join(root,p),'utf8');const data=read('src/features/control-plane/data.ts'), panel=read('src/features/control-plane/components/ConfigurationReleasePanel.tsx'), reducer=read('src/features/control-plane/controlPlaneSlice.ts');
+const routeModule=await import(pathToFileURL(path.join(root,'src/features/control-plane/platformRoutePermissions.ts')).href);const access=await import(pathToFileURL(path.join(root,'src/features/platform-admin/access-control/platformAccess.ts')).href);
+let fails=0;const c=(ok,m)=>{console.log(`${ok?'PASS':'FAIL'}: ${m}`);if(!ok)fails++};
+const entries=Object.entries(routeModule.PLATFORM_ADMIN_ROUTE_PERMISSIONS);c(entries.length===17,'17 canonical Platform Admin route permissions');
+const permissions=[...new Set(entries.map(([,p])=>p))];
+const roleLine=(code)=>data.split('\n').find(line=>line.includes(`code:'${code}'`))??'';
+const admin=roleLine('PLATFORM_ADMIN'), reviewer=roleLine('PLATFORM_REVIEWER'), member=roleLine('MEMBER'), superRole=roleLine('SUPER_ADMIN');
+for(const perm of permissions)c(admin.includes(`'${perm}'`),`Platform Administrator grants route permission ${perm}`);
+for(const perm of permissions)c(reviewer.includes(`'${perm}'`),`Platform Reviewer inspection grants route permission ${perm}`);
+c(superRole.includes("permissionCodes:['*']"),'Super Administrator wildcard permission');
+c(!member.includes("platform.workspace.access"),'Member has no Platform Admin workspace permission');
+c(access.canProposePlatformConfiguration('Platform Administrator')&&!access.canReviewPlatformConfiguration('Platform Administrator'),'Platform Administrator is maker, not checker');
+c(!access.canProposePlatformConfiguration('Platform Reviewer')&&access.canReviewPlatformConfiguration('Platform Reviewer'),'Platform Reviewer is checker, not maker');
+c(access.canProposePlatformConfiguration('Super Administrator')&&access.canReviewPlatformConfiguration('Super Administrator'),'Super Administrator has maker/reviewer capability subject to independence');
+c(panel.includes("c.status==='Draft'&&canMake")&&panel.includes("c.status==='Pending Review'&&canReview&&c.maker!==actor"),'Configuration Release UI separates maker and independent checker actions');
+c(reducer.includes("if(c.maker===a.payload.actor){c.validationErrors=['Maker cannot approve own configuration change.")&&reducer.includes("if(!c.checker||c.maker===c.checker)"),'Reducer enforces independent checker before approval/activation');
+if(fails)process.exit(1);console.log('\nSETHU V6.1 role/permission/action matrix validation: PASS.');

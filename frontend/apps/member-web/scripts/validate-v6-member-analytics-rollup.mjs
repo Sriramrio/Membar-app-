@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');let pass=0;const ok=(n,c)=>{if(!c){console.error(`FAIL: ${n}`);process.exit(1)}console.log(`PASS: ${n}`);pass++};
+const engine=read('src/features/member/analytics/networkingAnalytics.ts');const view=read('src/features/member/dashboard/OrganisationInsightsView.tsx');const dash=read('src/features/member/pages/MemberDashboardPage.tsx');
+for(const level of ['Chapter','City','Region','State','National'])ok(`Roll-up level ${level} supported`,engine.includes(`'${level}'`));
+ok('One reusable organisation analytics engine is used',engine.includes('buildOrganisationAnalytics'));
+ok('Authorised organisational assignment gates roll-up',engine.includes('authorisedOrganisationAssignment')&&engine.includes("a.workspace!=='Member'"));
+ok('Platform assignment is excluded from Member roll-up',engine.includes("a.unitType!=='Platform'"));
+ok('Roll-up derives same canonical networking entities', ['connections','meetings','references','opportunities','responses','transactions','events','attendance'].every(k=>engine.includes(`n.${k}`)));
+ok('Organisational view supports hierarchy roll-down',view.includes('Roll down by organisational unit')&&view.includes('parentId===selected.id'));
+ok('Aggregate visibility warns about record permissions',view.includes('does not grant unrestricted access'));
+ok('Dashboard exposes organisational roll-up only when authorised',dash.includes('organisationAssignment ?')&&dash.includes('OrganisationInsightsView'));
+console.log(`\nSETHU Member analytics roll-up gate: PASS — ${pass}/${pass}`);

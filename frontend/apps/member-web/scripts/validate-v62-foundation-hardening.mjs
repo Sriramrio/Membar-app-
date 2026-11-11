@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const checks=[];const add=(name,ok)=>checks.push({name,ok});
+const store=read('src/app/store.ts');
+const scheduler=read('src/app/persistenceScheduler.ts');
+const clock=read('src/services/time/serverClock.ts');
+const ids=read('src/utils/stableId.ts');
+add('Redux serializable guardrail enabled',!store.includes('serializableCheck:false')&&store.includes('serializableCheck:{warnAfter:64}'));
+add('Persistence is debounced',scheduler.includes('setTimeout')&&store.includes('scheduleStatePersistence'));
+add('Persistence flushes on page hide',store.includes("addEventListener('pagehide'"));
+add('Persistence is selective by state references',scheduler.includes('previousSafeRefs')&&scheduler.includes('previousRuntimeRefs'));
+add('Stable UUID utility exists',ids.includes('randomUUID'));
+add('Server clock abstraction exists',clock.includes('serverOffsetMs')&&clock.includes('isoNow'));
+add('API response can synchronize server clock',read('src/services/api/interceptors.ts').includes('serverClock.sync'));
+for(const c of checks)console.log(`${c.ok?'PASS':'FAIL'}: ${c.name}`);
+const failed=checks.filter(c=>!c.ok);console.log(`V6.2 foundation hardening: ${checks.length-failed.length}/${checks.length}`);if(failed.length)process.exit(1);

@@ -1,0 +1,1 @@
+import {HierarchyPage} from './HierarchyPage';export default function CityPage(){return <HierarchyPage level="CITY"/>}

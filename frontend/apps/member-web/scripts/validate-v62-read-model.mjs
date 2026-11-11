@@ -1,0 +1,11 @@
+import fs from 'node:fs';const r=p=>fs.readFileSync(p,'utf8');const c=[];const add=(n,o)=>c.push([n,o]);
+const m=r('src/features/network/readModel.ts');const s=r('src/features/network/selectors.ts');
+add('Network read model uses memoized createSelector',m.includes('createSelector'));
+add('Member/business entity indexes exist',m.includes('selectMemberEntities')&&m.includes('selectBusinessEntities'));
+add('Relationship indexes exist',m.includes('selectAffiliationsByMember')&&m.includes('selectAffiliationsByBusiness'));
+add('Conversation/response indexes exist',m.includes('selectMessagesByConversation')&&m.includes('selectResponsesByOpportunity'));
+add('Notification/attendance/connection indexes exist',m.includes('selectNotificationsByMember')&&m.includes('selectAttendanceByEvent')&&m.includes('selectConnectionsByMember'));
+add('Selector factories exist for targeted subscriptions',m.includes('makeSelectMemberById')&&m.includes('makeSelectBusinessById'));
+add('Active member selector no longer scans array',s.includes('selectActiveMember=createSelector'));
+add('Active business selector consumes indexed read model',s.includes('selectActiveBusiness=createSelector'));
+for(const [n,o] of c)console.log(`${o?'PASS':'FAIL'}: ${n}`);const f=c.filter(([,o])=>!o);console.log(`V6.2 read-model optimization: ${c.length-f.length}/${c.length}`);if(f.length)process.exit(1);

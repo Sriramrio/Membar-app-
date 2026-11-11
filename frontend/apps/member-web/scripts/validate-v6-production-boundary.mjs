@@ -1,0 +1,17 @@
+import fs from 'node:fs';import path from 'node:path';
+const root=process.cwd();let pass=0,fail=0;const read=p=>fs.readFileSync(path.join(root,p),'utf8');const ok=(n,c)=>{if(c){pass++;console.log(`PASS: ${n}`)}else{fail++;console.error(`FAIL: ${n}`)}};
+const auth=read('src/features/auth/authService.ts');const env=read('src/config/env.ts');const login=read('src/features/auth/components/LoginForm.tsx');const otp=read('src/features/public/pages/OtpVerificationPage.tsx');const forgot=read('src/features/public/pages/ForgotAccessPage.tsx');const vr=read('src/features/public/pages/VisitorRegistrationPage.tsx');const vv=read('src/features/public/pages/VisitorVerificationPage.tsx');const profile=read('src/features/member/pages/MyProfilePage.tsx');const security=read('src/features/member/pages/SecuritySettingsPage.tsx');const mock=read('src/services/api/mockServer.ts');
+ok('Production defaults mocks off',env.includes('const useMocks = import.meta.env.DEV')&&env.includes(": import.meta.env.VITE_USE_MOCKS === 'true';"));
+for(const endpoint of ['/auth/login','/auth/otp/request','/auth/otp/verify','/auth/recovery/request','/auth/recovery/reset','/auth/password/change','/public/visitor-registrations','/contact-verification/request','/contact-verification/verify'])ok(`Production boundary declares ${endpoint}`,auth.includes(endpoint));
+ok('OTP request wrapper uses local preview only when mocks enabled',auth.includes("if(env.useMocks)return requestLocalOtp(identifier,purpose)"));
+ok('OTP verification wrapper uses production API otherwise',auth.includes("'/auth/otp/verify'")&&otp.includes('await verifyOtp(challenge,code)'));
+ok('Password recovery uses production-aware wrappers',forgot.includes('requestPasswordRecovery(identifier)')&&forgot.includes('resetPasswordByChallenge(challenge,code,password)'));
+ok('Visitor registration branches preview/local vs production API',vr.includes('if(env.useMocks)')&&vr.includes('submitPublicVisitorRegistration(next)'));
+ok('Visitor verification does not require local Redux record in production',vv.includes('env.useMocks&&!visitor')&&vv.includes('verifyVisitorVerification(challenge,code,id)'));
+ok('Member contact verification uses production-aware wrappers',profile.includes('requestContactVerification(')&&profile.includes('verifyContactVerification('));
+ok('Member profile preview OTP is build-gated',profile.includes("showPreviewContactCode=import.meta.env.DEV||import.meta.env.VITE_ENABLE_PREVIEW_AUTH==='true'")&&profile.includes('showPreviewContactCode&&previewOtpCode'));
+ok('Password change uses production-aware boundary',security.includes('await changePassword(account.id,current,next)'));
+ok('API failures are surfaced instead of fake success',login.includes('boundaryErrorMessage')&&otp.includes('boundaryErrorMessage')&&forgot.includes('boundaryErrorMessage')&&vr.includes('boundaryErrorMessage')&&vv.includes('boundaryErrorMessage')&&profile.includes('boundaryErrorMessage')&&security.includes('boundaryErrorMessage'));
+ok('Preview unmatched endpoints still fail explicitly',mock.includes('PREVIEW_ENDPOINT_NOT_IMPLEMENTED')&&mock.includes('501'));
+ok('Production API contract is documented',fs.existsSync(path.join(root,'V6_PRODUCTION_API_CONTRACT.md'))&&fs.existsSync(path.join(root,'V6_API_FUNCTIONAL_COVERAGE_MATRIX.md')));
+console.log(`Production boundary validation: ${pass} passed, ${fail} failed.`);if(fail)process.exit(1);

@@ -1,0 +1,1 @@
+function e(o){const t=o?.trim();if(!t)return;const n=/^[a-z][a-z0-9+.-]*:/i.test(t)?t:`https://${t}`;try{const r=new URL(n);return r.protocol!=="https:"&&r.protocol!=="http:"?void 0:r.toString()}catch{return}}export{e as s};

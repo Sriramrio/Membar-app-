@@ -1,0 +1,108 @@
+import type { Workspace } from '@/types/screen';
+
+export interface RouteNavigationMeta {
+  routeId:number;
+  label:string;
+  group:string;
+  parentPath?:string;
+  workspace:Workspace;
+  entityKind?:'member'|'business'|'opportunity'|'conversation'|'meeting'|'event'|'promotion';
+  queryViews?:Record<string,string>;
+}
+
+const m=(routeId:number,label:string,group:string,workspace:Workspace,parentPath?:string,entityKind?:RouteNavigationMeta['entityKind'],queryViews?:Record<string,string>):RouteNavigationMeta=>({routeId,label,group,workspace,parentPath,entityKind,queryViews});
+
+export const routeNavigationMeta:Record<number,RouteNavigationMeta>={
+  1:m(1,'Workspace','Workspace','Workspace'),
+  2:m(2,'Discover','Discover','Member','/app/dashboard'),
+  3:m(3,'Directory','Discover','Member','/app/dashboard'),
+  4:m(4,'Categories','Discover','Member','/app/directory'),
+  5:m(5,'Member','Discover','Member','/app/directory','member'),
+  6:m(6,'Business','Discover','Member','/app/directory','business'),
+  7:m(7,'Suggestions','My Network','Member','/app/connections'),
+  8:m(8,'Saved','Discover','Member','/app/directory'),
+  9:m(9,'Connections','My Network','Member','/app/dashboard'),
+  10:m(10,'References','My Network','Member','/app/dashboard'),
+  11:m(11,'New Reference','My Network','Member','/app/references'),
+  12:m(12,'Business Outcomes','Business','Member','/app/dashboard'),
+  13:m(13,'One-to-One Meetings','My Network','Member','/app/dashboard'),
+  14:m(14,'Thank You & Follow-up','My Network','Member','/app/dashboard'),
+  15:m(15,'Opportunities','Business','Member','/app/dashboard'),
+  16:m(16,'New Opportunity','Business','Member','/app/opportunities'),
+  17:m(17,'Opportunity','Business','Member','/app/opportunities','opportunity'),
+  18:m(18,'My Opportunities','Business','Member','/app/opportunities'),
+  19:m(19,'My Responses','Business','Member','/app/opportunities'),
+  20:m(20,'Respond','Business','Member','/app/opportunities','opportunity'),
+  21:m(21,'Converse','My Network','Member','/app/dashboard'),
+  22:m(22,'Converse','My Network','Member','/app/messages','conversation'),
+  23:m(23,'Announcements','Community','Member','/app/dashboard'),
+  24:m(24,'Calendar','Community','Member','/app/events'),
+  25:m(25,'Meeting','My Network','Member','/app/one-to-one','meeting'),
+  26:m(26,'Event','Community','Member','/app/events','event'),
+  27:m(27,'Gallery','Community','Member','/app/dashboard'),
+  28:m(28,'News','Community','Member','/app/dashboard'),
+  29:m(29,'Partners','Community','Member','/app/dashboard'),
+  30:m(30,'Resources','Community','Member','/app/dashboard'),
+  31:m(31,'Support','My Account','Member','/app/dashboard'),
+  32:m(32,'My Profile','My Account','Member','/app/dashboard'),
+  33:m(33,'My Businesses','My Account','Member','/app/dashboard'),
+  34:m(34,'Family','My Account','Member','/app/profile'),
+  35:m(35,'Membership','My Account','Member','/app/dashboard'),
+  36:m(36,'Attendance','My Account','Member','/app/dashboard'),
+  37:m(37,'Payments','My Account','Member','/app/dashboard'),
+  38:m(38,'Activity & Actions','My Account','Member','/app/dashboard',undefined,{view:'Action Centre'}),
+  39:m(39,'Privacy','My Account','Member','/app/profile'),
+  40:m(40,'Notification Settings','My Account','Member','/app/profile'),
+  41:m(41,'Security','My Account','Member','/app/profile'),
+  42:m(42,'Install & Offline','My Account','Member','/app/dashboard'),
+  43:m(43,'Management Dashboard','Overview','Management'),
+  44:m(44,'Workflow Inbox','Overview','Management','/manage/dashboard'),
+  45:m(45,'Members','Membership','Management','/manage/dashboard'),
+  46:m(46,'Visitors','Membership','Management','/manage/dashboard'),
+  47:m(47,'Onboarding','Membership','Management','/manage/dashboard'),
+  48:m(48,'Meeting Administration','Operations','Management','/manage/dashboard'),
+  49:m(49,'Attendance Administration','Operations','Management','/manage/dashboard'),
+  50:m(50,'Payment Administration','Operations','Management','/manage/dashboard'),
+  51:m(51,'Announcement Management','Communications','Management','/manage/dashboard'),
+  52:m(52,'Event Management','Communications','Management','/manage/dashboard'),
+  53:m(53,'Gallery Management','Communications','Management','/manage/dashboard'),
+  54:m(54,'Promotions','Communications','Management','/manage/dashboard'),
+  55:m(55,'Reports','Intelligence','Management','/manage/dashboard'),
+  56:m(56,'Governance Dashboard','Overview','Governance'),
+  57:m(57,'Decision Register','Decisions & Strategy','Governance','/governance/dashboard'),
+  58:m(58,'Board Packs','Decisions & Strategy','Governance','/governance/dashboard'),
+  59:m(59,'Strategy Outcomes','Decisions & Strategy','Governance','/governance/dashboard'),
+  60:m(60,'Policy Register','Governance Control','Governance','/governance/dashboard'),
+  61:m(61,'Policy Exceptions','Governance Control','Governance','/governance/policies'),
+  62:m(62,'Role & Tenure','Governance Control','Governance','/governance/dashboard'),
+  63:m(63,'Governance History','History','Governance','/governance/dashboard'),
+  64:m(64,'Admin Dashboard','Platform Overview','Platform Admin'),
+  65:m(65,'Identity','Identity & Organisation','Platform Admin','/platform-admin/dashboard'),
+  66:m(66,'Organisation Hierarchy','Identity & Organisation','Platform Admin','/platform-admin/dashboard'),
+  67:m(67,'Role Assignments','Identity & Organisation','Platform Admin','/platform-admin/dashboard'),
+  68:m(68,'RBAC','Access Governance','Platform Admin','/platform-admin/dashboard'),
+  69:m(69,'RACI','Access Governance','Platform Admin','/platform-admin/dashboard'),
+  70:m(70,'Workflows','Configuration','Platform Admin','/platform-admin/dashboard'),
+  71:m(71,'Lookups & Taxonomies','Configuration','Platform Admin','/platform-admin/dashboard'),
+  72:m(72,'Form Builder','Configuration','Platform Admin','/platform-admin/dashboard'),
+  73:m(73,'Import Centre','Data Operations','Platform Admin','/platform-admin/dashboard'),
+  74:m(74,'Integrations','Data Operations','Platform Admin','/platform-admin/dashboard'),
+  75:m(75,'Moderation','Trust & Communications','Platform Admin','/platform-admin/dashboard'),
+  76:m(76,'Notification Administration','Trust & Communications','Platform Admin','/platform-admin/dashboard'),
+  77:m(77,'Promotion Policies','Trust & Communications','Platform Admin','/platform-admin/dashboard'),
+  78:m(78,'Audit Explorer','Assurance','Platform Admin','/platform-admin/dashboard'),
+  79:m(79,'Data Quality','Data Operations','Platform Admin','/platform-admin/dashboard'),
+  80:m(80,'Platform Settings','Assurance','Platform Admin','/platform-admin/dashboard'),
+  81:m(81,'My Dashboard','My Dashboard','Member',undefined,undefined,{view:'Chapter Insights'}),
+  82:m(82,'Events','Community','Member','/app/dashboard'),
+  83:m(83,'Notifications','Community','Member','/app/dashboard'),
+  84:m(84,'Promotion','Community','Member','/app/dashboard','promotion'),
+  85:m(85,'Chapter Workflow','Membership','Management','/manage/dashboard'),
+  86:m(86,'Invite Athithi','My Network','Member','/app/dashboard'),
+  87:m(87,'Chapter Management','Chapters & Governance','Platform Admin','/platform-admin/dashboard'),
+  88:m(88,'Chapter Workflow & Onboarding','Chapters & Governance','Platform Admin','/platform-admin/dashboard'),
+};
+
+export const workspaceHomePath=(workspace:Workspace|null)=>workspace==='Member'?'/app/home':workspace==='Management'?'/manage/dashboard':workspace==='Governance'?'/governance/dashboard':workspace==='Platform Admin'?'/platform-admin/dashboard':'/app/home';
+
+export function routeLabelForQuery(meta:RouteNavigationMeta|undefined,search:string){if(!meta)return 'Page';const params=new URLSearchParams(search);for(const [key,label] of Object.entries(meta.queryViews??{})){if(params.get(key))return label}return meta.label}

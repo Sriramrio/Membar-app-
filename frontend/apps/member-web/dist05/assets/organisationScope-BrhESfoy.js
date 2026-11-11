@@ -1,0 +1,1 @@
+function i(d,t){if(!t)return[];const r=d.find(e=>e.name===t);if(!r)return[t];const n=new Set([r.id]);let a=!0;for(;a;){a=!1;for(const e of d)e.parentId&&n.has(e.parentId)&&!n.has(e.id)&&(n.add(e.id),a=!0)}return d.filter(e=>n.has(e.id)).map(e=>e.name)}export{i as d};

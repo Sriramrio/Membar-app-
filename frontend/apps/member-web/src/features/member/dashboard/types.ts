@@ -1,0 +1,9 @@
+export type DashboardPeriodKey='month'|'last-month'|'quarter'|'year'|'custom';
+export interface DashboardPeriod {key:DashboardPeriodKey;label:string;start:string;end:string;comparisonStart:string;comparisonEnd:string;}
+export interface MetricDrillTarget {route:string;params?:Record<string,string>;}
+export interface MemberMetricDefinition {code:string;label:string;description:string;periodBehaviour:'Period'|'Current';permission?:string;privacy:'Personal'|'Aggregated Chapter';drill:MetricDrillTarget;category:'Network'|'Meetings'|'References'|'Opportunities'|'Business Outcomes'|'Community'|'Profile';}
+export interface DashboardMetricValue {definition:MemberMetricDefinition;value:number|string;previousValue?:number;trend?:number;detail?:string;}
+export interface MemberActionItem {id:string;domain:'Network'|'Business'|'Opportunities'|'Meetings'|'Events'|'Membership'|'Account';title:string;description:string;priority:'Normal'|'High'|'Urgent';route:string;dueAt?:string;status:string;}
+export interface UpcomingItem {id:string;kind:string;title:string;date:string;route:string;detail?:string;}
+export interface MemberBusinessSummary {businessId:string;name:string;relationship?:string;profileCompleteness:number;verified:boolean;activeCertifications:number;expiringCertifications:number;activeOpportunities:number;responsesReceived:number;references:number;relationships:number;}
+export interface MemberDashboardProjection {memberId:string;period:DashboardPeriod;actionRequired:MemberActionItem[];personalPerformance:DashboardMetricValue[];businessPerformance:MemberBusinessSummary[];upcoming:UpcomingItem[];recommendations:Array<{id:string;title:string;why:string;route:string;priority:number}>;recentActivity:Array<{id:string;label:string;detail:string;at:string;route:string}>;generatedAt:string;effectiveScope:string;effectiveConfigurationVersion:string;}

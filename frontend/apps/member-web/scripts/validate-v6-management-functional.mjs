@@ -1,0 +1,52 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+const root=process.cwd();let fail=0,pass=0;
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const ok=(name,cond,detail='')=>{if(cond){pass++;console.log(`PASS: ${name}`)}else{fail++;console.error(`FAIL: ${name}${detail?` — ${detail}`:''}`)}};
+const routes=read('src/routes/routeConfig.tsx');
+const data=read('src/features/control-plane/data.ts');
+const protectedRoute=read('src/routes/ProtectedRoute.tsx');
+const header=read('src/components/layout/Header.tsx');
+const visitor=read('src/features/management/pages/VisitorManagementPage.tsx');
+const workflow=read('src/features/management/pages/WorkflowInboxPage.tsx');
+const onboarding=read('src/features/management/pages/NewMemberOnboardingPage.tsx');
+const attendance=read('src/features/management/pages/AttendanceAdministrationPage.tsx');
+const runtime=read('src/features/platform-runtime/platformRuntimeSlice.ts');
+const routePermissions=read('src/features/control-plane/workspaceRoutePermissions.ts');
+const managementPages=fs.readdirSync(path.join(root,'src/features/management/pages')).filter(f=>f.endsWith('.tsx'));
+const expectedRoutes=['/manage/dashboard','/manage/workflows','/manage/members','/manage/visitors','/manage/onboarding','/manage/meetings','/manage/attendance','/manage/payments','/manage/announcements','/manage/events','/manage/gallery','/manage/promotions','/manage/reports'];
+for(const r of expectedRoutes)ok(`Management route ${r} is registered`,routes.includes(`path:"${r}"`)||routes.includes(`path:'${r}'`));
+ok('Management route count remains 13',[...routes.matchAll(/workspace:"Management"/g)].length===13);
+ok('All 13 dedicated Management page modules exist',managementPages.length===13,String(managementPages.length));
+const wrapperConsumers=managementPages.filter(f=>read(`src/features/management/pages/${f}`).includes('features/network/pages/managementPages'));
+ok('Management pages no longer delegate to shared network managementPages monolith',wrapperConsumers.length===0,wrapperConsumers.join(', '));
+ok('Management membership/member/meeting/attendance/communications modules have route-specific permissions',[
+ "routeRoots:['/manage/members']","routeRoots:['/manage/visitors']","routeRoots:['/manage/onboarding']","routeRoots:['/manage/meetings']","routeRoots:['/manage/attendance']","routeRoots:['/manage/announcements','/manage/gallery','/manage/promotions']"
+].every(x=>data.includes(x)));
+for(const p of ['member.manage','membership.review','membership.activate','meeting.manage','attendance.manage','communication.manage'])ok(`Permission ${p} is defined`,data.includes(`code:'${p}'`));
+ok('Chapter Secretary has member/visitor/activation/meeting/attendance/communications responsibility',data.includes("code:'CHAPTER_SECRETARY'")&&['member.manage','membership.review','membership.activate','meeting.manage','attendance.manage','communication.manage'].every(x=>data.match(/code:'CHAPTER_SECRETARY'[^\n]+/)?.[0]?.includes(x)));
+ok('Chapter Treasurer stays finance-focused and is not granted membership activation',data.match(/code:'CHAPTER_TREASURER'[^\n]+/)?.[0]?.includes('payment.view')&&!data.match(/code:'CHAPTER_TREASURER'[^\n]+/)?.[0]?.includes('membership.activate'));
+ok('State Reviewer can review membership but cannot activate it',data.match(/code:'STATE_REVIEWER'[^\n]+/)?.[0]?.includes('membership.review')&&!data.match(/code:'STATE_REVIEWER'[^\n]+/)?.[0]?.includes('membership.activate'));
+ok('Attendance correction has canonical accountable RACI',data.includes("process:'Attendance correction'")&&data.includes("resolverValue:'CHAPTER_SECRETARY'"));
+ok('ProtectedRoute resolves Management/Governance route permissions from canonical modules',protectedRoute.includes("targetWorkspace==='Management'||targetWorkspace==='Governance'")&&protectedRoute.includes('requiredPermissionForWorkspacePath'));
+ok('Global header filters Management and Governance search/navigation by canonical permissions',header.includes("['Platform Admin','Management','Governance'].includes(auth.activeWorkspace)")&&header.includes('requiredPermissionForWorkspacePath'));
+ok('Visitor final decision UI is RACI-aware',visitor.includes('canDecideMembership')&&visitor.includes("process==='Membership onboarding'")&&visitor.includes('not the accountable membership decision role'));
+ok('Visitor final decision reducer requires active workflow, accountable role and maker/checker separation',runtime.includes('No active membership approval workflow task')&&runtime.includes('membershipDecisionRoleAllowed')&&runtime.includes('Membership maker cannot be the independent checker'));
+ok('Workflow decision UI disables approve/reject when active role is not accountable',workflow.includes('const canDecide=')&&workflow.includes("(t.conflict||!canDecide)&&['Approve','Reject'].includes(a)"));
+ok('Workflow reducer independently enforces accountable role for approve/reject',runtime.includes('managementDecisionRoleAllowed(t.accountableRole,a.payload.actorRole)'));
+ok('Member activation remains gated by approved visitor, verified contact, passed due diligence and duplicate-email protection',[
+ "visitor.status!=='Approved'","!visitor.emailVerified","visitor.checks.some(c=>c.status!=='Passed')","A member or login already uses this verified email address"
+].every(x=>onboarding.includes(x)));
+ok('Attendance administration retains finalise/correction controls',attendance.includes('finaliseAttendance')&&attendance.includes('approveAttendanceCorrection')&&attendance.includes('Finalise attendance'));
+ok('Payment route remains separately permissioned by payment.view',data.includes("routeRoots:['/manage/payments','/app/payments']")&&data.includes("requiredPermission:'payment.view'"));
+ok('Management route permission resolver prefers longest matching route root',routePermissions.includes('.sort((a,b)=>b.root.length-a.root.length)'));
+const managementText=managementPages.map(f=>read(`src/features/management/pages/${f}`)).join('\n');
+ok('Management source has no retired enterprise runtime dependency',!managementText.includes('@/features/enterprise')&&!/\b(?:s|state)\.enterprise\b/.test(managementText));
+ok('Management source has no native prompt/confirm or TODO/FIXME placeholders',!/window\.(?:prompt|confirm)|\bTODO\b|\bFIXME\b/.test(managementText));
+const sm=await import(pathToFileURL(path.join(root,'src/features/platform-runtime/stateMachines.ts')).href);
+ok('Membership decision role helper allows Chapter Secretary',sm.membershipDecisionRoleAllowed('Chapter Secretary')===true);
+ok('Membership decision role helper denies State Reviewer final approval',sm.membershipDecisionRoleAllowed('State Reviewer')===false);
+ok('Management decision role helper matches human/code-normalized roles',sm.managementDecisionRoleAllowed('Chapter Treasurer','CHAPTER_TREASURER')===true);
+ok('Management decision role helper denies wrong accountable role',sm.managementDecisionRoleAllowed('Chapter Treasurer','Chapter Secretary')===false);
+console.log(`Management functional closure: ${pass} passed, ${fail} failed.`);if(fail)process.exit(1);

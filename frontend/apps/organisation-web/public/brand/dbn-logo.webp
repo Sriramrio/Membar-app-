@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" width="240" height="64" fill="none">
+  <defs>
+    <linearGradient id="dbnGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E87509" />
+      <stop offset="100%" stop-color="#BC5100" />
+    </linearGradient>
+  </defs>
+  
+  <rect x="2" y="10" width="44" height="44" rx="12" fill="#FFF3EA" stroke="#E87509" stroke-width="1.5" />
+  <text x="24" y="38" font-family="'Segoe UI', Roboto, Inter, sans-serif" font-size="16" font-weight="900" fill="#7C0928" text-anchor="middle">DBN</text>
+  
+  <text x="56" y="32" font-family="'Segoe UI', Roboto, Inter, sans-serif" font-size="16" font-weight="800" fill="#4A0718">Business Network</text>
+  <text x="56" y="46" font-family="'Segoe UI', Roboto, Inter, sans-serif" font-size="9" font-weight="700" letter-spacing="0.12em" fill="#716B6B">GLOBAL CHAPTERS</text>
+</svg>

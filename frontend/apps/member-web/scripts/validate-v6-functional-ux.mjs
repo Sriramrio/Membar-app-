@@ -1,0 +1,14 @@
+import fs from 'node:fs';import path from 'node:path';
+const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]);
+const files=walk('src').filter(f=>/\.tsx$/.test(f));const texts=new Map(files.map(f=>[f,fs.readFileSync(f,'utf8')]));const all=[...texts.values()].join('\n');let pass=0,fail=0;const ok=(c,m)=>{if(c){console.log(`PASS: ${m}`);pass++}else{console.error(`FAIL: ${m}`);fail++}};
+ok(!/<Link\b[^>]*>\s*<Button\b/s.test(all),'No Router Link wraps an interactive Button');
+ok(fs.existsSync('src/components/ui/LinkButton.tsx'),'Semantic LinkButton exists for button-styled navigation');
+const btn=fs.readFileSync('src/components/ui/Button.tsx','utf8'),linkBtn=fs.readFileSync('src/components/ui/LinkButton.tsx','utf8');
+ok(btn.includes('min-h-11'),'Shared Button maintains 44px minimum touch target');ok(linkBtn.includes('buttonVariants'),'LinkButton shares Button visual/touch contract');
+const member=[...texts].filter(([f])=>f.includes('/features/member/')).map(([,s])=>s).join('\n');ok(!member.includes('text-xs'),'Member feature source has no explicit 12px text utility');
+const login=texts.get('src/features/auth/components/LoginForm.tsx')??'';ok(!login.includes('text-xs'),'Authentication preview details avoid 12px typography');
+const dialog=texts.get('src/components/ui/ActionDialog.tsx')??'';ok(dialog.includes("e.key==='Escape'")&&dialog.includes("e.key!=='Tab'"),'ActionDialog provides Escape and focus-trap keyboard behavior');ok(dialog.includes('aria-modal="true"'),'ActionDialog exposes modal semantics');
+const errorBoundary=texts.get('src/components/ui/RouteErrorBoundary.tsx')??'';ok(errorBoundary.includes('Retry screen')||errorBoundary.includes('Return to workspace'),'Route error boundary exposes recovery action');
+const loading=[...texts].some(([,s])=>s.includes('aria-busy'));ok(loading,'Loading UX exposes aria-busy somewhere in shared UI');
+ok(!/window\.(?:confirm|prompt)\s*\(/.test(all),'No native prompt/confirm remains');
+if(fail){console.error(`\nSETHU V6.1 functional UX hardening: FAIL (${pass} passed, ${fail} failed).`);process.exit(1)}console.log(`\nSETHU V6.1 functional UX hardening: PASS (${pass}/${pass} checks).`);

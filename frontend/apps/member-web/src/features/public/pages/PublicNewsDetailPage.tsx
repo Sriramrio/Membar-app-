@@ -1,0 +1,4 @@
+import { useParams } from 'react-router-dom';
+import { useAppSelector } from '@/app/hooks';
+import { PublicCard, PublicShell } from '../components/PublicShell';
+export default function PublicNewsDetailPage(){const {id}=useParams();const a=useAppSelector(s=>s.network.announcements.find(x=>x.id===id&&(x.scope==='All members'||x.scope==='Public')));return <PublicShell compact><PublicCard>{a?<><div className="text-sm font-bold text-slate-500">{new Date(a.publishedAt).toLocaleDateString('en-IN')}</div><h1 className="mt-2 text-3xl font-black">{a.title}</h1><p className="mt-4 text-sm leading-7 text-slate-600">{a.body}</p></>:<><h1 className="text-xl font-black">News item unavailable</h1><p className="mt-2 text-sm text-slate-600">The item is not published for public viewing.</p></>}</PublicCard></PublicShell>}

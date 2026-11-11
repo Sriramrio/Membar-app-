@@ -1,0 +1,11 @@
+import fs from 'node:fs';const r=p=>fs.readFileSync(p,'utf8');let p=0,f=0;const c=(x,m)=>{console.log(`${x?'PASS':'FAIL'}: ${m}`);x?p++:f++};
+const svc=r('src/services/api/productionProviders.ts'),pay=r('src/features/member/pages/MyPaymentsPage.tsx'),mem=r('src/features/member/pages/MembershipPage.tsx'),doc=r('V6_PRODUCTION_PROVIDER_BOUNDARIES.md');
+for(const ep of ['/v6/payments/sessions','/v6/payments/status','/v6/payments/receipts','/v6/notifications/deliveries','/v6/integrations/health-checks','/v6/audit/query','/v6/authorization/evaluate'])c(svc.includes(ep)&&doc.includes(ep),`Provider boundary ${ep}`);
+c(pay.includes('createPaymentSession')&&pay.includes("purpose:'member-payment'")&&pay.includes('Pay securely'),'Member Payments uses production checkout session instead of local production mutation');
+c(mem.includes('createPaymentSession')&&mem.includes("purpose:'membership'")&&mem.includes('Pay renewal securely'),'Membership renewal uses production checkout session');
+c(pay.includes('safeExternalHttpUrl')&&mem.includes('safeExternalHttpUrl'),'Payment checkout redirect validates safe HTTP(S) URL');
+c(pay.includes('payMembership')&&pay.includes('previewPayment'),'Local payment reducer remains preview-only');
+c(mem.includes('payMembership')&&mem.includes('previewPayment'),'Local renewal reducer remains preview-only');
+c(doc.includes('never from browser redirect alone'),'Payment success is explicitly server/provider authoritative');
+c(doc.includes('immutable server audit store')&&doc.includes('server-authoritative permission/policy decision'),'Audit and RBAC server trust boundaries documented');
+console.log(`\nProvider/trust-boundary validation: ${f?'FAIL':'PASS'} — ${p}/${p+f}`);process.exit(f?1:0);

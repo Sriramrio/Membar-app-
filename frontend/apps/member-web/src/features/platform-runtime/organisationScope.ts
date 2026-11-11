@@ -1,0 +1,3 @@
+export interface ScopeUnit {id:string;name:string;parentId?:string;active?:boolean;}
+export function descendantUnitNames<T extends ScopeUnit>(units:T[],rootName:string|null|undefined){if(!rootName)return[];const root=units.find(u=>u.name===rootName);if(!root)return[rootName];const ids=new Set<string>([root.id]);let changed=true;while(changed){changed=false;for(const u of units){if(u.parentId&&ids.has(u.parentId)&&!ids.has(u.id)){ids.add(u.id);changed=true}}}return units.filter(u=>ids.has(u.id)).map(u=>u.name)}
+export function isUnitInScope<T extends ScopeUnit>(units:T[],rootName:string|null|undefined,target:string){const names=descendantUnitNames(units,rootName);return names.length?names.includes(target):rootName===target}

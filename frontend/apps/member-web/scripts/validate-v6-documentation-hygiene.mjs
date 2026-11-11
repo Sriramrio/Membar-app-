@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+const read=(p)=>fs.readFileSync(p,'utf8');
+const current=['README.md','RUNBOOK.md','ARCHITECTURE.md','COMPLETION_MATRIX.md','SOURCE_ALIGNMENT.md','TRACEABILITY.md','VALIDATION_REPORT.md','V6_CURRENT_RELEASE_INDEX.md','V6_DOCUMENTATION_HYGIENE_POLICY.md'];
+const checks=[];const check=(n,o,d='')=>checks.push({n,o:Boolean(o),d});
+for(const f of current) check(`Current-facing document exists: ${f}`,fs.existsSync(f));
+const joined=current.map(read).join('\n');
+check('Obsolete baseline ZIP is not presented as current source',!joined.includes('SETHU_Enterprise_Platform_V6_BASELINE_FINAL.zip'));
+check('Retired compatibilityProjection is not described as active current runtime',!joined.includes('compatibilityProjection.ts'));
+check('Retired runtimeProjection is not described as active current runtime',!joined.includes('runtimeProjection.ts'));
+check('Current recovery status is referenced',joined.includes('V6_RUNTIME_REMEDIATION_CHECKPOINT_STATUS.md'));
+check('Historical evidence is explicitly classified',/historical evidence/i.test(read('V6_CURRENT_RELEASE_INDEX.md')));
+check('Runtime certification non-claims are explicit',/TypeScript[\s\S]*Vitest[\s\S]*Vite[\s\S]*(BLOCKED|blocked|not PASS|NOT CLAIMED)/.test(joined));
+check('docs/history exists for lineage evidence',fs.existsSync('docs/history'));
+const failed=checks.filter(x=>!x.o);for(const c of checks)console.log(`${c.o?'PASS':'FAIL'}: ${c.n}${c.d?` (${c.d})`:''}`);if(failed.length){console.error(`\nDocumentation hygiene FAILED: ${failed.length}/${checks.length}`);process.exit(1)}console.log(`\nDocumentation hygiene: PASS — ${checks.length}/${checks.length}.`);

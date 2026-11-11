@@ -1,0 +1,23 @@
+Area,Scenario,Expected/Observed Handling,Status,Evidence
+General,Validation failure,400 VALIDATION; field/message shown,PASS,PA-FC05
+Security,Unauthenticated,401 AUTHENTICATION; fail closed,PASS,PA-FC05
+Security,Unauthorized,403 AUTHORIZATION; fail closed,PASS,PA-FC05
+Query,Not found,404 NOT_FOUND,PASS,PA-FC05
+Lifecycle,Gone/retired,410 GONE,PASS,PA-FC05
+Concurrency,Stale expectedVersion,412 CONFLICT + currentVersion + recovery,PASS,PA-FC05
+Rate limit,Too many requests,429 + Retry-After,PASS,PA-FC05
+Dependency,Dependency unavailable,503 DEPENDENCY,PASS,PA-FC05
+Connectivity,Offline,503 OFFLINE,PASS,PA-FC05
+Command,Cancelled,499 CANCELLED,PASS,PA-FC05
+Command,Unknown failure,500 UNKNOWN,PASS,PA-FC05
+Command,Unknown after commit,504 UNKNOWN_COMMITTED + reconciliation,PASS,PA-FC05
+Idempotency,Duplicate command,same result/reconciliation,PASS,base E2E/PA-FC05
+RBAC,Reviewer permission grant/revoke,Effective Access changes ALLOW/DENY,PASS,PA-FC03
+RACI,Missing resolver role,VALIDATION,PASS,PA-FC03
+SoD,Maker/checker conflict,denied before commit,PASS,base E2E/PA-FC03
+Delegation,Time-bound delegation,persisted assignment metadata,PASS,PA-FC03
+Configuration,Validate/impact/review lifecycle,governed lifecycle,PASS,PA-FC04
+Forms,Draft/validate/publish,governed version lifecycle,PASS,PA-FC04
+Workflow,Draft/validate/publish,governed version lifecycle,PASS,PA-FC04
+Accessibility,Keyboard/focus/touch/static responsive patterns,source validator,PASS,PA-FC06
+Accessibility,Rendered browser / assistive technology,requires browser runtime/deps,BLOCKED_ENVIRONMENT,PA-FC06

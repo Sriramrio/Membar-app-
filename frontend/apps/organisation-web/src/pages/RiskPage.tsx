@@ -1,0 +1,1 @@
+import {ControlsPage} from './ControlsPage';export default function RiskPage(){return <ControlsPage mode="RISK"/>}

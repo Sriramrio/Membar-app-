@@ -1,0 +1,2 @@
+export const performanceBudgets={uiFeedbackMs:100,cachedUsableMs:1000,readP95Ms:800,searchP95Ms:800,commandP95Ms:1000,slowOperationMs:2000,maxPageSize:100,defaultPageSize:25};
+export function classifyLatency(durationMs:number,kind:'read'|'search'|'command'){const targetMs=kind==='read'?performanceBudgets.readP95Ms:kind==='search'?performanceBudgets.searchP95Ms:performanceBudgets.commandP95Ms;return{targetMs,slow:durationMs>targetMs,critical:durationMs>performanceBudgets.slowOperationMs}}

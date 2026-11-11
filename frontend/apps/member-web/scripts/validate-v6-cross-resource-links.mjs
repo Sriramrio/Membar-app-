@@ -1,0 +1,11 @@
+import fs from 'node:fs';const read=p=>fs.readFileSync(p,'utf8');let p=0,f=0;const c=(x,m)=>{console.log(`${x?'PASS':'FAIL'}: ${m}`);x?p++:f++};
+const targets=read('src/navigation/entityTargets.ts'),header=read('src/components/layout/Header.tsx'),audit=read('src/features/platform-admin/pages/AuditExplorerPage.tsx'),dq=read('src/features/platform-admin/pages/DataQualityCentrePage.tsx'),mod=read('src/features/platform-admin/pages/ModerationQueuePage.tsx'),notif=read('src/features/member/pages/NotificationsPage.tsx');
+c(targets.includes('safeNavigationTarget'),'Canonical notification/path safety helper exists');
+for(const k of ['platform-role','workflow-definition','form-definition','taxonomy','integration','configuration-change','audit-event'])c(header.includes(`entityTarget('${k}'`),`Header search deep-links ${k}`);
+c(header.includes('safeNavigationTarget(n.href)'),'Header notification navigation is canonical/safe');
+c(notif.includes('safeNavigationTarget(n.href)'),'Notification centre navigation is canonical/safe');
+c(audit.includes('resourceTarget(e.resource,e.recordId)')&&audit.includes('Open affected record'),'Audit Explorer cross-links affected records');
+c(dq.includes('resourceTarget(x.entity,x.recordId)')&&dq.includes('Open source record'),'Data Quality cross-links source records');
+c(mod.includes('resourceTarget(c.resource,c.recordId)')&&mod.includes('Open governed record'),'Moderation cross-links governed records');
+c(header.includes('identityRecords,auditEvents,controlPlane'),'Search memo dependencies include identity/audit state');
+console.log(`\nSETHU V6 N07 cross-resource links: ${f?'FAIL':'PASS'} — ${p}/${p+f}`);process.exit(f?1:0);

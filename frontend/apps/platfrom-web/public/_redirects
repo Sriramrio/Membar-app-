@@ -1,0 +1,5 @@
+# Cloudflare Pages Proxy & SPA Fallback
+/api/* https://sethudbnapi.dharmicbusines.com/api/:splat 200
+/v6/* https://sethudbnapi.dharmicbusines.com/v6/:splat 200
+/* /index.html 200
+

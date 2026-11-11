@@ -1,0 +1,5 @@
+import {readdirSync,readFileSync,statSync} from 'node:fs';import{join,relative}from'node:path';import{fileURLToPath}from'node:url';
+const root=fileURLToPath(new URL('../src/',import.meta.url));const files=[];function walk(p){for(const n of readdirSync(p)){const x=join(p,n);if(statSync(x).isDirectory())walk(x);else if(/\.(ts|tsx)$/.test(n))files.push(x)}}walk(root);
+const forbiddenImports=["@/features/member/","@/features/network/","@/features/operations/","@/features/governance/","@/features/management/"];const forbiddenRoutes=[/['\"]\/app\//,/['\"]\/org\//,/['\"]\/governance\//];const failures=[];
+for(const f of files){const t=readFileSync(f,'utf8');for(const x of forbiddenImports)if(t.includes(x))failures.push(`${relative(root,f)} imports forbidden ${x}`);for(const r of forbiddenRoutes)if(r.test(t))failures.push(`${relative(root,f)} owns consumer route ${r}`)}
+if(failures.length){console.error(failures.join('\n'));process.exit(1)}console.log(`PASS standalone isolation: ${files.length} TS/TSX files; 0 Member/Organisation/Governance feature imports or owned routes.`)

@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Sethu.Domain/Sethu.Domain.csproj" />
+    <Project Path="src/Sethu.Contracts/Sethu.Contracts.csproj" />
+    <Project Path="src/Sethu.Service/Sethu.Service.csproj" />
+    <Project Path="src/Sethu.Infrastructure/Sethu.Infrastructure.csproj" />
+    <Project Path="src/Sethu.Api/Sethu.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Sethu.TrackA.SourceTests/Sethu.TrackA.SourceTests.csproj" />
+  </Folder>
+</Solution>

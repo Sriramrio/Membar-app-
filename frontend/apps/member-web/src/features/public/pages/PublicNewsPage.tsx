@@ -1,0 +1,4 @@
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '@/app/hooks';
+import { PublicCard, PublicShell } from '../components/PublicShell';
+export default function PublicNewsPage(){const announcements=useAppSelector(s=>s.network.announcements.filter(a=>a.scope==='All members'||a.scope==='Public'));return <PublicShell><h1 className="text-3xl font-black">News</h1><div className="mt-6 grid gap-4 md:grid-cols-2">{announcements.map(a=><PublicCard key={a.id}><div className="text-sm font-bold text-slate-500">{new Date(a.publishedAt).toLocaleDateString('en-IN')}</div><h2 className="mt-2 text-lg font-black">{a.title}</h2><p className="mt-2 text-sm leading-6 text-slate-600">{a.body}</p><Link className="mt-4 inline-block text-sm font-bold text-sky-700" to={`/news/${a.id}`}>Read →</Link></PublicCard>)}{!announcements.length&&<PublicCard><p className="text-sm text-slate-600">No public news is currently published.</p></PublicCard>}</div></PublicShell>}

@@ -1,0 +1,110 @@
+import { stableClientId } from '@/utils/stableId';
+import { useEffect,useMemo,useState } from 'react';
+import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/Card';
+import { Input } from '@/components/common/Input';
+import { ActionDialog } from '@/components/ui/ActionDialog';
+import { EmptyState,PageHead,StatusPill,Tip } from '@/features/network/components/NetworkUI';
+import { useAppDispatch,useAppSelector } from '@/app/hooks';
+import { ConfigurationReleasePanel } from '@/features/control-plane/components/ConfigurationReleasePanel';
+import { deleteFormAuthoringDraft,linkFormAuthoringDraftToRelease,proposeConfigurationChange,saveFormAuthoringDraft } from '@/features/control-plane/controlPlaneSlice';
+import type { DynamicFormDefinition, DynamicFormField, FormAuthoringDraft } from '@/features/control-plane/types';
+import { clearDirtyGuard,setDirtyGuard } from '@/features/member/navigation/memberNavigationSlice';
+import { registerNavigationDraftSaver } from '@/features/member/navigation/navigationDraftRegistry';
+import { FormFieldEditor } from './FormFieldEditor';
+import { FormRuntimePreview } from './FormRuntimePreview';
+import { FormValidationSummary } from './FormValidationSummary';
+import { FORM_PURPOSES,draftFromDefinition,formSnapshot,freshDraft,newFieldId,slugFormCode,validateFormDraft } from './formBuilderModel';
+import { canProposePlatformConfiguration } from '@/features/platform-admin/access-control/platformAccess';
+import { serverClock } from '@/services/time/serverClock';
+
+const selectClass='min-h-11 rounded-lg border border-slate-300 bg-white px-3 text-sm';
+const textAreaClass='min-h-24 rounded-lg border border-slate-300 bg-white p-3 text-sm outline-none focus:border-sky-600 focus:ring-3 focus:ring-sky-100';
+const clone=<T,>(value:T):T=>JSON.parse(JSON.stringify(value)) as T;
+const makeReleaseId=()=>stableClientId('CFG-FORM');
+type PendingConfirm={mode:'delete-field';fieldId:string}|{mode:'delete-draft';draftId:string}|{mode:'close-editor'}|null;
+
+export default function FormBuilderPageV6(){
+ const dispatch=useAppDispatch();
+ const account=useAppSelector(s=>s.auth.account);
+ const actor=account?.name??'Platform administrator';
+ const canMake=canProposePlatformConfiguration(account?.role);
+ const forms=useAppSelector(s=>s.controlPlane.forms);
+ const formHistory=useAppSelector(s=>s.controlPlane.formHistory);
+ const savedDrafts=useAppSelector(s=>s.controlPlane.formDrafts);
+ const changes=useAppSelector(s=>s.controlPlane.changes);
+ const [editing,setEditing]=useState<FormAuthoringDraft|null>(null);
+ const [savedSnapshot,setSavedSnapshot]=useState('');
+ const [fieldEditor,setFieldEditor]=useState<DynamicFormField|null>(null);
+ const [notice,setNotice]=useState('');
+ const [confirm,setConfirm]=useState<PendingConfirm>(null);
+ const [previewOpen,setPreviewOpen]=useState(false);
+ const [releaseReason,setReleaseReason]=useState('');
+ const definition=editing?.definition;
+ const draftValidation=useMemo(()=>definition?validateFormDraft(definition,forms,'draft'):{formErrors:[],fieldErrors:{},valid:true},[definition,forms]);
+ const releaseValidation=useMemo(()=>definition?validateFormDraft(definition,forms,'release'):{formErrors:[],fieldErrors:{},valid:true},[definition,forms]);
+ const dirty=Boolean(editing&&formSnapshot(editing)!==savedSnapshot);
+ const linkedChange=editing?.releaseChangeId?changes.find(c=>c.id===editing.releaseChangeId):undefined;
+
+ const changeDefinition=(fn:(current:DynamicFormDefinition)=>DynamicFormDefinition)=>setEditing(current=>current?{...current,definition:fn(current.definition)}:current);
+ const saveDraft=()=>{
+  if(!canMake){setNotice('Review mode is read-only. Switch to Platform Administrator or Super Administrator to author form drafts.');return false}
+  if(!editing)return false;
+  const validation=validateFormDraft(editing.definition,forms,'draft');
+  if(!validation.valid){setNotice('Draft was not saved because the current structure contains errors. Review the validation summary.');return false}
+  const next={...editing,savedAt:serverClock.isoNow(),savedBy:actor};
+  dispatch(saveFormAuthoringDraft(next));setEditing(next);setSavedSnapshot(formSnapshot(next));setNotice('Draft saved. You can leave this page and reopen it later.');return true;
+ };
+ useEffect(()=>{if(dirty)dispatch(setDirtyGuard({dirty:true,label:definition?.name?.trim()?`Form Builder · ${definition.name}`:'Form Builder draft',canSaveDraft:true,draftKey:'platform-admin-form-builder'}));else dispatch(clearDirtyGuard());return()=>{dispatch(clearDirtyGuard())}},[dirty,definition?.name,dispatch]);
+ useEffect(()=>registerNavigationDraftSaver('platform-admin-form-builder',saveDraft),[editing,forms,actor]);
+ useEffect(()=>{const h=(e:BeforeUnloadEvent)=>{if(dirty){e.preventDefault();e.returnValue=''}};window.addEventListener('beforeunload',h);return()=>window.removeEventListener('beforeunload',h)},[dirty]);
+ useEffect(()=>{if(!editing?.releaseChangeId)return;const change=changes.find(c=>c.id===editing.releaseChangeId);if(change?.status==='Active'){setNotice(`Form ${editing.definition.name} v${editing.definition.version} is active. The authoring draft has been closed and retained configuration history is available below.`);setEditing(null);setSavedSnapshot('');setFieldEditor(null);setPreviewOpen(false);dispatch(clearDirtyGuard())}},[changes,editing,dispatch]);
+
+ const resetEditorExtras=()=>{setFieldEditor(null);setPreviewOpen(false);setReleaseReason('')};
+ const openFresh=()=>{if(!canMake){setNotice('Review mode is read-only.');return}if(dirty){setConfirm({mode:'close-editor'});return}const draft=freshDraft();setEditing(draft);setSavedSnapshot('');resetEditorExtras();setNotice('New form draft opened. Save Draft when you want to preserve your work.')};
+ const openSaved=(draft:FormAuthoringDraft)=>{if(!canMake){setNotice('Review mode is read-only.');return}if(dirty){setNotice('Save or discard the current edits before opening another draft.');return}const next=clone(draft);setEditing(next);setSavedSnapshot(formSnapshot(next));resetEditorExtras();setNotice(`Opened saved draft${draft.savedAt?` from ${new Date(draft.savedAt).toLocaleString('en-IN')}`:''}.`)};
+ const startRevision=(form:DynamicFormDefinition)=>{if(!canMake){setNotice('Review mode is read-only.');return}if(dirty){setNotice('Save or discard the current edits before starting another revision.');return}const draft=draftFromDefinition(form);setEditing(draft);setSavedSnapshot('');resetEditorExtras();setNotice(`Version ${draft.definition.version} draft created from active version ${form.version}. It is not saved until you choose Save Draft.`)};
+ const startAddField=()=>{if(!canMake||!definition)return;setFieldEditor({id:newFieldId(definition.fields),label:'',type:'text',required:false})};
+ const saveField=(field:DynamicFormField)=>{if(!canMake)return;changeDefinition(d=>{const i=d.fields.findIndex(x=>x.id===fieldEditor?.id);const fields=[...d.fields];if(i>=0)fields[i]=field;else fields.push(field);return{...d,fields}});setFieldEditor(null);setNotice('Field updated in the authoring draft. Save Draft to persist it.')};
+ const moveField=(id:string,dir:-1|1)=>{if(!canMake)return;changeDefinition(d=>{const i=d.fields.findIndex(x=>x.id===id);const target=i+dir;if(i<0||target<0||target>=d.fields.length)return d;const fields=[...d.fields];[fields[i],fields[target]]=[fields[target],fields[i]];return{...d,fields}})};
+ const duplicateField=(field:DynamicFormField)=>{if(!canMake)return;changeDefinition(d=>{const id=newFieldId(d.fields);return{...d,fields:[...d.fields,{...clone(field),id,label:`${field.label} copy`}]}})};
+ const removeField=(id:string)=>{if(!canMake)return;changeDefinition(d=>({...d,fields:d.fields.filter(x=>x.id!==id)}));setFieldEditor(current=>current?.id===id?null:current);setNotice('Field removed from the authoring draft. Save Draft to persist the change.')};
+ const closeEditor=()=>{if(dirty){setConfirm({mode:'close-editor'});return}setEditing(null);resetEditorExtras();setNotice('')};
+ const executeConfirm=()=>{if(!confirm)return;if(confirm.mode==='delete-field')removeField(confirm.fieldId);if(confirm.mode==='delete-draft'){dispatch(deleteFormAuthoringDraft({id:confirm.draftId}));if(editing?.id===confirm.draftId){setEditing(null);setSavedSnapshot('');resetEditorExtras()}setNotice('Saved draft discarded.')}if(confirm.mode==='close-editor'){setEditing(null);setSavedSnapshot('');resetEditorExtras();dispatch(clearDirtyGuard());setNotice('Unsaved form edits discarded.')}setConfirm(null)};
+ const onName=(name:string)=>changeDefinition(d=>({...d,name,code:!d.code||d.code===slugFormCode(d.name)?slugFormCode(name):d.code}));
+ const prepareRelease=()=>{
+  if(!canMake){setNotice('Review mode is read-only. Use the release queue below for independent checker actions.');return}
+  if(!editing||!definition)return;
+  if(dirty){setNotice('Save Draft before preparing a governed release so the release payload and saved authoring state are identical.');return}
+  const validation=validateFormDraft(definition,forms,'release');
+  if(!validation.valid){setNotice('Release was not prepared. Resolve all release-readiness validation issues first.');return}
+  if(!releaseReason.trim()){setNotice('Enter a change reason before preparing the governed release.');return}
+  const activeLinked=editing.releaseChangeId?changes.find(c=>c.id===editing.releaseChangeId&&!['Rejected','Superseded','Rolled Back'].includes(c.status)):undefined;
+  if(activeLinked){setNotice(`This draft is already linked to configuration change ${activeLinked.id} (${activeLinked.status}). Continue that release below.`);return}
+  const changeId=makeReleaseId();const releaseDraft:DynamicFormDefinition={...clone(definition),status:'Draft',active:false};
+  dispatch(proposeConfigurationChange({changeId,artifactType:'Form',artifactId:definition.id,draft:releaseDraft,actor,reason:releaseReason.trim(),changeSummary:`Form ${definition.name} v${definition.version}`,affectedModules:[definition.targetModule||'Dynamic Forms'],effectiveFrom:definition.effectiveFrom,idempotencyKey:`form-release:${editing.id}:${definition.version}:${formSnapshot(editing)}`}));
+  dispatch(linkFormAuthoringDraftToRelease({id:editing.id,releaseChangeId:changeId}));
+  const linked={...editing,releaseChangeId:changeId,savedAt:serverClock.isoNow(),savedBy:actor};dispatch(saveFormAuthoringDraft(linked));setEditing(linked);setSavedSnapshot(formSnapshot(linked));setNotice(`Governed release ${changeId} prepared. Run Validate and Impact, then Submit for independent review.`);
+ };
+
+ return <div>
+  <PageHead title="Form Builder" description="Author runtime forms as persistent drafts, preview them safely, then move structurally valid versions through governed validation, impact, independent approval and activation." actions={canMake?<Button onClick={openFresh}>New form draft</Button>:undefined}/>{!canMake&&<div className="mb-4 rounded-xl border border-sky-200 bg-sky-50 p-3 text-sm text-sky-900"><strong>Review mode.</strong> Active forms and governed releases are available for inspection/review; authoring controls require Platform Administrator or Super Administrator context.</div>}
+  {notice&&<div role="status" className={`mb-5 rounded-xl border p-3 text-sm font-semibold ${notice.includes('not saved')||notice.startsWith('Save or discard')||notice.includes('Resolve')||notice.includes('Enter a change')?'border-amber-200 bg-amber-50 text-amber-900':'border-emerald-200 bg-emerald-50 text-emerald-900'}`}>{notice}</div>}
+  <div className="grid gap-5 xl:grid-cols-[320px_minmax(0,1fr)]">
+   <aside className="grid content-start gap-4">
+    <Card><h2 className="font-black">Saved authoring drafts</h2><p className="mt-1 text-sm text-slate-500">Persisted separately from active runtime forms.</p><div className="mt-3 grid gap-2">{savedDrafts.map(d=><div key={d.id} className={`rounded-lg border p-3 ${editing?.id===d.id?'border-sky-300 bg-sky-50':'border-slate-200'}`}>{canMake?<button type="button" className="w-full text-left" onClick={()=>openSaved(d)}><div className="break-words font-bold">{d.definition.name||'Untitled form'}</div><div className="mt-1 break-words text-sm text-slate-500">{d.definition.code||'No code'} · {d.definition.purpose} · v{d.definition.version}</div><div className="mt-1 text-sm text-slate-400">{d.savedAt?`Saved ${new Date(d.savedAt).toLocaleString('en-IN')}`:'Not saved'}{d.releaseChangeId?` · Release ${d.releaseChangeId}`:''}</div></button>:<div><div className="break-words font-bold">{d.definition.name||'Untitled form'}</div><div className="mt-1 break-words text-sm text-slate-500">{d.definition.code||'No code'} · {d.definition.purpose} · v{d.definition.version}</div></div>}{canMake&&<Button className="mt-2" type="button" variant="ghost" onClick={()=>setConfirm({mode:'delete-draft',draftId:d.id})}>Discard draft</Button>}</div>)}{!savedDrafts.length&&<EmptyState title="No saved drafts" body="Start a new form or create a new version of an active form."/>}</div></Card>
+    <Card><h2 className="font-black">Active runtime forms</h2><div className="mt-3 grid gap-2">{forms.filter(f=>f.active&&f.status==='Active').map(f=>{const history=formHistory.filter(h=>h.id===f.id).sort((a,b)=>b.version-a.version);return <div key={f.id} className="rounded-lg border border-slate-200 p-3"><div className="break-words font-bold">{f.name}</div><div className="mt-1 break-words text-sm text-slate-500">{f.code} · {f.purpose} · v{f.version}</div><div className="mt-2 flex flex-wrap gap-2">{canMake&&<Button type="button" variant="secondary" onClick={()=>startRevision(f)}>Create new version</Button>}{history.length>0&&<details className="w-full rounded-lg bg-slate-50 p-2 text-sm"><summary className="cursor-pointer font-bold">Version history ({history.length})</summary><div className="mt-2 grid gap-1">{history.map(h=><div key={`${h.id}-${h.version}`}>v{h.version} · {h.status} · {h.fields.length} fields</div>)}</div></details>}</div></div>})}</div></Card>
+   </aside>
+   <main className="min-w-0">{!editing?<EmptyState title="Select or create a form draft" body="Nothing changes at runtime until a saved authoring draft completes the governed configuration lifecycle and is activated." action={canMake?<Button onClick={openFresh}>New form draft</Button>:undefined}/>:<div className="grid gap-5">
+    <Card><div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between"><div className="min-w-0"><div className="flex flex-wrap items-center gap-2"><h2 className="break-words text-xl font-black">{definition?.name||'Untitled form'}</h2><StatusPill tone="warn">Authoring Draft</StatusPill>{dirty&&<StatusPill tone="warn">Unsaved changes</StatusPill>}{linkedChange&&<StatusPill tone={linkedChange.status==='Rejected'?'bad':linkedChange.status==='Active'?'good':'info'}>{linkedChange.status}</StatusPill>}</div><p className="mt-1 text-sm text-slate-600">{editing.sourceVersion?`Based on active version ${editing.sourceVersion}`:'New form'} · target version {definition?.version}</p></div><div className="flex flex-wrap gap-2"><Button type="button" onClick={saveDraft}>Save Draft</Button><Button type="button" variant="secondary" onClick={()=>setPreviewOpen(x=>!x)}>{previewOpen?'Hide preview':'Preview Form'}</Button><Button type="button" variant="secondary" onClick={closeEditor}>Close editor</Button></div></div><div className="mt-5 grid gap-4 md:grid-cols-2"><Input label="Form name" value={definition?.name??''} onChange={e=>onName(e.target.value)} error={draftValidation.formErrors.find(x=>x.toLowerCase().includes('name'))}/><Input label="Form code" value={definition?.code??''} onChange={e=>changeDefinition(d=>({...d,code:e.target.value.toLowerCase()}))} hint="Stable runtime identifier, e.g. event.registration.extra"/><label className="grid gap-1.5 text-sm font-semibold">Purpose<select className={selectClass} value={definition?.purpose??''} onChange={e=>changeDefinition(d=>({...d,purpose:e.target.value}))}>{FORM_PURPOSES.map(x=><option key={x} value={x}>{x}</option>)}</select></label><Input label="Target module" value={definition?.targetModule??''} onChange={e=>changeDefinition(d=>({...d,targetModule:e.target.value}))}/><Input label="Target entity / journey" value={definition?.targetEntity??''} onChange={e=>changeDefinition(d=>({...d,targetEntity:e.target.value}))}/><Input type="date" label="Effective from" value={definition?.effectiveFrom??''} onChange={e=>changeDefinition(d=>({...d,effectiveFrom:e.target.value||undefined}))}/><label className="grid gap-1.5 text-sm font-semibold md:col-span-2">Description<textarea className={textAreaClass} value={definition?.description??''} onChange={e=>changeDefinition(d=>({...d,description:e.target.value}))}/></label><label className="grid gap-1.5 text-sm font-semibold md:col-span-2">Runtime instructions<textarea className={textAreaClass} value={definition?.instructions??''} onChange={e=>changeDefinition(d=>({...d,instructions:e.target.value}))}/></label><Input className="md:col-span-2" label="Confirmation message" value={definition?.confirmationMessage??''} onChange={e=>changeDefinition(d=>({...d,confirmationMessage:e.target.value}))}/></div></Card>
+    <FormValidationSummary validation={draftValidation}/>
+    <Card><div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><div><h2 className="font-black">Fields</h2><p className="mt-1 text-sm text-slate-500">Add and edit fields without creating a configuration release. Ordering is explicit and keyboard-accessible.</p></div><Button type="button" onClick={startAddField}>Add field</Button></div><div className="mt-4 grid gap-3">{definition?.fields.map((field,index)=><div key={`${field.id}-${index}`} className="rounded-xl border border-slate-200 p-3"><div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between"><div className="min-w-0"><div className="flex flex-wrap items-center gap-2"><strong className="break-words">{index+1}. {field.label}</strong><StatusPill>{field.type}</StatusPill>{field.required&&<StatusPill tone="warn">Required</StatusPill>}{field.readOnly&&<StatusPill>Read only</StatusPill>}</div><div className="mt-1 break-words text-sm text-slate-500">ID {field.id}{field.section?` · Section ${field.section}`:''}{field.helpText?` · ${field.helpText}`:''}</div>{draftValidation.fieldErrors[field.id]?.length&&<div className="mt-2 text-sm font-semibold text-rose-700">{draftValidation.fieldErrors[field.id].join(' · ')}</div>}</div><div className="flex flex-wrap gap-2"><Button type="button" variant="secondary" onClick={()=>setFieldEditor(clone(field))}>Edit</Button><Button type="button" variant="ghost" disabled={index===0} onClick={()=>moveField(field.id,-1)}>Move up</Button><Button type="button" variant="ghost" disabled={index===definition.fields.length-1} onClick={()=>moveField(field.id,1)}>Move down</Button><Button type="button" variant="ghost" onClick={()=>duplicateField(field)}>Duplicate</Button><Button type="button" variant="danger" onClick={()=>setConfirm({mode:'delete-field',fieldId:field.id})}>Delete</Button></div></div></div>)}{!definition?.fields.length&&<EmptyState title="No fields yet" body="Add the first field. A release cannot be prepared until the form has at least one valid field." action={<Button onClick={startAddField}>Add first field</Button>}/>}</div>{fieldEditor&&<div className="mt-4"><FormFieldEditor initial={fieldEditor} existingIds={definition?.fields.map(x=>x.id)??[]} onSave={saveField} onCancel={()=>setFieldEditor(null)}/></div>}</Card>
+    {previewOpen&&definition&&<FormRuntimePreview form={definition}/>} 
+    <Card><h2 className="font-black">Release readiness & governance</h2><p className="mt-1 text-sm text-slate-600">Save the authoring draft first. When structurally ready, prepare one governed configuration change, then use Validate → Impact → Submit → independent approval → Activate.</p><div className="mt-3 flex flex-wrap gap-2">{releaseValidation.valid?<StatusPill tone="good">Structurally ready</StatusPill>:<StatusPill tone="warn">{releaseValidation.formErrors.length+Object.values(releaseValidation.fieldErrors).flat().length} release-readiness issue(s)</StatusPill>}<StatusPill>{definition?.fields.length??0} field(s)</StatusPill>{editing.releaseChangeId&&<StatusPill>Release linked</StatusPill>}</div><label className="mt-4 grid gap-1.5 text-sm font-bold">Change reason<textarea className={textAreaClass} value={releaseReason} onChange={e=>setReleaseReason(e.target.value)} placeholder="Why is this form or version required?"/></label><div className="mt-3 flex flex-wrap gap-2"><Button type="button" disabled={!releaseValidation.valid||dirty||Boolean(linkedChange&&!['Rejected','Superseded','Rolled Back'].includes(linkedChange.status))} onClick={prepareRelease}>Prepare Release</Button>{dirty&&<span className="self-center text-sm font-semibold text-amber-700">Save Draft before preparing release.</span>}</div></Card>
+    {definition&&<ConfigurationReleasePanel artifactType="Form" artifactId={definition.id} limit={6} emptyMessage="No governed release exists for this form draft yet."/>}
+    <Tip>Activation normalises the approved form to Active runtime state. A replaced active version is archived in `formHistory`, and historic submissions can resolve their original version instead of using the newest field labels.</Tip>
+   </div>}</main>
+  </div>
+  <ActionDialog open={Boolean(confirm)} title={confirm?.mode==='delete-field'?'Delete field from draft?':confirm?.mode==='delete-draft'?'Discard saved draft?':'Discard unsaved form edits?'} description={confirm?.mode==='delete-field'?'The field is removed only from the authoring draft. Save Draft to persist the removal.':confirm?.mode==='delete-draft'?'The saved authoring draft will be removed. Active runtime forms are unaffected.':'Unsaved edits in the current authoring session will be lost.'} confirmLabel={confirm?.mode==='delete-field'?'Delete field':confirm?.mode==='delete-draft'?'Discard draft':'Discard edits'} confirmVariant="danger" onClose={()=>setConfirm(null)} onConfirm={executeConfirm}/>
+ </div>;
+}

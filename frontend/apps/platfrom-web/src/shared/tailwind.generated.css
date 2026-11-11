@@ -1,0 +1,22 @@
+/*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
+.tw-flex {
+  display: flex;
+}
+.tw-inline-flex {
+  display: inline-flex;
+}
+.tw-grid {
+  display: grid;
+}
+.tw-hidden {
+  display: none;
+}
+.tw-block {
+  display: block;
+}
+.tw-w-full {
+  width: 100%;
+}
+.tw-h-full {
+  height: 100%;
+}

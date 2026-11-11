@@ -1,0 +1,26 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+let pass=0,fail=0;const check=(ok,label)=>{console.log(`${ok?'PASS':'FAIL'}: ${label}`);ok?pass++:fail++};
+const scope=read('src/features/member/components/MemberJourneyScopeBar.tsx');
+const nav=read('src/config/navigation.ts');
+const meta=read('src/config/routeMetadata.ts');
+const routes=read('src/routes/routeConfig.tsx');
+const selectors=read('src/features/network/selectors.ts');
+const slice=read('src/features/network/networkSlice.ts');
+const converse=read('src/features/member/pages/ConverseThreadPage.tsx');
+const inbox=read('src/features/member/pages/ConverseInboxPage.tsx');
+const sourceFiles=['MemberHomePage.tsx','SmartMemberBusinessDirectoryPage.tsx','OpportunityMarketplacePage.tsx','ConnectionsPage.tsx','ConnectionSuggestionsPage.tsx','EventsPage.tsx'];
+check(scope.includes("label: 'For You'")&&scope.includes("label: 'Your Chapter'")&&scope.includes("label: 'Your Network'"),'Three-scope Member Journey labels are canonical');
+for(const f of sourceFiles){const t=read(`src/features/member/pages/${f}`);check(t.includes('MemberJourneyScopeBar'),`${f} participates in three-scope journey`)}
+check(nav.includes("{label:'Converse',path:'/app/messages'}"),'Visible navigation names in-app discussion Converse');
+check(meta.includes("m(21,'Converse'")&&meta.includes("m(22,'Converse'"),'Route metadata presents canonical Messages routes as Converse');
+check(routes.includes('path:"/app/messages"')&&routes.includes('path:"/app/messages/:conversationId"'),'Canonical V6 internal Converse routes are preserved');
+check(selectors.includes('directConversationBetween='),'Canonical direct Converse pair resolver exists');
+check(slice.includes("(c.kind??'direct')==='direct'&&c.participantIds.length===2"),'Reducer de-duplicates one direct thread per Member pair');
+check(converse.includes('Type or paste your message')&&converse.includes('Text only in this version'),'Converse composer is text-only');
+check(!/type=["']file["']|attachment/i.test(converse),'Converse thread contains no file/attachment UI');
+check(!/type=["']file["']|attachment/i.test(inbox),'Converse inbox contains no file/attachment UI');
+check(converse.includes("searchParams.get('context')")&&converse.includes('ContextBanner'),'Converse preserves owning workflow context without splitting direct threads');
+const memberSource=fs.readdirSync('src/features/member/pages').filter(x=>x.endsWith('.tsx')).map(x=>read(`src/features/member/pages/${x}`)).join('\n');
+check(!/>(Message|Messages|Chat|Chats|Messaging)</.test(memberSource),'No stale user-facing Message/Chat labels in Member pages');
+console.log(`\nSETHU Member Journey modernisation gate: ${fail?'FAIL':'PASS'} — ${pass}/${pass+fail}`);process.exit(fail?1:0);

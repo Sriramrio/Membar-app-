@@ -1,0 +1,12 @@
+{
+  "name": "@sethu/test-fixtures",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./fixtures.json": "./fixtures.json"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

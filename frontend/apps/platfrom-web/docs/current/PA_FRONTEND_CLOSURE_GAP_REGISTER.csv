@@ -1,0 +1,6 @@
+GapId,Area,Finding,Status,PlannedClosure
+FC-GAP-001,Simulator,Generic E2E fails at platform.configuration.validate,FAILED_VALIDATION,PA-FC01
+FC-GAP-002,Routes,14 routes pending runtime evidence,IMPLEMENTED_PENDING_RUNTIME_TEST,PA-FC02
+FC-GAP-003,Build,React/Vite dependency-backed typecheck/build not certified,BLOCKED_ENVIRONMENT,PA-FC09
+FC-GAP-004,Tests,No browser/component test framework available in baseline,BLOCKED_ENVIRONMENT,PA-FC02/FC06 deterministic harnesses
+FC-GAP-005,Docs,Current and historical validation evidence mixed together,VERIFIED_FROM_SOURCE,PA-FC08

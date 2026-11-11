@@ -1,0 +1,12 @@
+import fs from 'node:fs';import path from 'node:path';
+const read=f=>fs.readFileSync(f,'utf8');let pass=0,fail=0;const ok=(c,m)=>{console.log(`${c?'PASS':'FAIL'}: ${m}`);c?pass++:fail++};
+const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]);
+const source=walk('src').filter(f=>/\.(ts|tsx)$/.test(f)&&!f.replace(/\\/g,'/').includes('/services/storage/')).map(read).join('\n');
+ok(!/(?:^|[^A-Za-z0-9_$])(?:sessionStorage|localStorage)\s*\./m.test(source),'Application source uses browser storage only through storage services');
+ok(!/catch\s*\{\s*\}/.test(source),'No silent empty catch blocks remain in application source');
+const boundary=read('src/components/ui/RouteErrorBoundary.tsx');ok(boundary.includes("telemetry.error('ui','route.error-boundary'"),'Route error boundary emits structured telemetry');ok(!boundary.includes('console.error'),'Route error boundary no longer relies on console logging');
+const global=read('src/services/telemetry/globalErrorCapture.ts');ok(global.includes("addEventListener('error'")&&global.includes("addEventListener('unhandledrejection'"),'Global error and unhandled-rejection capture are installed');
+const main=read('src/main.tsx');ok(main.includes('installGlobalErrorCapture()'),'Global error capture is activated at application startup');
+const interceptor=read('src/services/api/interceptors.ts');ok(interceptor.includes("'X-Correlation-ID'")&&interceptor.includes("'X-Request-ID'")&&interceptor.includes("'Idempotency-Key'"),'API requests carry correlation, request and idempotency identifiers');ok(interceptor.includes("telemetry.error('api','request.failed'"),'API failures emit structured telemetry');
+const draft=read('src/services/storage/versionedDraft.ts');ok(draft.includes('schemaVersion')&&draft.includes('screenId')&&draft.includes('savedAt'),'Persisted draft envelope is versioned and source identified');
+console.log(`\nSETHU V6 error/resilience validation: ${fail?'FAIL':'PASS'} — ${pass}/${pass+fail}`);process.exit(fail?1:0);

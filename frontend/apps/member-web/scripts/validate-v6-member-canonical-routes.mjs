@@ -1,0 +1,21 @@
+import { readFile,readdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
+const root=fileURLToPath(new URL('..',import.meta.url));
+const read=async p=>readFile(join(root,p),'utf8');
+let failures=0;const pass=m=>console.log(`PASS: ${m}`);const fail=m=>{failures++;console.error(`FAIL: ${m}`)};
+const route=await read('src/routes/routeConfig.tsx');
+const imports=[...route.matchAll(/const\s+(Screen\d+)\s*=\s*lazy\(\(\)\s*=>\s*import\('(@\/features\/member\/pages\/[^']+)'\)\)/g)];
+const importByScreen=new Map(imports.map(m=>[m[1],m[2]]));
+const memberRoutes=[...route.matchAll(/\{\s*id:(\d+),\s*path:"([^"]+)",\s*workspace:"Member" as Workspace,\s*component:(Screen\d+)\s*\}/g)].map(m=>({id:Number(m[1]),path:m[2],screen:m[3]}));
+if(memberRoutes.length!==45)fail(`Expected 45 canonical Member routes, found ${memberRoutes.length}`);else pass('Canonical Member route count is 45');
+const missing=memberRoutes.filter(r=>!importByScreen.has(r.screen));if(missing.length)fail(`Member routes without dedicated Member page imports: ${missing.map(x=>x.path).join(', ')}`);else pass('45/45 Member routes resolve to dedicated Member page imports');
+const wrong=memberRoutes.filter(r=>!String(importByScreen.get(r.screen)).startsWith('@/features/member/pages/'));if(wrong.length)fail(`Non-Member page delegation: ${wrong.map(x=>x.path).join(', ')}`);else pass('Route registry has zero Member route delegation outside V6 Member pages');
+const pageDir=join(root,'src/features/member/pages');const pageFiles=(await readdir(pageDir)).filter(f=>f.endsWith('.tsx'));
+const referenced=new Set(memberRoutes.map(r=>String(importByScreen.get(r.screen)).split('/').at(-1)+'.tsx'));
+const missingFiles=[...referenced].filter(f=>!pageFiles.includes(f));if(missingFiles.length)fail(`Dedicated page files missing: ${missingFiles.join(', ')}`);else pass('All canonical Member route page files exist');
+const nav=await read('src/features/member/navigation/useMemberNavigation.ts');if(nav.includes('resolveLegacyRouteAlias')||nav.includes('routeCompatibility'))fail('Member runtime navigation still calls legacy route compatibility');else pass('Member runtime navigation uses canonical route resolver only');
+const dir=await read('src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx');if(dir.includes('LEGACY_MEMBER_NAV_STORAGE_KEYS'))fail('Directory still reads legacy Member navigation storage keys');else pass('Directory navigation persistence uses canonical Member storage keys only');
+for(const [screen,modulePath] of importByScreen){if(!modulePath.startsWith('@/features/member/pages/'))continue;const rel=`src/features/member/pages/${modulePath.split('/').at(-1)}.tsx`;const text=await read(rel);if(/network\/pages\/memberPages|LegacyMember|from ['"][^'"]*memberPages['"]/.test(text))fail(`${rel} delegates to legacy Member page implementation`)}
+if(!failures)pass('Dedicated Member page modules contain no detected legacy memberPages delegation');
+if(failures)process.exit(1);console.log('\nSETHU V6 Member Canonical Route/Page validation: PASS (C03).');

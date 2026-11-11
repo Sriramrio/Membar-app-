@@ -1,0 +1,12 @@
+import fs from 'node:fs';const r=p=>fs.readFileSync(p,'utf8');const c=[];const add=(n,o)=>c.push([n,o]);
+const offline=r('src/services/offline/offlineCommandPolicy.ts');const rt=r('src/services/realtime/realtimeGateway.ts');const tabs=r('src/services/realtime/crossTabSync.ts');const perf=r('src/services/performance/performanceMonitor.ts');const cursor=r('src/hooks/useDomainCursorPage.ts');const main=r('src/main.tsx');
+add('Offline policy defaults unknown commands to online-required',offline.includes("??'online-required'"));
+add('Payment/governance/import critical actions require online',offline.includes("'payment.initiate':'online-required'")&&offline.includes("'governance.approve':'online-required'")&&offline.includes("'import.commit':'online-required'"));
+add('Realtime gateway deduplicates event IDs',rt.includes('this.seen.has(event.id)'));
+add('Realtime subscriptions are centralized',rt.includes("this.handlers.get('*')"));
+add('Cross-tab synchronization uses BroadcastChannel',tabs.includes('BroadcastChannel'));
+add('Cross-tab synchronization covers sign-out/workspace/assignment',tabs.includes('auth.signOut')&&tabs.includes('auth.workspace')&&tabs.includes('auth.assignment'));
+add('Performance monitoring observes navigation/LCP/CLS/long tasks',perf.includes("'navigation'")&&perf.includes("'largest-contentful-paint'")&&perf.includes("'layout-shift'")&&perf.includes("'longtask'"));
+add('High-volume UI uses bounded cursor paging rather than unbounded client rendering',cursor.includes('pageSize')&&cursor.includes('localItems.slice')&&cursor.includes('executeServerPage'));
+add('Runtime scale seams are installed at startup',main.includes('installCrossTabSync(store)')&&main.includes('installPerformanceMonitoring()'));
+for(const [n,o] of c)console.log(`${o?'PASS':'FAIL'}: ${n}`);const f=c.filter(([,o])=>!o);console.log(`V6.2 runtime scale seams: ${c.length-f.length}/${c.length}`);if(f.length)process.exit(1);

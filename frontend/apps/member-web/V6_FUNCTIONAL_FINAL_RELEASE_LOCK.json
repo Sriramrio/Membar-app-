@@ -1,0 +1,18 @@
+{
+  "release": "SETHU V6.1 Functionally Verified Enterprise Platform",
+  "version": "6.1.0",
+  "phase": "F18",
+  "release_status": "FINAL_SOURCE_FUNCTIONALLY_VERIFIED_RUNTIME_BLOCKED_ENVIRONMENT",
+  "functional_regression": "PASS_16_OF_16",
+  "platform_canonical_release": "PASS_59_OF_59",
+  "role_journeys": "PASS_131_OF_131",
+  "dependency_certification": "BLOCKED_ENVIRONMENT",
+  "browser_certification": "NOT_CLAIMED_ENVIRONMENT_BLOCKED",
+  "member_routes": 45,
+  "management_routes": 13,
+  "governance_routes": 8,
+  "platform_admin_routes": 17,
+  "preview_identities": 11,
+  "active_legacy_member_dependencies": 0,
+  "active_retired_enterprise_dependencies": 0
+}

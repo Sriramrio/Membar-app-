@@ -1,0 +1,13 @@
+import fs from 'node:fs';const r=p=>fs.readFileSync(p,'utf8');let p=0,f=0;const c=(x,m)=>{console.log(`${x?'PASS':'FAIL'}: ${m}`);x?p++:f++};
+const b=r('src/features/member/pages/BusinessDetailPage.tsx'),pay=r('src/features/member/pages/MyPaymentsPage.tsx'),mem=r('src/features/member/pages/MembershipPage.tsx'),evt=r('src/features/member/pages/MemberEventDetailPage.tsx'),res=r('src/features/member/pages/ResourcesPage.tsx');
+c(b.includes('await navigator.clipboard.writeText')&&b.includes('shareStatus')&&b.includes('role="status"'),'Business Share reports clipboard success/failure');
+c(evt.includes('calendarStatus')&&evt.includes('Calendar file downloaded'),'Calendar download provides user feedback');
+c(res.includes('downloadStatus')&&res.includes('downloaded.'),'Resource download provides user feedback');
+c(pay.includes('previewPayment=env.useMocks')&&pay.includes('createPaymentSession'),'Payments separate preview recording from production provider checkout');
+c(pay.includes('Pay securely')&&pay.includes('safeExternalHttpUrl'),'Production payment action uses safe provider checkout');
+c(pay.includes('ActionDialog')&&pay.includes('No production payment is claimed'),'Preview payment requires confirmation and disclaims production payment');
+c(mem.includes('previewPayment=env.useMocks')&&mem.includes('createPaymentSession'),'Membership renewal separates preview recording from production provider checkout');
+c(mem.includes('Pay renewal securely')&&mem.includes('safeExternalHttpUrl'),'Production renewal uses safe provider checkout');
+c(!pay.includes('onClick={()=>dispatch(payMembership'),'Payment page no longer performs one-click direct payment mutation');
+c(!mem.includes('onClick={()=>dispatch(payMembership'),'Membership page no longer performs one-click direct payment mutation');
+console.log(`\nSETHU V6 N08/N11 action UX hardening: ${f?'FAIL':'PASS'} — ${p}/${p+f}`);process.exit(f?1:0);

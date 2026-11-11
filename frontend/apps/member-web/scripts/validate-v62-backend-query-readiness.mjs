@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+const r=p=>fs.readFileSync(p,'utf8');const c=[];const add=(n,o)=>c.push([n,o]);
+const contracts=r('src/services/query/queryContracts.ts');const gateway=r('src/services/query/queryGateway.ts');const hook=r('src/hooks/useDomainCursorPage.ts');const adopted=[r('src/features/member/pages/SmartMemberBusinessDirectoryPage.tsx'),r('src/features/member/pages/ConverseThreadPage.tsx'),r('src/features/member/pages/OneToOneMeetingsPage.tsx')].join('\n');
+add('Cursor paging contract exists',contracts.includes('CursorPageMeta')&&contracts.includes('nextCursor')&&contracts.includes('hasMore'));
+add('Filter/sort/facet contracts exist',contracts.includes('QueryFilter')&&contracts.includes('QuerySort')&&contracts.includes('QueryFacetRequest'));
+add('Page size bounded',contracts.includes('normalizePageSize')&&gateway.includes('maxPageSize'));
+add('Query runtime envelope validation uses Zod',gateway.includes('envelopeSchema')&&gateway.includes('.parse(raw)'));
+add('Cursor page runtime validation uses Zod',gateway.includes('cursorPageSchema.parse'));
+add('Read POST queries explicitly use safe retries',gateway.includes("retry:'safe'"));
+add('Cursor hook aborts stale requests',hook.includes('AbortController')&&hook.includes('seq.current'));
+add('Canonical high-volume query IDs adopted',adopted.includes('member.directory.businesses')&&adopted.includes('member.converse.messages')&&adopted.includes('member.meetings.list'));
+for(const [n,o] of c)console.log(`${o?'PASS':'FAIL'}: ${n}`);const f=c.filter(([,o])=>!o);console.log(`V6.2 backend query readiness: ${c.length-f.length}/${c.length}`);if(f.length)process.exit(1);

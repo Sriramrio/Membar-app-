@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const checks=[];
+const check=(name,ok)=>{checks.push([name,!!ok]);console.log(`${ok?'PASS':'FAIL'}: ${name}`)};
+const route=read('src/features/platform-admin/pages/FormBuilderPage.tsx');
+const form=read('src/features/platform-admin/form-builder/FormBuilderPageV6.tsx');
+const workflow=read('src/features/platform-admin/workflow-taxonomy/WorkflowDesignerPageV6.tsx');
+const taxonomy=read('src/features/platform-admin/workflow-taxonomy/TaxonomyPageV6.tsx');
+const model=read('src/features/platform-admin/form-builder/formBuilderModel.ts');
+check('Form Builder route delegates to canonical V6 authoring page',route.includes("form-builder/FormBuilderPageV6")&&!route.includes('proposeConfigurationChange'));
+check('Form Builder persists authoring drafts and supports reopen/versioning',form.includes('saveFormAuthoringDraft')&&form.includes('openSaved')&&form.includes('startRevision')&&form.includes('Version history'));
+check('Form Builder has runtime preview and governed release preparation',form.includes('FormRuntimePreview')&&form.includes('prepareRelease')&&form.includes('ConfigurationReleasePanel'));
+check('Form Builder has unsaved-navigation protection',form.includes('setDirtyGuard')&&form.includes('registerNavigationDraftSaver')&&form.includes('beforeunload'));
+check('Form field validation covers identifiers/options/taxonomy/pattern/conditional rules',model.includes('Field ID must be unique')&&model.includes('fields require at least one option')&&model.includes('taxonomy domain')&&model.includes('valid regular expression')&&model.includes('Conditional expression'));
+check('Form authoring is maker gated and reviewer is inspection/release only',form.includes('canProposePlatformConfiguration')&&form.includes('canMake')&&form.includes('Review mode is read-only'));
+check('Workflow authoring validates states/transitions/references',workflow.includes('At least two states are required')&&workflow.includes('Workflow states must be unique')&&workflow.includes('unknown source state')&&workflow.includes('unknown target state'));
+check('Workflow, SLA and maker-checker authoring is maker gated',workflow.includes('canProposePlatformConfiguration')&&workflow.includes('canMake')&&workflow.includes('Review mode is read-only'));
+check('Taxonomy validates duplicate code, hierarchy cycles and dates',taxonomy.includes('already exists')&&taxonomy.includes('circular taxonomy hierarchy')&&taxonomy.includes('Effective until cannot be earlier'));
+check('Taxonomy authoring and supersede are maker gated',taxonomy.includes('canProposePlatformConfiguration')&&taxonomy.includes('canMake')&&taxonomy.includes('Review mode is read-only'));
+check('All three configuration modules expose governed release queue',[form,workflow,taxonomy].every(x=>x.includes('ConfigurationReleasePanel')));
+const failed=checks.filter(([,ok])=>!ok);
+if(failed.length){console.error(`\nSETHU V6.1 Platform Admin configuration functional validation: FAIL (${failed.length}/${checks.length}).`);process.exit(1)}
+console.log(`\nSETHU V6.1 Platform Admin configuration functional validation: PASS (${checks.length}/${checks.length}).`);

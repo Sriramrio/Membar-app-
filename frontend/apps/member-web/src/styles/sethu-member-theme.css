@@ -1,0 +1,1093 @@
+
+/* ==========================================
+   SETHU MEMBER THEME
+   Responsive Theme v2
+========================================== */
+
+:root,
+[data-sethu-theme="light"] {
+  color-scheme: light;
+
+  --sethu-maroon: #7C0928;
+  --sethu-maroon-dark: #5A071F;
+  --sethu-maroon-soft: #A52A3D;
+
+  --sethu-saffron: #E87509;
+  --sethu-saffron-dark: #BC5100;
+  --sethu-gold: #E6A93F;
+
+  --sethu-ivory: #FFFBF5;
+  --sethu-canvas: #F9F5F0;
+  --sethu-surface: #FFFFFF;
+  --sethu-surface-muted: #FFF3EA;
+  --sethu-surface-warm: #FFF7E8;
+
+  --sethu-text: #231F20;
+  --sethu-heading: #690C27;
+  --sethu-muted: #716B6B;
+  --sethu-border: #E9DFDB;
+
+  --sethu-success: #1D7D58;
+  --sethu-warning: #B85C00;
+  --sethu-danger: #B4233A;
+  --sethu-focus: #C95A00;
+
+  --sethu-shadow-sm:
+    0 2px 10px rgb(75 35 33 / 5%);
+  --sethu-shadow-md:
+    0 6px 24px rgb(75 35 33 / 9%);
+
+  --sethu-radius-sm: 10px;
+  --sethu-radius-md: 16px;
+  --sethu-radius-lg: 22px;
+  --sethu-radius-xl: 28px;
+
+  --sethu-content-width: 1200px;
+  --sethu-nav-height: 74px;
+  --sethu-font: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+/* ==========================================
+   DARK THEME
+========================================== */
+
+[data-sethu-theme="dark"] {
+  color-scheme: dark;
+
+  --sethu-maroon: #E68FA5;
+  --sethu-maroon-dark: #F4B6C5;
+  --sethu-maroon-soft: #D36D87;
+  --sethu-saffron: #FFAE55;
+  --sethu-saffron-dark: #F39025;
+  --sethu-gold: #F3C477;
+
+  --sethu-ivory: #151014;
+  --sethu-canvas: #181317;
+  --sethu-surface: #241D22;
+  --sethu-surface-muted: #35232A;
+  --sethu-surface-warm: #382A23;
+
+  --sethu-text: #FCF4F2;
+  --sethu-heading: #FFE0E7;
+  --sethu-muted: #CBBCC1;
+  --sethu-border: #49373F;
+
+  --sethu-success: #76D9AA;
+  --sethu-warning: #FFCD80;
+  --sethu-danger: #FFA1B1;
+  --sethu-focus: #FFBD74;
+
+  --sethu-shadow-sm:
+    0 2px 12px rgb(0 0 0 / 14%);
+  --sethu-shadow-md:
+    0 8px 26px rgb(0 0 0 / 24%);
+}
+
+/* ==========================================
+   MEMBER APP FOUNDATION
+========================================== */
+
+.sethu-app,
+.sethu-app * {
+  box-sizing: border-box;
+}
+
+.sethu-app {
+  min-height: 100dvh;
+  width: 100%;
+  min-width: 0;
+  background: var(--sethu-canvas);
+  color: var(--sethu-text);
+  font-family: var(--sethu-font);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sethu-app button,
+.sethu-app input,
+.sethu-app select,
+.sethu-app textarea {
+  font: inherit;
+}
+
+.sethu-app button {
+  cursor: pointer;
+}
+
+.sethu-app :focus-visible {
+  outline: 3px solid var(--sethu-focus);
+  outline-offset: 3px;
+}
+
+/* ==========================================
+   CONTAINER
+========================================== */
+
+.sethu-container {
+  width: min(
+    calc(100% - 32px),
+    var(--sethu-content-width)
+  );
+  min-width: 0;
+  margin-inline: auto;
+  padding-bottom:
+    calc(
+      var(--sethu-nav-height) + 38px +
+      env(safe-area-inset-bottom)
+    );
+}
+
+/* ==========================================
+   TOPBAR AND BRAND
+========================================== */
+
+.sethu-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+  padding: 18px 0 12px;
+}
+
+.sethu-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: var(--sethu-heading);
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: -0.035em;
+}
+
+.sethu-brand-subtitle {
+  display: block;
+  color: var(--sethu-maroon-dark);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.sethu-brand-mark {
+  font-size: 34px;
+  color: var(--sethu-saffron);
+  line-height: 1;
+}
+
+.sethu-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sethu-icon-button {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--sethu-heading);
+}
+
+.sethu-icon-button:hover {
+  background: var(--sethu-surface-muted);
+}
+
+.sethu-text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* ==========================================
+   HERO SECTION
+========================================== */
+
+.sethu-hero {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  margin-bottom: 18px;
+  padding: 22px;
+
+  border: 1px solid var(--sethu-border);
+  border-radius: var(--sethu-radius-xl);
+
+  background: linear-gradient(
+    135deg,
+    var(--sethu-surface) 22%,
+    var(--sethu-surface-warm) 100%
+  );
+}
+
+.sethu-hero::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  width: 190px;
+  height: 190px;
+  right: -75px;
+  bottom: -100px;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgb(232 117 9 / 16%),
+    transparent 70%
+  );
+}
+
+.sethu-greeting {
+  margin: 0 0 5px;
+  color: var(--sethu-heading);
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.sethu-subheading {
+  margin: 0;
+  color: var(--sethu-muted);
+  overflow-wrap: anywhere;
+}
+
+.sethu-chapter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 100%;
+  margin-top: 14px;
+  padding: 8px 12px;
+
+  border: 1px solid var(--sethu-border);
+  border-radius: 999px;
+  background: var(--sethu-surface);
+  color: var(--sethu-heading);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   SCOPE TABS
+========================================== */
+
+.sethu-scopes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  margin: 16px 0;
+  padding: 4px;
+
+  border: 1px solid var(--sethu-border);
+  border-radius: 15px;
+  background: var(--sethu-surface);
+}
+
+.sethu-scope {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 6px;
+
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--sethu-muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sethu-scope[aria-selected="true"] {
+  background: var(--sethu-maroon);
+  color: #ffffff;
+  box-shadow: var(--sethu-shadow-sm);
+}
+
+[data-sethu-theme="dark"]
+.sethu-scope[aria-selected="true"] {
+  color: #241018;
+}
+
+/* ==========================================
+   SECTIONS AND HEADINGS
+========================================== */
+
+.sethu-section {
+  margin: 22px 0;
+  min-width: 0;
+}
+
+.sethu-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  min-width: 0;
+}
+
+.sethu-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  min-width: 0;
+
+  color: var(--sethu-heading);
+  font-weight: 800;
+  font-size: clamp(17px, 2.4vw, 21px);
+  letter-spacing: -0.02em;
+}
+
+.sethu-link {
+  color: var(--sethu-heading);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sethu-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================
+   CARDS
+========================================== */
+
+.sethu-card {
+  min-width: 0;
+  padding: 16px;
+  background: var(--sethu-surface);
+  border: 1px solid var(--sethu-border);
+  border-radius: var(--sethu-radius-lg);
+  box-shadow: var(--sethu-shadow-sm);
+}
+
+.sethu-card--interactive {
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease;
+}
+
+@media (hover: hover) {
+  .sethu-card--interactive:hover {
+    transform: translateY(-2px);
+    border-color: var(--sethu-gold);
+    box-shadow: var(--sethu-shadow-md);
+  }
+}
+
+.sethu-next-action {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  padding: 18px;
+  text-align: left;
+  color: #ffffff;
+  border: 0;
+  border-radius: var(--sethu-radius-lg);
+
+  background: linear-gradient(
+    110deg,
+    #A33032 0%,
+    #7C0928 68%,
+    #630922 100%
+  );
+
+  box-shadow: var(--sethu-shadow-md);
+}
+
+.sethu-next-action strong {
+  display: block;
+  font-size: 17px;
+}
+
+.sethu-next-action small {
+  display: block;
+  margin-top: 4px;
+  opacity: 0.91;
+  font-size: 12px;
+}
+
+.sethu-action-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+
+  background: var(--sethu-surface-muted);
+  color: var(--sethu-saffron-dark);
+}
+
+.sethu-next-action .sethu-action-icon {
+  background: rgb(255 255 255 / 15%);
+  color: #ffffff;
+}
+
+/* ==========================================
+   ATTENTION LIST
+========================================== */
+
+.sethu-attention-list {
+  padding: 0 16px;
+}
+
+.sethu-list-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  padding: 13px 0;
+
+  color: var(--sethu-text);
+  border: 0;
+  border-bottom: 1px solid var(--sethu-border);
+  background: transparent;
+  text-align: left;
+}
+
+.sethu-list-row:last-child {
+  border-bottom: 0;
+}
+
+.sethu-list-row strong {
+  display: block;
+  font-size: 14px;
+}
+
+.sethu-list-row small {
+  display: block;
+  color: var(--sethu-muted);
+  font-size: 12px;
+}
+
+.sethu-row-copy,
+.sethu-list-row > .sethu-row-copy {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.sethu-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 23px;
+  height: 23px;
+  padding: 0 6px;
+
+  background: var(--sethu-saffron);
+  color: #ffffff;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+/* ==========================================
+   QUICK ACTION GRID
+========================================== */
+
+.sethu-quick-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sethu-quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 0;
+  min-height: 96px;
+  padding: 12px 6px;
+
+  color: var(--sethu-heading);
+  border: 1px solid var(--sethu-border);
+  border-radius: var(--sethu-radius-md);
+
+  background: linear-gradient(
+    145deg,
+    var(--sethu-surface),
+    var(--sethu-surface-muted)
+  );
+
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.sethu-quick-action:hover {
+  border-color: var(--sethu-gold);
+  box-shadow: var(--sethu-shadow-sm);
+}
+
+.sethu-quick-action svg {
+  width: 25px;
+  height: 25px;
+  color: var(--sethu-saffron-dark);
+  stroke-width: 1.9;
+}
+
+/* ==========================================
+   METRICS
+========================================== */
+
+.sethu-metrics {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.sethu-metric {
+  min-width: 0;
+  padding: 10px 6px;
+  text-align: center;
+  border: 0;
+  border-right: 1px solid var(--sethu-border);
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.sethu-metric:last-child {
+  border-right: 0;
+}
+
+.sethu-metric-icon {
+  margin: 0 auto 6px;
+  color: var(--sethu-saffron-dark);
+}
+
+.sethu-metric-value {
+  display: block;
+  color: var(--sethu-heading);
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.sethu-metric-label {
+  display: block;
+  margin: 6px 0 2px;
+  font-size: 12px;
+}
+
+.sethu-metric-meta {
+  display: block;
+  font-size: 11px;
+  color: var(--sethu-muted);
+}
+
+/* ==========================================
+   MISC COMPONENTS
+========================================== */
+
+.sethu-stack {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.sethu-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 4px 9px;
+  border-radius: 999px;
+
+  background: var(--sethu-surface-muted);
+  color: var(--sethu-heading);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sethu-chip--warning {
+  background: var(--sethu-surface-warm);
+  color: var(--sethu-warning);
+}
+
+.sethu-chip--success {
+  background: color-mix(
+    in srgb,
+    var(--sethu-success) 10%,
+    var(--sethu-surface)
+  );
+  color: var(--sethu-success);
+}
+
+.sethu-date-tile {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 56px;
+  height: 58px;
+  background: var(--sethu-surface-muted);
+  color: var(--sethu-heading);
+  border-radius: 13px;
+  font-weight: 800;
+}
+
+.sethu-date-tile small {
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.sethu-date-tile strong {
+  font-size: 23px;
+  line-height: 1;
+}
+
+.sethu-impact {
+  background: linear-gradient(
+    140deg,
+    var(--sethu-surface-warm),
+    var(--sethu-surface)
+  );
+}
+
+.sethu-empty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  color: var(--sethu-muted);
+  line-height: 1.5;
+}
+
+.sethu-data-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 28px 0;
+  font-size: 11px;
+  color: var(--sethu-muted);
+}
+
+/* ==========================================
+   HOME PAGE COLUMNS
+========================================== */
+
+.sethu-home-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 24px;
+  min-width: 0;
+}
+
+/* Actual MemberHomePage uses #sethu-home */
+#sethu-home {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+#sethu-home > section {
+  min-width: 0;
+  max-width: 100%;
+}
+
+#sethu-home img {
+  max-width: 100%;
+  height: auto;
+}
+
+#sethu-home .grid > * {
+  min-width: 0;
+}
+
+/* ==========================================
+   OPTIONAL CUSTOM BOTTOM NAV
+========================================== */
+
+.sethu-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+
+  display: grid;
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+  align-items: center;
+
+  min-height: var(--sethu-nav-height);
+  padding:
+    8px max(12px, env(safe-area-inset-right))
+    calc(8px + env(safe-area-inset-bottom))
+    max(12px, env(safe-area-inset-left));
+
+  border-top: 1px solid var(--sethu-border);
+
+  background: color-mix(
+    in srgb,
+    var(--sethu-surface) 95%,
+    transparent
+  );
+
+  backdrop-filter: blur(14px);
+}
+
+.sethu-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  min-height: 48px;
+
+  border: 0;
+  background: transparent;
+  color: var(--sethu-muted);
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.sethu-nav-item[aria-current="page"] {
+  color: var(--sethu-maroon);
+}
+
+.sethu-fab {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin-top: -26px;
+  margin-inline: auto;
+
+  border: 3px solid var(--sethu-surface);
+  border-radius: 50%;
+  background: linear-gradient(
+    145deg,
+    #BA4141,
+    #790528 80%
+  );
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgb(102 18 45 / 25%);
+}
+
+/* ==========================================
+   LOADING SKELETON
+========================================== */
+
+.sethu-skeleton {
+  min-height: 42px;
+  border-radius: 12px;
+
+  background: linear-gradient(
+    100deg,
+    var(--sethu-surface-muted) 20%,
+    var(--sethu-border) 40%,
+    var(--sethu-surface-muted) 60%
+  );
+
+  background-size: 200% 100%;
+  animation: sethu-shimmer 1.4s linear infinite;
+}
+
+@keyframes sethu-shimmer {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+/* ==========================================
+   MOBILE: BELOW 640px
+========================================== */
+
+@media (max-width: 639px) {
+
+  .sethu-container {
+    width: calc(100% - 20px);
+    padding-bottom:
+      calc(92px + env(safe-area-inset-bottom));
+  }
+
+  .sethu-topbar {
+    gap: 8px;
+    padding: 12px 0;
+  }
+
+  .sethu-brand {
+    gap: 6px;
+    font-size: 20px;
+  }
+
+  .sethu-brand-mark {
+    font-size: 28px;
+  }
+
+  .sethu-header-actions {
+    gap: 4px;
+  }
+
+  .sethu-icon-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .sethu-hero {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .sethu-greeting {
+    font-size: 23px;
+  }
+
+  .sethu-subheading {
+    font-size: 13px;
+  }
+
+  .sethu-section {
+    margin: 16px 0;
+  }
+
+  .sethu-section-heading {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .sethu-section-title {
+    font-size: 17px;
+  }
+
+  .sethu-card {
+    padding: 13px;
+    border-radius: 15px;
+  }
+
+  .sethu-next-action {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .sethu-next-action strong {
+    font-size: 15px;
+  }
+
+  .sethu-action-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .sethu-quick-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .sethu-quick-action {
+    min-height: 92px;
+    padding: 10px 6px;
+    font-size: 12px;
+  }
+
+  .sethu-metrics {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .sethu-metric {
+    padding: 14px 6px;
+    border-bottom: 1px solid var(--sethu-border);
+  }
+
+  .sethu-metric:nth-child(even) {
+    border-right: 0;
+  }
+
+  .sethu-metric-value {
+    font-size: 23px;
+  }
+
+  .sethu-home-columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .sethu-scopes {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .sethu-scope {
+    font-size: 11px;
+    padding: 6px 3px;
+  }
+
+  .sethu-list-row {
+    gap: 9px;
+  }
+
+  .sethu-attention-list {
+    padding-inline: 12px;
+  }
+
+  .sethu-bottom-nav {
+    min-height:
+      calc(64px + env(safe-area-inset-bottom));
+  }
+
+  .sethu-nav-item {
+    font-size: 10px;
+  }
+
+  #sethu-home {
+    padding-bottom:
+      calc(18px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ==========================================
+   VERY SMALL MOBILE: BELOW 375px
+========================================== */
+
+@media (max-width: 374px) {
+
+  .sethu-container {
+    width: calc(100% - 16px);
+  }
+
+  .sethu-brand {
+    font-size: 18px;
+  }
+
+  .sethu-greeting {
+    font-size: 21px;
+  }
+
+  .sethu-hero {
+    padding: 12px;
+  }
+
+  .sethu-card {
+    padding: 11px;
+  }
+
+  .sethu-quick-grid {
+    gap: 6px;
+  }
+
+  .sethu-quick-action {
+    font-size: 11px;
+    min-height: 88px;
+    padding: 8px 4px;
+  }
+
+  .sethu-metric-value {
+    font-size: 20px;
+  }
+
+  .sethu-metric-label {
+    font-size: 10px;
+  }
+
+  .sethu-scope {
+    font-size: 10px;
+  }
+
+  .sethu-section-title {
+    font-size: 16px;
+  }
+}
+
+/* ==========================================
+   TABLET: 640px - 1023px
+========================================== */
+
+@media (min-width: 640px) and (max-width: 1023px) {
+
+  .sethu-container {
+    width: calc(100% - 40px);
+  }
+
+  .sethu-quick-grid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+  }
+
+  .sethu-metrics {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+  }
+
+  .sethu-home-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sethu-card {
+    padding: 18px;
+  }
+
+  .sethu-hero {
+    padding: 24px;
+  }
+}
+
+/* ==========================================
+   DESKTOP: 1024px AND ABOVE
+========================================== */
+
+@media (min-width: 1024px) {
+
+  .sethu-container {
+    padding-bottom: 40px;
+  }
+
+  .sethu-quick-grid {
+    grid-template-columns:
+      repeat(8, minmax(0, 1fr));
+  }
+
+  .sethu-home-columns {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+    gap: 0 24px;
+  }
+
+  .sethu-bottom-nav {
+    display: none;
+  }
+}
+
+/* ==========================================
+   REDUCED MOTION
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sethu-app *,
+  .sethu-app *::before,
+  .sethu-app *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

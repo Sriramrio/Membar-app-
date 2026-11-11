@@ -1,0 +1,1 @@
+export const stableId=(prefix='id')=>`${prefix}_${crypto.randomUUID()}`;
