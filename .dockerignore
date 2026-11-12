@@ -1,0 +1,17 @@
+
+.git
+.gitignore
+
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+**/*.zip
+**/*.tsbuildinfo
+
+.env
+.env.*
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/secrets.json
+
